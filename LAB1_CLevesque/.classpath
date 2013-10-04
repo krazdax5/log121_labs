@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/Users/charleslevesque/workspace/Squelette-lab1/ca.etsmtl.log.util.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ca.etsmtl.log.util"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

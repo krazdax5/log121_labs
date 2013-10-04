@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ca.etsmtl.log.util">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ca.etsmtl.log.util.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
