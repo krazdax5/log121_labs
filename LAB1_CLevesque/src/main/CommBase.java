@@ -105,23 +105,24 @@ public class CommBase {
 			@Override
 			protected Object doInBackground() throws Exception {
 				System.out.println("Le fils d'execution parallele est lance");
-				int compteur = 0;
-				while(true){
-					if (client.isConnected()){
-						Thread.sleep(DELAI);
-	  					fluxEcriture.println(GET_TRAME);
-	  					fluxLecture.readLine();
-	  					String trame = fluxLecture.readLine();
-						
-	 					//La méthode suivante alerte l'observateur 
-						if(listener!=null){
-							firePropertyChange("ENVOIE-TEST", null, (Object) ".");
-							firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
-						} else {
-							JOptionPane.showMessageDialog(null, "Le serveur a interrompue la connexion.");
-						}
-					}
+				while(!client.isClosed()){
+                    try{
+                        Thread.sleep(DELAI);
+                        fluxEcriture.println(GET_TRAME);
+                        fluxLecture.readLine();
+                        String trame = fluxLecture.readLine();
+
+                        //La méthode suivante alerte l'observateur
+                        if(listener!=null){
+                            firePropertyChange("ENVOIE-TEST", null, (Object) ".");
+                            firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
+                        }
+                    } catch (Exception ex){
+                        JOptionPane.showMessageDialog(null, "La connexion a été interrompue!");
+                        stop();
+                    }
 				}
+                return null;
 			}
 		};
 		if(listener!=null)
