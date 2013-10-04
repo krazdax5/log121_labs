@@ -1,6 +1,7 @@
 *.class
 .DS_Store
 .idea
+IDLogger
 
 # Package Files #
 *.jar
