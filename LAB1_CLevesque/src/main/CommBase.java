@@ -23,7 +23,13 @@ import java.net.Socket;
  * Base d'une communication via un fil d'exécution parallèle.
  */
 public class CommBase {
-	
+	private final String OPTIONPANE_MESSAGE_BADSERVERNAME = "app.optionPane.message.badServerName";
+    private final String OPTIONPANE_MESSAGE_STARTERROR = "app.optionPane.message.startError";
+    private final String OPTIONPANE_MESSAGE_STOPERROR = "app.optionPane.message.stopError";
+    private final String OPTIONPANE_MESSAGE_CONNEXTIONINTERRUPTED = "app.optionPane.message.connexionInterrupted";
+    private final String OPTIONPANE_TITLE_ERROR = "app.optionPane.title.error";
+    private final String OPTIONPANE_TITLE_WARNING = "app.optionPane.title.warning";
+
 	private final int DELAI = 1000;
 	private SwingWorker threadComm = null;
 	private PropertyChangeListener listener = null;
@@ -51,7 +57,12 @@ public class CommBase {
 			this.ADRESSE_SERVEUR = serverLocation.split(":")[0];
 			this.PORT_SERVEUR = Integer.parseInt(serverLocation.split(":")[1]);			
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null, "Mauvais nom de serveur.");
+			JOptionPane.showMessageDialog(
+                    null,
+                    LangueConfig.getResource(OPTIONPANE_MESSAGE_BADSERVERNAME),
+                    LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
+                    JOptionPane.ERROR_MESSAGE
+            );
 			System.exit(1);
 		}
 	}
@@ -74,7 +85,12 @@ public class CommBase {
 			fluxEcriture = new PrintWriter(client.getOutputStream(), true);
 			creerCommunication();
 		}catch(IOException ex){
-			JOptionPane.showMessageDialog(null, "\nL'application n'a pas pu se connecter au serveur à l'adresse " + this.ADRESSE_SERVEUR + ", au port " + this.PORT_SERVEUR + "\n" + ex.getMessage());
+			JOptionPane.showMessageDialog(
+                    null,
+                    "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(), this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
+                    LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
+                    JOptionPane.ERROR_MESSAGE
+            );
 		}
 	}
 	
@@ -91,7 +107,12 @@ public class CommBase {
 				if (!client.isClosed())
 					client.close();
 			}catch(IOException ex){
-				JOptionPane.showMessageDialog(null, "\nLa connexion n'a pas pu être fermée.\n".concat(ex.getMessage()));
+				JOptionPane.showMessageDialog(
+                        null,
+                        LangueConfig.getResource(OPTIONPANE_MESSAGE_STOPERROR).concat(ex.getMessage()),
+                        LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
+                        JOptionPane.ERROR_MESSAGE
+                );
 			}
 		}
 	}
@@ -118,7 +139,12 @@ public class CommBase {
                             firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
                         }
                     } catch (Exception ex){
-                        JOptionPane.showMessageDialog(null, "La connexion a été interrompue!");
+                        JOptionPane.showMessageDialog(
+                                null,
+                                LangueConfig.getResource(OPTIONPANE_MESSAGE_CONNEXTIONINTERRUPTED),
+                                LangueConfig.getResource(OPTIONPANE_TITLE_WARNING),
+                                JOptionPane.WARNING_MESSAGE
+                        );
                         stop();
                     }
 				}
