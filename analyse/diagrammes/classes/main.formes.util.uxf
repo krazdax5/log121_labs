@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>180</x>
+      <y>110</y>
+      <w>600</w>
+      <h>460</h>
+    </coordinates>
+    <panel_attributes>main.formes.util</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>280</x>
+      <y>150</y>
+      <w>240</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>*AnalyseurTrame*
+--
+-typeForme: String
+-x1: int
+-y1: int
+-x2: int
+-y2: int
+-centreX: int
+-centreY: int
+-rayonH: int
+-rayonV: int
+-rayon: int
+-numeroSequence: int
+--
++AnalyseurTrame(trame: String)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>230</x>
+      <y>420</y>
+      <w>470</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>*ClasseurFormes*
+--
+ 
+--
++classerParNumeroSequence(croissant: boolean[true]): Forme[]
++classerParAire(croissant: boolean[true]): Forme[]
++classerParType(inverse: boolean[false]): Forme[]
++classerParDistance(): Forme[]
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

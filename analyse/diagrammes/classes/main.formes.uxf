@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="12.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>1200</x>
+      <y>150</y>
+      <w>160</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enumeration&gt;&gt;
+*Formes*
+--
+INDETERMINE
+RECTANGLE
+OVALE
+CERCLE
+CARRE
+LIGNE
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>800</x>
+      <y>90</y>
+      <w>250</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>*CreateurFormes*
+--
+ 
+--
++creerForme(trame: String): Forme
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>780</x>
+      <y>230</y>
+      <w>270</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>/*Forme*/
+--
+#type: Formes[Formes.INDETERMINE]
+#numeroSequence: int
+--
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>300</x>
+      <y>100</y>
+      <w>520</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1</panel_attributes>
+    <additional_attributes>30;30;500;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>420</x>
+      <y>380</y>
+      <w>460</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*Rectangle*
+--
+-premiereCoordonnee: Point[null]
+-secondeCoordonnee: Point[null]
+-width: int[-1]
+-height: int[-1]
+--
++Rectangle(x1: int, y1: int, x2: int, y2: int, numeroSequence: int)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>400</x>
+      <y>40</y>
+      <w>1010</w>
+      <h>660</h>
+    </coordinates>
+    <panel_attributes>formes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>890</x>
+      <y>130</y>
+      <w>50</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=   1</panel_attributes>
+    <additional_attributes>30;100;30;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>680</x>
+      <y>520</y>
+      <w>470</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*Ovale*
+--
+-coordonneeCentre: Point[null]
+-rayonHorizontal: int[-1]
+-rayonVertical: int[-1]
+--
++Ovale(x: int, y: int, rayonH: int, rayonV: int, numeroSequence: int)
++Ovale(x: int, y: int, rayon: int, numeroSequence: int)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>880</x>
+      <y>280</y>
+      <w>50</w>
+      <h>260</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-
+bg=white</panel_attributes>
+    <additional_attributes>30;30;30;240</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>940</x>
+      <y>380</y>
+      <w>430</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>*Ligne*
+--
+-premiereCoordonnee: Point[null]
+-secondeCoordonnee: Point[null]
+-longueur: int[-1]
+--
++Ligne(x1: int, y1: int, x2: int, y2: int, numeroSequence: int)
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>880</x>
+      <y>320</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>30;30;140;30;140;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>770</x>
+      <y>320</y>
+      <w>160</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>140;30;30;30;30;60</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>200</x>
+      <y>90</y>
+      <w>130</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>*AnalyseurTrame*
+--
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>180</x>
+      <y>60</y>
+      <w>180</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>util</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
