@@ -1,13 +1,16 @@
 /******************************************************
- Cours:  LOG121
- Projet: Squelette du laboratoire #1
- Nom du fichier: ApplicationFormes.java
- Date créé: 2013-05-03
+ * Cours:  LOG121
+ * Projet: Squelette du laboratoire #1
+ * Nom du fichier: ApplicationFormes.java
+ * Date créé: 2013-05-03
  *******************************************************
- Historique des modifications
+ * Historique des modifications
  *******************************************************
- *@author Patrice Boucher
-2013-05-03 Version initiale
+ * @author Patrice Boucher
+ * 2013-05-03 Version initiale
+ *
+ * @author Charles Levesque
+ * 2013-10-01 Version finale TP1
  *******************************************************/
 package main;
 
@@ -16,7 +19,7 @@ import javax.swing.*;
 /**
  * Cette classe représente l'application dans son ensemble. 
  * @author Patrice Boucher
- * @date 2013/05/04
+ * 2013/05/04
  */
 public class ApplicationFormes{
 	

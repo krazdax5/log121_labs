@@ -1,14 +1,21 @@
 /******************************************************
-Cours:  LOG121
-Projet: Squelette du laboratoire #1
-Nom du fichier: CommBase.java
-Date créé: 2013-05-03
-*******************************************************
-Historique des modifications
-*******************************************************
-*@author Patrice Boucher
-2013-05-03 Version initiale
-*******************************************************/  
+ * Cours:  LOG121
+ * Projet: Squelette du laboratoire #1
+ * Nom du fichier: CommBase.java
+ * Date créé: 2013-05-03
+ *******************************************************
+ * Historique des modifications
+ *******************************************************
+ * @author Patrice Boucher
+ * 2013-05-03 Version initiale
+ *
+ * @author Charles Levesque
+ * 2013-10-01 Version finale TP1
+ *
+ * @author Mathieu Lachance
+ * 2013-10-09 : Ajout des fonctions connect et disconnect
+ ********************************************************/
+
 package main;
 
 import javax.swing.*;
@@ -41,6 +48,8 @@ public class CommBase {
 	private Socket client = null;
 	private PrintWriter fluxEcriture = null;
 	private BufferedReader fluxLecture = null;
+
+    private boolean isConnected = false;
 	
 	/**
 	 * @return le socket client
@@ -68,7 +77,7 @@ public class CommBase {
 	}
 	
 	/**
-	 * D�finir le r�cepteur de l'information re�ue dans la communication avec le serveur
+	 * Definir le recepteur de l'information recue dans la communication avec le serveur
 	 * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
 	 */
 	public void setPropertyChangeListener(PropertyChangeListener listener){
@@ -76,46 +85,67 @@ public class CommBase {
 	}
 	
 	/**
-	 * Démarre la communication
+	 * Démarre la communication.
+     * Verifie si l'application est connecte au serveur.
+     * Si non, elle la connecte a ce dernier et commence a envoyer les requetes pour les formes.
 	 */
 	public void start(){
-		try{
-			client = new Socket(ADRESSE_SERVEUR, PORT_SERVEUR);
-			fluxLecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
-			fluxEcriture = new PrintWriter(client.getOutputStream(), true);
-			creerCommunication();
-		}catch(IOException ex){
-			JOptionPane.showMessageDialog(
+        if(client==null)
+            connect();
+		creerCommunication();
+        isConnected = true;
+	}
+	
+	/**
+	 * Arrête la communication (pause)
+	 */
+	public void stop(){
+        isActif = false;
+        isConnected = false;
+	}
+
+    /**
+     * Connecte l'application client au serveur sans que celle-ci envoie de
+     * requete afin d'afficher les formes.
+     */
+    public void connect() {
+        try {
+            client = new Socket(ADRESSE_SERVEUR, PORT_SERVEUR);
+            fluxLecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            fluxEcriture = new PrintWriter(client.getOutputStream(), true);
+        } catch(IOException ex){
+            JOptionPane.showMessageDialog(
                     null,
                     "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(), this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
                     LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
                     JOptionPane.ERROR_MESSAGE
             );
-		}
-	}
-	
-	/**
-	 * Arrête la communication
-	 */
-	public void stop(){
-		if(threadComm!=null)
-			threadComm.cancel(true); 
-		isActif = false;
-		if (client != null && client.isConnected()){
-			try{
-				fluxEcriture.println(END_TRAME);
-				if (!client.isClosed())
-					client.close();
-			}catch(IOException ex){
-				JOptionPane.showMessageDialog(
+        }
+    }
+
+    /**
+     * Deconnecte l'application client du serveur en envoyant une commande END à celui-ci.
+     */
+    public void disconnect() {
+        if(threadComm!=null)
+            threadComm.cancel(true);
+        isActif = false;
+        isConnected = false;
+        if (client != null && client.isConnected()){
+            try{
+                fluxEcriture.println(END_TRAME);
+                if (!client.isClosed())
+                    client.close();
+            }catch(IOException ex){
+                JOptionPane.showMessageDialog(
                         null,
                         LangueConfig.getResource(OPTIONPANE_MESSAGE_STOPERROR).concat(ex.getMessage()),
                         LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
                         JOptionPane.ERROR_MESSAGE
                 );
-			}
-		}
-	}
+            }
+        }
+    }
 	
 	/**
 	 * Créer le nécessaire pour la communication avec le serveur
@@ -125,8 +155,8 @@ public class CommBase {
 		threadComm = new SwingWorker(){
 			@Override
 			protected Object doInBackground() throws Exception {
-				System.out.println("Le fils d'execution parallele est lance");
-				while(!client.isClosed()){
+				System.out.println("\nLe fils d'execution parallele est lance");
+				while(/*!client.isClosed()*/ isConnected()){
                     try{
                         Thread.sleep(DELAI);
                         fluxEcriture.println(GET_TRAME);
@@ -163,4 +193,8 @@ public class CommBase {
 	public boolean isActif(){
 		return isActif;
 	}
+
+    public boolean isConnected() {
+        return isConnected;
+    }
 }

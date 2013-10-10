@@ -1,15 +1,22 @@
-package main;
 /******************************************************
-Cours:  LOG121
-Projet: Squelette du laboratoire #1
-Nom du fichier: MenuFenetre.java
-Date créé: 2013-05-03
-*******************************************************
-Historique des modifications
-*******************************************************
-*@author Patrice Boucher
-2013-05-03 Version initiale
-*******************************************************/
+ * Cours:  LOG121
+ * Projet: Squelette du laboratoire #1
+ * Nom du fichier: MenuFenetre.java
+ * Date créé: 2013-05-03
+ *******************************************************
+ * Historique des modifications
+ *******************************************************
+ * @author Patrice Boucher
+ * 2013-05-03 Version initiale
+ *
+ * @author Charles Levesque
+ * 2013-10-01 Version finale TP1
+ *
+ * @author Mathieu Lachance
+ * 2013-10-09 Ajout des sous-menus "Connecter" et "Deconnecter"
+ *******************************************************/
+
+package main;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 /**
- * Crée le menu de la fenêtre de l'applicationé
+ * Cree le menu de la fenetre de l'application
  */
 public class MenuFenetre extends JMenuBar{
 	
@@ -34,11 +41,13 @@ public class MenuFenetre extends JMenuBar{
 			MENU_DESSIN_TITRE = "app.frame.menus.draw.title",
 			MENU_DESSIN_DEMARRER = "app.frame.menus.draw.start",
 			MENU_DESSIN_ARRETER = "app.frame.menus.draw.stop",
+            MENU_DESSIN_CONNECTER = "app.frame.menus.file.connect",
+            MENU_DESSIN_DECONNECTER = "app.frame.menus.file.disconnect",
 			MENU_AIDE_TITRE = "app.frame.menus.help.title",
 			MENU_AIDE_PROPOS = "app.frame.menus.help.about";
 	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
 
-	private JMenuItem arreterMenuItem, demarrerMenuItem;
+	private JMenuItem arreterMenuItem, demarrerMenuItem, connecterMenuItem, deconnecterMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200;
  	   
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
@@ -54,10 +63,11 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Créer le menu "Draw". 
+	 *  Creer le menu "Draw"/"Dessiner".
 	 */
 	protected void addMenuDessiner() {
-		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER });
+		JMenu menu = creerMenu(MENU_DESSIN_TITRE,new String[] { MENU_DESSIN_DEMARRER, MENU_DESSIN_ARRETER,
+                MENU_DESSIN_CONNECTER, MENU_DESSIN_DECONNECTER });
 
 		demarrerMenuItem = menu.getItem(0);
 		demarrerMenuItem.addActionListener(new ActionListener(){
@@ -81,11 +91,28 @@ public class MenuFenetre extends JMenuBar{
 		arreterMenuItem.setAccelerator(KeyStroke.getKeyStroke(
 				MENU_DESSIN_ARRETER_TOUCHE_RACC,
 				MENU_DESSIN_ARRETER_TOUCHE_MASK));
+
+        connecterMenuItem = menu.getItem(2);
+        connecterMenuItem.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {
+            comm.connect();
+            rafraichirMenus();
+            }
+        });
+
+        deconnecterMenuItem = menu.getItem(3);
+        deconnecterMenuItem.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent arg0) {
+                comm.disconnect();
+                rafraichirMenus();
+            }
+        });
+
 		add(menu);
 	}
 
 	/** 
-	 * Créer le menu "File". 
+	 * Creer le menu "File"/"Fichier".
 	 */
 	protected void addMenuFichier() {
 		JMenu menu = creerMenu(MENU_FICHIER_TITRE, new String[] { MENU_FICHIER_QUITTER });
@@ -108,7 +135,7 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Créer le menu "Help". 
+	 *  Creer le menu "Help"/"Aide".
 	 */
 	private void addMenuAide() {
 		JMenu menu = creerMenu(MENU_AIDE_TITRE, new String[] { MENU_AIDE_PROPOS });
@@ -122,7 +149,7 @@ public class MenuFenetre extends JMenuBar{
 	}
 
 	/**
-	 *  Activer ou désactiver les items du menu selon la sélection. 
+	 *  Activer ou desactiver les items du menu selon la sélection.
 	 */
 	private void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
