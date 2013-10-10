@@ -109,6 +109,8 @@ public class MenuFenetre extends JMenuBar{
         });
 
 		add(menu);
+        rafraichirMenus();
+
 	}
 
 	/** 
@@ -119,7 +121,7 @@ public class MenuFenetre extends JMenuBar{
 		menu.getItem(0).addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comm.getClient() != null && !comm.getClient().isClosed())
-					comm.stop();
+					comm.disconnect();
 			    try {
 						Thread.sleep(DELAI_QUITTER_MSEC);
 				} catch (InterruptedException e) {
@@ -154,6 +156,8 @@ public class MenuFenetre extends JMenuBar{
 	private void rafraichirMenus() {
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
+        connecterMenuItem.setEnabled(!comm.isConnected());
+        deconnecterMenuItem.setEnabled(comm.isConnected());
 	}
 	
 	/**

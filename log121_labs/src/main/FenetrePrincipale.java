@@ -51,7 +51,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			@Override
 			public void windowClosing(WindowEvent windowEvent){
 				if (comm.isActif()){
-					comm.stop();
+					comm.disconnect();
 				}
 			}
 		});
