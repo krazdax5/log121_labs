@@ -9,7 +9,7 @@ Historique des modifications
 *@author Charles Levesque
 2013-09-17 Version initiale
 *******************************************************/ 
-package main.formes;
+package main.formes.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

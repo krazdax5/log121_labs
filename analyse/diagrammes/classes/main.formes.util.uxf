@@ -6,7 +6,7 @@
     <coordinates>
       <x>30</x>
       <y>0</y>
-      <w>870</w>
+      <w>700</w>
       <h>500</h>
     </coordinates>
     <panel_attributes>main.formes.util</panel_attributes>
@@ -44,7 +44,7 @@ bg=blue</panel_attributes>
     <coordinates>
       <x>80</x>
       <y>310</y>
-      <w>780</w>
+      <w>600</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>*ClasseurFormes*
