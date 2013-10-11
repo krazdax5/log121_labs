@@ -4,10 +4,10 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>180</x>
-      <y>110</y>
-      <w>600</w>
-      <h>460</h>
+      <x>30</x>
+      <y>0</y>
+      <w>870</w>
+      <h>500</h>
     </coordinates>
     <panel_attributes>main.formes.util</panel_attributes>
     <additional_attributes/>
@@ -15,8 +15,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>280</x>
-      <y>150</y>
+      <x>130</x>
+      <y>40</y>
       <w>240</w>
       <h>250</h>
     </coordinates>
@@ -42,19 +42,19 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>230</x>
-      <y>420</y>
-      <w>470</w>
+      <x>80</x>
+      <y>310</y>
+      <w>780</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>*ClasseurFormes*
 --
  
 --
-+classerParNumeroSequence(croissant: boolean[true]): Forme[]
-+classerParAire(croissant: boolean[true]): Forme[]
-+classerParType(inverse: boolean[false]): Forme[]
-+classerParDistance(): Forme[]
++classerParNumeroSequence(listeFormes: Forme[], croissant: boolean[true]): Forme[]
++classerParAire(listeForme: Forme[], croissant: boolean[true]): Forme[]
++classerParType(ListeForme: Forme[], inverse: boolean[false]): Forme[]
++classerParDistance(listeForme: Forme[]): Forme[]
 
 bg=blue</panel_attributes>
     <additional_attributes/>
