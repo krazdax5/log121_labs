@@ -50,16 +50,16 @@ public class ClasseurFormes {
      * @return Une copie ordonnée de la liste donnée en paramètre.
      */
     public static Forme[] classerParType(Forme[] listeFormes, boolean inverse){
-        Forme[] listeOrdonnee = {null, null, null, null, null, null, null, null, null, null}; //10
+        Forme[] listeOrdonnee = new Forme[listeFormes.length];
 
-        for (byte position = 0; position > listeOrdonnee.length; position++){
+        for (byte position = 0; position < listeOrdonnee.length; position++){
             for (Forme laForme : listeFormes){
                 if (laForme == null)
                     continue;
 
                 if (listeOrdonnee[position] == null)
                     listeOrdonnee[position] = laForme;
-                else
+                else{
                     if (!inverse)
                         switch (laForme.getType()){
                             case CARRE:
@@ -67,13 +67,13 @@ public class ClasseurFormes {
                                     listeOrdonnee[position] = laForme;
                                 break;
                             case RECTANGLE:
-                                if (listeOrdonnee[position].getType() != Formes.CARRE ||
+                                if (listeOrdonnee[position].getType() != Formes.CARRE &&
                                         listeOrdonnee[position].getType() != Formes.RECTANGLE)
                                     listeOrdonnee[position] = laForme;
                                 break;
                             case CERCLE:
-                                if (listeOrdonnee[position].getType() != Formes.CARRE ||
-                                        listeOrdonnee[position].getType() != Formes.RECTANGLE ||
+                                if (listeOrdonnee[position].getType() != Formes.CARRE &&
+                                        listeOrdonnee[position].getType() != Formes.RECTANGLE &&
                                         listeOrdonnee[position].getType() != Formes.CERCLE)
                                     listeOrdonnee[position] = laForme;
                                 break;
@@ -89,13 +89,13 @@ public class ClasseurFormes {
                                     listeOrdonnee[position] = laForme;
                                 break;
                             case OVALE:
-                                if (listeOrdonnee[position].getType() != Formes.LIGNE ||
+                                if (listeOrdonnee[position].getType() != Formes.LIGNE &&
                                         listeOrdonnee[position].getType() != Formes.OVALE)
                                     listeOrdonnee[position] = laForme;
                                 break;
                             case CERCLE:
-                                if (listeOrdonnee[position].getType() != Formes.LIGNE ||
-                                        listeOrdonnee[position].getType() != Formes.OVALE ||
+                                if (listeOrdonnee[position].getType() != Formes.LIGNE &&
+                                        listeOrdonnee[position].getType() != Formes.OVALE &&
                                         listeOrdonnee[position].getType() != Formes.CERCLE)
                                     listeOrdonnee[position] = laForme;
                                 break;
@@ -104,6 +104,7 @@ public class ClasseurFormes {
                                     listeOrdonnee[position] = laForme;
                                 break;
                         }
+                }
             }
             listeFormes = ClasseurFormes.supprimerFormeDeLaListe(listeOrdonnee[position], listeFormes);
         }
@@ -127,14 +128,13 @@ public class ClasseurFormes {
      * @return Une copie mise à jour de la liste passée en paramètre.
      */
     public static Forme[] supprimerFormeDeLaListe(Forme formeASupprimer, Forme[] listeFormes){
-        byte position = 0;
-
-        while (formeASupprimer.getNumeroSequence() != listeFormes[position].getNumeroSequence() & position != listeFormes.length)
-            position++;
-
-        if (position != 10)
-            listeFormes[position] = null;
-
+        for (byte position = 0; position < listeFormes.length; position++){
+            if (listeFormes[position] != null)
+                if (listeFormes[position].getNumeroSequence() == formeASupprimer.getNumeroSequence()){
+                    listeFormes[position] = null;
+                    break;
+                }
+        }
         return listeFormes;
     }
 }
