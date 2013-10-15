@@ -51,7 +51,7 @@ public class MenuFenetre extends JMenuBar{
 	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
 
 	private JMenuItem arreterMenuItem, demarrerMenuItem, connecterMenuItem, deconnecterMenuItem, quitterMenuItem, obtenirFormesMenuItem;
-	private static final int DELAI_QUITTER_MSEC = 200;
+	private static final int DELAI_QUITTER_MSEC = 200, LIMITE_DE_FORMES = 10;
  	   
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
 	
@@ -125,7 +125,7 @@ public class MenuFenetre extends JMenuBar{
         obtenirFormesMenuItem = menu.getItem(0);
         obtenirFormesMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                //TODO: Add action to receive 10 items from the server.
+                comm.start(LIMITE_DE_FORMES);
             }
         });
         obtenirFormesMenuItem.setAccelerator(

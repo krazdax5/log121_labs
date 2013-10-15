@@ -41,6 +41,8 @@ public class CommBase {
 	private SwingWorker threadComm = null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
+    private boolean isLimited = false;
+    private int limite;
 	private int PORT_SERVEUR = -1;
 	private String ADRESSE_SERVEUR = null;
 	private final String END_TRAME = "END";
@@ -95,6 +97,16 @@ public class CommBase {
 		creerCommunication();
         isConnected = true;
 	}
+
+    /**
+     * Démarre la communication avec une limite de formes à recevoir.
+     * @param limite Nombre de formes à recevoir.
+     */
+    public void start(int limite){
+        this.limite = limite;
+        isLimited = true;
+        start();
+    }
 	
 	/**
 	 * Arrête la communication (pause)
@@ -102,6 +114,7 @@ public class CommBase {
 	public void stop(){
         isActif = false;
         isConnected = false;
+        isLimited = false;
 	}
 
     /**
@@ -156,18 +169,24 @@ public class CommBase {
 			@Override
 			protected Object doInBackground() throws Exception {
 				System.out.println("\nLe fils d'execution parallele est lance");
-				while(/*!client.isClosed()*/ isConnected()){
+                int compteurFormes = 0;
+
+				while(isConnected()){
                     try{
                         Thread.sleep(DELAI);
                         fluxEcriture.println(GET_TRAME);
                         fluxLecture.readLine();
                         String trame = fluxLecture.readLine();
+                        compteurFormes++;
 
                         //La méthode suivante alerte l'observateur
                         if(listener!=null){
                             firePropertyChange("ENVOIE-TEST", null, (Object) ".");
                             firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
                         }
+
+                        if (isLimited && compteurFormes == limite)
+                            disconnect();
                     } catch (Exception ex){
                         JOptionPane.showMessageDialog(
                                 null,
