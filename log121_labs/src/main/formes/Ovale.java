@@ -42,6 +42,13 @@ public class Ovale extends Forme {
 		return rayonVertical;
 	}
 
+    /**
+     * @return l'aire de la forme ovale.
+     */
+    public int getAire() {
+        return rayonHorizontal*rayonVertical;
+    }
+
 	/**
 	 * Constructeur d'une forme ronde avec une coordonnée et deux rayons.
 	 * @param x
