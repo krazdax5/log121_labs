@@ -14,7 +14,7 @@ Historique des modifications
 import ca.etsmtl.log.util.IDLogger;
 import main.formes.CreateurFormes;
 import main.formes.Forme;
-
+import main.formes.ListeFormes;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -25,7 +25,7 @@ import java.beans.PropertyChangeListener;
 /**
  * Cette classe représente la fenêtre principale de l'application 
  * @author Patrice Boucher
- * @date 2013/05/04
+ * date 2013/05/04
  */
 public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	
@@ -36,8 +36,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 	/**
 	 * Constructeur
 	 */
-	public FenetrePrincipale(final CommBase comm){
-		MenuFenetre menu = new MenuFenetre(comm);
+	public FenetrePrincipale(final CommBase comm, ListeFormes liste){
+		MenuFenetre menu = new MenuFenetre(comm, liste);
 		this.setLayout(new BorderLayout());
 		this.add(menu, BorderLayout.NORTH); 
 		fenetreFormes = new FenetreFormes();
@@ -67,6 +67,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 			Forme nouvelleForme = CreateurFormes.creerForme((String) arg0.getNewValue());
 			fenetreFormes.ajouterForme(nouvelleForme);
 			log.logID(nouvelleForme.getNumeroSequence());
+            fenetreFormes.repaint();
 		}
 	}
 	

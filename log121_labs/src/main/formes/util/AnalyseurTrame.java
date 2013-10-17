@@ -103,7 +103,7 @@ public class AnalyseurTrame {
 
 	/**
 	 * Constructeur de l'analyseur.
-	 * @param la trame du serveur
+	 * @param trame la trame du serveur
 	 */
 	public AnalyseurTrame(String trame){
 		Pattern tramePattern = Pattern.compile(REGEX_TRAME);

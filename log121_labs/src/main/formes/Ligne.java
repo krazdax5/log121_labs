@@ -42,6 +42,19 @@ public class Ligne extends Forme {
 		return longueur;
 	}
 
+    /**
+     * @return l'aire de la ligne (carre autour)
+     */
+    public int getAire() {
+        int aire = (int)((secondeCoordonnee.getX() - premiereCoordonnee.getX()) *
+                (secondeCoordonnee.getY() - premiereCoordonnee.getY()));
+        if(aire < 0)
+            aire = aire *(-1);
+
+        return aire;
+    }
+
+
 	/**
 	 * Constructeur d'une ligne
 	 * @param x1

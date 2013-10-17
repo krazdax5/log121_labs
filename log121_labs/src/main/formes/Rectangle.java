@@ -30,7 +30,7 @@ public class Rectangle extends Forme {
 	}
 
 	/**
-	 * @return La seconde Ccoordonnée
+	 * @return La seconde coordonnée
 	 */
 	public Point getSecondeCoordonnee() {
 		return secondeCoordonnee;
@@ -49,6 +49,14 @@ public class Rectangle extends Forme {
 	public int getHeight() {
 		return height;
 	}
+
+    /**
+     * @return l'aire du rectangle
+     */
+    @Override
+    public int getAire() {
+        return width*height;
+    }
 
 	/**
 	 * Constructeur d'un rectangle avec 2 coordonnées.

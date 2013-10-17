@@ -15,6 +15,7 @@
 package main;
 
 import javax.swing.*;
+import main.formes.ListeFormes;
 
 /**
  * Cette classe représente l'application dans son ensemble. 
@@ -38,7 +39,8 @@ public class ApplicationFormes{
 		String serverLocation = JOptionPane.showInputDialog(LangueConfig.getResource("app.optionPane.message"));
 		if (serverLocation != null){
 			CommBase comm = new CommBase(serverLocation);
-			FenetrePrincipale fenetre = new FenetrePrincipale(comm);
+            ListeFormes liste = new ListeFormes();
+			FenetrePrincipale fenetre = new FenetrePrincipale(comm, liste);
 			comm.setPropertyChangeListener(fenetre);
 		} else
 			System.exit(0);
