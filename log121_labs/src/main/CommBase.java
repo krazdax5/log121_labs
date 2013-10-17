@@ -184,7 +184,6 @@ public class CommBase {
                                 firePropertyChange("ENVOIE-TEST", null, (Object) ".");
                                 firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
                             }
-                        }
 
                         if (isLimited && compteurFormes == limite)
                             disconnect();
