@@ -39,8 +39,7 @@ public class ApplicationFormes{
 		String serverLocation = JOptionPane.showInputDialog(LangueConfig.getResource("app.optionPane.message"));
 		if (serverLocation != null){
 			CommBase comm = new CommBase(serverLocation);
-            ListeFormes liste = new ListeFormes();
-			FenetrePrincipale fenetre = new FenetrePrincipale(comm, liste);
+			FenetrePrincipale fenetre = new FenetrePrincipale(comm);
 			comm.setPropertyChangeListener(fenetre);
 		} else
 			System.exit(0);

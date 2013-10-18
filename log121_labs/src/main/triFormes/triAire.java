@@ -21,7 +21,7 @@ public class triAire {
     }
 
 
-    public ListeFormes trierCroissant() {
+    public void trierCroissant() {
 
         liste.premiere();
 
@@ -32,7 +32,10 @@ public class triAire {
             for(int i = 0; i < liste.length(); i++) {
                 if(liste.getPos().getSuivant() != null) {
 
-                    if(liste.getForme(i).getAire() > liste.getForme(i+1).getAire()) {
+                    int aire1 = liste.getForme(i).getAire();
+                    int aire2 = liste.getForme(i+1).getAire();
+
+                    if(aire1 < aire2) {
                         liste.inverser();
                     }
 
@@ -42,33 +45,47 @@ public class triAire {
             compteur++;
         }
 
+        for(int i = 0; i < liste.length();i++) {
+            System.out.println(liste.getForme(i).getType() + " : " + liste.getForme(i).getAire());
+        }
+        System.out.println();
 
-
-        return liste;
     }
 
-    public ListeFormes trierDecroissant() {
+    public void trierDecroissant() {
 
         liste.premiere();
 
-        int compteur = 0;
+        //int compteur = 0;
 
-        while(compteur != liste.length()+1) {
+        boolean sorted = true;
+
+        //while(compteur != liste.length()+1) {
+        for(int j = 0; j <= liste.length()+1; j++) {
+
+            sorted = false;
 
             for(int i = 0; i < liste.length(); i++) {
                 if(liste.getPos().getSuivant() != null) {
 
-                    if(liste.getForme(i).getAire() > liste.getForme(i+1).getAire()) {
+                    int aire1 = liste.getForme(i).getAire();
+                    int aire2 = liste.getForme(i+1).getAire();
+
+                    if(aire1 < aire2) {
                         liste.inverser();
+                        sorted=true;
                     }
 
                 }
                 liste.suivant();
             }
-            compteur++;
+            //compteur++;
         }
 
-        return liste;
+        for(int i = 0; i < liste.length();i++) {
+            System.out.println(liste.getForme(i).getType() + " : " + liste.getForme(i).getAire());
+        }
+        System.out.println();
     }
 
 

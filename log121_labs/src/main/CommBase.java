@@ -129,7 +129,8 @@ public class CommBase {
         } catch(Exception ex){
             JOptionPane.showMessageDialog(
                     null,
-                    "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(), this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
+                    "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(),
+                    this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
                     LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
                     JOptionPane.ERROR_MESSAGE
             );
@@ -171,7 +172,7 @@ public class CommBase {
 				System.out.println("\nLe fils d'execution parallele est lance");
                 int compteurFormes = 0;
 
-				while(isConnected()){
+				while(isConnected() && isActif()){
                     try{
                         Thread.sleep(DELAI);
                         fluxEcriture.println(GET_TRAME);
@@ -185,7 +186,7 @@ public class CommBase {
                                 firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
                             }
 
-                        if (isLimited && compteurFormes == limite)
+                        if ((isLimited && compteurFormes == limite) || !isActif)
                             disconnect();
                     } catch (Exception ex){
                         JOptionPane.showMessageDialog(

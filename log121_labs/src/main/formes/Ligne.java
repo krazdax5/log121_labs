@@ -20,6 +20,7 @@ public class Ligne extends Forme {
 	private Point premiereCoordonnee = null;
 	private Point secondeCoordonnee = null;
 	private double longueur = -1;
+    private int aire;
 
 	/**
 	 * @return La première coordonnée
@@ -45,8 +46,9 @@ public class Ligne extends Forme {
     /**
      * @return l'aire de la ligne (carre autour)
      */
+    @Override
     public int getAire() {
-        int aire = (int)((secondeCoordonnee.getX() - premiereCoordonnee.getX()) *
+        aire = (int)((secondeCoordonnee.getX() - premiereCoordonnee.getX()) *
                 (secondeCoordonnee.getY() - premiereCoordonnee.getY()));
         if(aire < 0)
             aire = aire *(-1);

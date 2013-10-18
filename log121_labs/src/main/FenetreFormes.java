@@ -46,13 +46,11 @@ public class FenetreFormes extends JComponent{
 	/**
 	 * Constructeur
 	 */
-	public FenetreFormes(){
-//		listeFormes = new Forme[10];
-		colorDictionary = new HashMap<Formes, Color>();
-//		for (int pos = 0; pos < listeFormes.length; pos++)
-//			listeFormes[pos] = null;
+	public FenetreFormes(ListeFormes liste){
 
-        listeFormes = new ListeFormes();
+		colorDictionary = new HashMap<Formes, Color>();
+
+        this.listeFormes = liste;
 		
 		colorDictionary.put(Formes.CARRE, Color.RED);
 		colorDictionary.put(Formes.CERCLE, Color.BLUE);
@@ -61,8 +59,10 @@ public class FenetreFormes extends JComponent{
 		colorDictionary.put(Formes.RECTANGLE, Color.GREEN);
 	}
 	
-	/*
-	 * Affiche la liste de formes 
+	/**
+	 * Affiche la liste de formes
+     *
+     * @param g L'element graphique qui permettra l'affichage.
 	 */
 	@Override 
 	public void paintComponent(Graphics g){

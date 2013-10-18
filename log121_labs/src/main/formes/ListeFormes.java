@@ -19,10 +19,7 @@ public class ListeFormes {
         /**
          * Constructeur par defaut, initialise laForme et suivant à null.
          */
-        public Noeud() {
-            laForme = null;
-            suivant = null;
-        }
+        public Noeud() {}
 
         /**
          * Constructeur par copie d'attribut.
@@ -75,18 +72,6 @@ public class ListeFormes {
      */
     public ListeFormes() {}
 
-//    /**
-//     * Constructeur qui recoit en paramètre un liste de forme.
-//     *
-//     *
-//     * @param liste
-//     */
-//    public ListeFormes(ListeFormes liste) {
-//        liste.premiere();
-//        while(liste.pos.suivant != null){
-//            pos = new Noeud(liste.pos.laForme, liste.pos.suivant);
-//        }
-//    }
 
     /**
      * Methode qui retourne le nombre de formes qu'il ya dans la liste chainee
@@ -167,7 +152,8 @@ public class ListeFormes {
      * Methode qui detruit la forme a la position courante.
      */
     public void detruireForme() {
-        pos=pos.suivant;
+        precedent();
+        pos.suivant=pos.suivant.suivant;
     }
 
     /**
@@ -186,6 +172,21 @@ public class ListeFormes {
     public void suivant() {
         if(pos.suivant != null)
             pos = pos.suivant;
+    }
+
+    /**
+     * Methode qui permet de pointer sur la forme precedente de la position actuelle de la liste chaine
+     */
+    public void precedent() {
+        if(pos.suivant!= null && pos != null) {
+            Noeud temp = premiere;
+
+            while(temp.suivant != pos)
+                temp = temp.suivant;
+            pos=temp;
+
+            temp = null;
+        }
     }
 
     /**
@@ -235,7 +236,6 @@ public class ListeFormes {
         }
         return forme;
     }
-
 
     /**
      * @return le noeud a la position courrante

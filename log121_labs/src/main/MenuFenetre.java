@@ -132,9 +132,15 @@ public class MenuFenetre extends JMenuBar{
         menu.getItem(0).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+                comm.stop();
+
                 triAire tri = new triAire(liste);
-                liste = tri.trierCroissant();
-                tri = null;
+                tri.trierCroissant();
+
+                rafraichirMenus();
+
+
             }
         });
         menu.getItem(1).setSelected(false);
@@ -143,9 +149,14 @@ public class MenuFenetre extends JMenuBar{
         menu.getItem(1).addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+                comm.stop();
+
                 triAire tri = new triAire(liste);
-                liste = tri.trierDecroissant();
-                tri = null;
+                tri.trierDecroissant();
+
+                rafraichirMenus();
+
             }
         });
         menu.getItem(1).setSelected(false);
@@ -154,6 +165,7 @@ public class MenuFenetre extends JMenuBar{
         menu.addSeparator();
 
         add(menu);
+        rafraichirMenus();
     }
 
 	/** 
