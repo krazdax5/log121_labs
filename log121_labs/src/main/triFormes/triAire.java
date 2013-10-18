@@ -30,7 +30,7 @@ public class triAire {
         while(compteur != liste.length()+1) {
 
             for(int i = 0; i < liste.length(); i++) {
-                if(liste.getPos().getSuivant() != null) {
+                if(liste.getPosition().getSuivant() != null) {
 
                     int aire1 = liste.getForme(i).getAire();
                     int aire2 = liste.getForme(i+1).getAire();
@@ -66,7 +66,7 @@ public class triAire {
             sorted = false;
 
             for(int i = 0; i < liste.length(); i++) {
-                if(liste.getPos().getSuivant() != null) {
+                if(liste.getPosition().getSuivant() != null) {
 
                     int aire1 = liste.getForme(i).getAire();
                     int aire2 = liste.getForme(i+1).getAire();

@@ -20,7 +20,7 @@ import main.formes.Formes;
  *
  * ***La classe n'est pas conçue pour être instancier.
  */
-public class ClasseurFormes {
+public final class ClasseurFormes {
 
     /**
      * Méthode qui classe une liste de forme par son numéro de séquence.

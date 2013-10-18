@@ -15,7 +15,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>130</x>
+      <x>90</x>
       <y>40</y>
       <w>240</w>
       <h>250</h>
@@ -57,6 +57,31 @@ bg=blue</panel_attributes>
 +classerParDistance(listeForme: Forme[]): Forme[]
 
 bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>350</x>
+      <y>80</y>
+      <w>320</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>*ReplacerForme*
+--
+
+ -rayonH:int
+ -ratonV:int
+
+--
+
++replaceForme(ListeFormes liste):ListeForme
++setCoordLigne(forme:Forme, x:int, y:int)
++setCoordCercle(forme:Forme, x:int, y:int)
++setCoordCarre(forme:Forme, x:int,y:int)
+
+bg=blue
+	</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
