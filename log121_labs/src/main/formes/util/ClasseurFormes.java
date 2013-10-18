@@ -57,7 +57,67 @@ public class ClasseurFormes {
      * @return Une copie ordonnée de la liste donnée en paramètre.
      */
     public void classerParType(boolean inverse){
+        Forme[] tableauOrdonnee = new Forme[listeFormes.length()];
 
+        for (int position = 0; position < tableauOrdonnee.length; position++){
+            listeFormes.premiere();
+
+            do{
+                if (tableauOrdonnee[position] == null)
+                    tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                else
+                    if (!inverse)
+                        switch(listeFormes.getPosition().getForme().getType()){
+                            case CARRE:
+                                if (tableauOrdonnee[position].getType() != Formes.CARRE)
+                                    tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                                break;
+                            case RECTANGLE:
+                                if (tableauOrdonnee[position].getType() != Formes.CARRE &&
+                                        tableauOrdonnee[position].getType() != Formes.RECTANGLE)
+                                    tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                                break;
+                            case CERCLE:
+                                if (tableauOrdonnee[position].getType() != Formes.CARRE &&
+                                        tableauOrdonnee[position].getType() != Formes.RECTANGLE &&
+                                        tableauOrdonnee[position].getType() != Formes.CERCLE)
+                                    tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                                break;
+                            case OVALE:
+                                if (tableauOrdonnee[position].getType() == Formes.LIGNE)
+                                    tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                                break;
+                        }
+                    else
+                        switch (listeFormes.getPosition().getForme().getType()){
+                           case LIGNE:
+                               if (tableauOrdonnee[position].getType() != Formes.LIGNE)
+                                   tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                               break;
+                           case OVALE:
+                               if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
+                                       tableauOrdonnee[position].getType() != Formes.OVALE)
+                                   tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                               break;
+                           case CERCLE:
+                               if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
+                                       tableauOrdonnee[position].getType() != Formes.OVALE &&
+                                       tableauOrdonnee[position].getType() != Formes.CERCLE)
+                                   tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                               break;
+                           case RECTANGLE:
+                               if (tableauOrdonnee[position].getType() == Formes.CARRE)
+                                   tableauOrdonnee[position] = listeFormes.getPosition().getForme();
+                               break;
+                        }
+            } while (listeFormes.suivant() != null);
+
+            listeFormes.detruireForme(tableauOrdonnee[position]);
+        }
+        listeFormes = new ListeFormes();
+
+        for (Forme laForme : tableauOrdonnee)
+            listeFormes.ajouterForme(laForme);
     }
 
     /**

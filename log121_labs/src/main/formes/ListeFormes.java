@@ -130,7 +130,7 @@ public class ListeFormes {
         premiere = null;
         premiere = temp.suivant;
 
-        temp=null;
+        temp = null;
     }
 
     /**
@@ -152,10 +152,15 @@ public class ListeFormes {
 
     /**
      * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
+     * @return Le prochain noeud
      */
-    public void suivant() {
-        if(position.suivant != null)
+    public Noeud suivant() {
+        if(position.suivant != null){
             position = position.suivant;
+            return position;
+        }
+        else
+            return null;
     }
 
     /**
