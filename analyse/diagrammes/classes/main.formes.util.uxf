@@ -42,19 +42,20 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>310</y>
-      <w>600</w>
+      <x>190</x>
+      <y>330</y>
+      <w>400</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>*ClasseurFormes*
 --
- 
+-listeFormes: ListeFormes
 --
-+classerParNumeroSequence(listeFormes: Forme[], croissant: boolean[true]): Forme[]
-+classerParAire(listeForme: Forme[], croissant: boolean[true]): Forme[]
-+classerParType(ListeForme: Forme[], inverse: boolean[false]): Forme[]
-+classerParDistance(listeForme: Forme[]): Forme[]
++ClasseurFormes(listeFormes: ListeFormes): void
++classerParNumeroSequence(croissant: boolean): void
++classerParAire(croissant: boolean): void
++classerParType(inverse: boolean): void
++classerParDistance(): void
 
 bg=blue</panel_attributes>
     <additional_attributes/>

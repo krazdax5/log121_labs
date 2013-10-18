@@ -16,6 +16,42 @@ public class ListeFormes {
     private int length = 0;
 
     /**
+     * Methode qui retourne la derniere forme de la liste chainee.
+     *
+     * @return La derniere forme de la liste chainee
+     */
+    public Forme getDerniereForme() {
+        derniere();
+        return position.laForme;
+    }
+
+    /**
+     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
+     *
+     * @param num La position de la forme desiree
+     * @return la forme a la postion envoye en parametres
+     */
+    public Forme getForme(int num) {
+        Forme forme = null;
+        if(length() != 0) {
+            position = premiere;
+            for(int i = 0; i < num; i++)
+                suivant();
+            forme = position.laForme;
+        }
+        return forme;
+    }
+
+
+    /**
+     * Methode qui permet de retrouver la position courante dans la liste
+     * @return le noeud a la position courrante
+     */
+    public Noeud getPosition(){
+        return position;
+    }
+
+    /**
      * Constructeur pas défaut
      */
     public ListeFormes() {}
@@ -107,10 +143,10 @@ public class ListeFormes {
     /**
      * Methode qui detruit la forme a la position envoyee en parametre
      *
-     * @param pos la position de la forme que l'on veut detruire
+     * @param position la position de la forme que l'on veut detruire
      */
-    public void detruireForme(int pos) {
-        getForme(pos);
+    public void detruireForme(int position) {
+        getForme(position);
         detruireForme();
     }
 
@@ -142,42 +178,6 @@ public class ListeFormes {
     }
 
     /**
-     * Methode qui retourne la derniere forme de la liste chainee.
-     *
-     * @return La derniere forme de la liste chainee
-     */
-    public Forme getDerniereForme() {
-        derniere();
-        return position.laForme;
-    }
-
-    /**
-     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
-     *
-     * @param num La position de la forme desiree
-     * @return la forme a la postion envoye en parametres
-     */
-    public Forme getForme(int num) {
-        Forme forme = null;
-        if(length() != 0) {
-            position = premiere;
-            for(int i = 0; i < num; i++)
-                suivant();
-            forme = position.laForme;
-        }
-        return forme;
-    }
-
-
-    /**
-     * Methode qui permet de retrouver la position courante dans la liste
-     * @return le noeud a la position courrante
-     */
-    public Noeud getPosition(){
-        return position;
-    }
-
-    /**
      * Classe interne qui cree un noeud de la liste chainee.
      */
     public class Noeud {
@@ -185,10 +185,14 @@ public class ListeFormes {
         private Forme laForme;
         private Noeud suivant;
 
+        /**
+         * Constructeur par défaut.
+         */
         public Noeud() {
             laForme = null;
             suivant = null;
         }
+
         public Noeud(Forme formeNoeud, Noeud suivant) {
             this.laForme = formeNoeud;
             this.suivant = suivant;
