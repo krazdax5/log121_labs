@@ -30,7 +30,7 @@ import java.net.Socket;
  * Base d'une communication via un fil d'exécution parallèle.
  */
 public class CommBase {
-	private final String OPTIONPANE_MESSAGE_BADSERVERNAME = "app.optionPane.message.badServerName";
+    private final String OPTIONPANE_MESSAGE_BADSERVERNAME = "app.optionPane.message.badServerName";
     private final String OPTIONPANE_MESSAGE_STARTERROR = "app.optionPane.message.startError";
     private final String OPTIONPANE_MESSAGE_STOPERROR = "app.optionPane.message.stopError";
     private final String OPTIONPANE_MESSAGE_CONNEXTIONINTERRUPTED = "app.optionPane.message.connexionInterrupted";
@@ -41,6 +41,8 @@ public class CommBase {
 	private SwingWorker threadComm = null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
+    private boolean isLimited = false;
+    private int limite;
 	private int PORT_SERVEUR = -1;
 	private String ADRESSE_SERVEUR = null;
 	private final String END_TRAME = "END";
@@ -50,51 +52,61 @@ public class CommBase {
 	private BufferedReader fluxLecture = null;
 
     private boolean isConnected = false;
-	
-	/**
-	 * @return le socket client
-	 */
-	public Socket getClient() {
-		return client;
-	}
 
-	/**
-	 * Constructeur
-	 */
-	public CommBase(String serverLocation){
-		try{
-			this.ADRESSE_SERVEUR = serverLocation.split(":")[0];
-			this.PORT_SERVEUR = Integer.parseInt(serverLocation.split(":")[1]);			
-		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(
+    /**
+     * @return le socket client
+     */
+    public Socket getClient() {
+        return client;
+    }
+
+    /**
+     * Constructeur
+     */
+    public CommBase(String serverLocation){
+        try{
+            this.ADRESSE_SERVEUR = serverLocation.split(":")[0];
+            this.PORT_SERVEUR = Integer.parseInt(serverLocation.split(":")[1]);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(
                     null,
                     LangueConfig.getResource(OPTIONPANE_MESSAGE_BADSERVERNAME),
                     LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
                     JOptionPane.ERROR_MESSAGE
             );
-			System.exit(1);
-		}
-	}
-	
-	/**
-	 * Definir le recepteur de l'information recue dans la communication avec le serveur
-	 * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
-	 */
-	public void setPropertyChangeListener(PropertyChangeListener listener){
-		this.listener = listener;
-	}
-	
-	/**
-	 * Démarre la communication.
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Definir le recepteur de l'information recue dans la communication avec le serveur
+     * @param listener sera alerté lors de l'appel de "firePropertyChanger" par le SwingWorker
+     */
+    public void setPropertyChangeListener(PropertyChangeListener listener){
+        this.listener = listener;
+    }
+
+    /**
+     * Démarre la communication.
      * Verifie si l'application est connecte au serveur.
      * Si non, elle la connecte a ce dernier et commence a envoyer les requetes pour les formes.
-	 */
-	public void start(){
-        if(client==null)
+     */
+    public void start(){
+        if(client==null || !isConnected)
             connect();
-		creerCommunication();
+        creerCommunication();
         isConnected = true;
 	}
+
+    /**
+     * Démarre la communication avec une limite de formes à recevoir.
+     * @param limite Nombre de formes à recevoir.
+     */
+    public void start(int limite){
+        this.limite = limite;
+        isLimited = true;
+        start();
+    }
 	
 	/**
 	 * Arrête la communication (pause)
@@ -102,6 +114,7 @@ public class CommBase {
 	public void stop(){
         isActif = false;
         isConnected = false;
+        isLimited = false;
 	}
 
     /**
@@ -113,10 +126,11 @@ public class CommBase {
             client = new Socket(ADRESSE_SERVEUR, PORT_SERVEUR);
             fluxLecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
             fluxEcriture = new PrintWriter(client.getOutputStream(), true);
-        } catch(IOException ex){
+        } catch(Exception ex){
             JOptionPane.showMessageDialog(
                     null,
-                    "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(), this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
+                    "\n" + String.format(LangueConfig.getResource(OPTIONPANE_MESSAGE_STARTERROR) + "\n" + ex.getMessage(),
+                    this.ADRESSE_SERVEUR, this.PORT_SERVEUR),
                     LangueConfig.getResource(OPTIONPANE_TITLE_ERROR),
                     JOptionPane.ERROR_MESSAGE
             );
@@ -156,18 +170,24 @@ public class CommBase {
 			@Override
 			protected Object doInBackground() throws Exception {
 				System.out.println("\nLe fils d'execution parallele est lance");
-				while(/*!client.isClosed()*/ isConnected()){
+                int compteurFormes = 0;
+
+				while(isConnected() && isActif()){
                     try{
                         Thread.sleep(DELAI);
                         fluxEcriture.println(GET_TRAME);
                         fluxLecture.readLine();
                         String trame = fluxLecture.readLine();
+                        compteurFormes++;
 
-                        //La méthode suivante alerte l'observateur
-                        if(listener!=null){
-                            firePropertyChange("ENVOIE-TEST", null, (Object) ".");
-                            firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
-                        }
+                            //La méthode suivante alerte l'observateur
+                            if(listener!=null){
+                                firePropertyChange("ENVOIE-TEST", null, (Object) ".");
+                                firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
+                            }
+
+                        if ((isLimited && compteurFormes == limite) || !isActif)
+                            disconnect();
                     } catch (Exception ex){
                         JOptionPane.showMessageDialog(
                                 null,
@@ -175,25 +195,28 @@ public class CommBase {
                                 LangueConfig.getResource(OPTIONPANE_TITLE_WARNING),
                                 JOptionPane.WARNING_MESSAGE
                         );
-                        stop();
+                        disconnect();
                     }
-				}
+                }
                 return null;
-			}
-		};
-		if(listener!=null)
-		   threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger" 		
-		threadComm.execute(); // Lance le fil d'exécution parallèle.
-		isActif = true;
-	}
-	
-	/**
-	 * @return si le fil d'exécution parallèle est actif
-	 */
-	public boolean isActif(){
-		return isActif;
-	}
+            }
+        };
+        if(listener!=null)
+            threadComm.addPropertyChangeListener(listener); // La méthode "propertyChange" de ApplicationFormes sera donc appelée lorsque le SwinkWorker invoquera la méthode "firePropertyChanger"
+        threadComm.execute(); // Lance le fil d'exécution parallèle.
+        isActif = true;
+    }
 
+    /**
+     * @return si le fil d'exécution parallèle est actif
+     */
+    public boolean isActif(){
+        return isActif;
+    }
+
+    /**
+     * @return si l'application est connectee au serveur
+     */
     public boolean isConnected() {
         return isConnected;
     }

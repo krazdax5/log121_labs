@@ -16,13 +16,22 @@ import main.formes.Rectangle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ImageObserver;
+import java.awt.image.RenderedImage;
+import java.awt.image.renderable.RenderableImage;
+import java.text.AttributedCharacterIterator;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Cette fenêtre gère l'affichage des formes 
  * @author Patrice Boucher
- * @date 2013/05/04
+ * date 2013/05/04
  */
 public class FenetreFormes extends JComponent{
 	
@@ -30,58 +39,94 @@ public class FenetreFormes extends JComponent{
 	public static final int WIDTH = 500;
 	public static final int HEIGHT = 500;
 	public static final Dimension dimension = new Dimension(500,500);
-	private Forme[] listeFormes;
+	//private Forme[] listeFormes;
+    private ListeFormes listeFormes;
 	private Map<Formes, Color> colorDictionary;
 		
 	/**
 	 * Constructeur
 	 */
-	public FenetreFormes(){
-		listeFormes = new Forme[10];
+	public FenetreFormes(ListeFormes liste){
+
 		colorDictionary = new HashMap<Formes, Color>();
-		for (int pos = 0; pos < listeFormes.length; pos++)
-			listeFormes[pos] = null;
+
+        this.listeFormes = liste;
 		
-		colorDictionary.put(Formes.CARRE, Color.BLACK);
+		colorDictionary.put(Formes.CARRE, Color.RED);
 		colorDictionary.put(Formes.CERCLE, Color.BLUE);
-		colorDictionary.put(Formes.LIGNE, Color.CYAN);
-		colorDictionary.put(Formes.OVALE, Color.DARK_GRAY);
+		colorDictionary.put(Formes.LIGNE, Color.BLACK);
+		colorDictionary.put(Formes.OVALE, Color.YELLOW);
 		colorDictionary.put(Formes.RECTANGLE, Color.GREEN);
 	}
 	
-	/*
-	 * Affiche la liste de formes 
+	/**
+	 * Affiche la liste de formes
+     *
+     * @param g L'element graphique qui permettra l'affichage.
 	 */
 	@Override 
 	public void paintComponent(Graphics g){
+//        Graphics2D g2D = (Graphics2D)g;
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		for (int pos = 0; pos < listeFormes.length; pos++){
-			if (listeFormes[pos] != null){
-				Forme laForme = listeFormes[pos];
+
+        g.setColor(Color.BLACK);
+        g.drawString("NbFormes : " + listeFormes.length(), 10,15);
+//
+//        float dash1[] = {5.0f};
+//        BasicStroke dashed = new BasicStroke(1.0f,
+//                        BasicStroke.CAP_BUTT,
+//                        BasicStroke.JOIN_MITER,
+//                        10.0f, dash1, 0.0f);
+
+		for (int pos = 0; pos < listeFormes.length(); pos++){
+			if (listeFormes != null){
+				Forme laForme = listeFormes.getForme(pos);
                 g.setColor(colorDictionary.get(laForme.getType()));
 
 				switch(laForme.getType()){
 				case CARRE:
 					Rectangle leCarre = (Rectangle) laForme;
 					g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+                    g.setColor(Color.BLACK);
+                    g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+//                    g2D.setStroke(dashed);
+//                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
 					break;
 				case RECTANGLE:
 					Rectangle leRectangle = (Rectangle) laForme;
 					g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
-					break;
+                    g.setColor(Color.BLACK);
+                    g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+//                    g2D.setStroke(dashed);
+//                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+                    break;
 				case OVALE:
 					Ovale lOvale = (Ovale) laForme;
 					g.fillOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
-					break;
+                    g.setColor(Color.BLACK);
+                    g.drawOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
+//                    g2D.setStroke(dashed);
+//                    g2D.drawRect(lOvale.getCoordonneeCentre().x-lOvale.getRayonHorizontal()/2,
+//                            lOvale.getCoordonneeCentre().y+lOvale.getRayonVertical()/2,
+//                            lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
+                    break;
 				case CERCLE:
 					Ovale leCercle = (Ovale) laForme;
 					g.fillOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
-					break;
+                    g.setColor(Color.BLACK);
+                    g.drawOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
+//                    g2D.setStroke(dashed);
+//                    g2D.drawRect(leCercle.getCoordonneeCentre().x-leCercle.getRayonHorizontal()/2,
+//                            leCercle.getCoordonneeCentre().y+leCercle.getRayonVertical()/2,
+//                            leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
+                    break;
 				case LIGNE:
 					Ligne laLigne = (Ligne) laForme;
 					g.drawLine(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
-					break;
+                    //g2D.setStroke(dashed);
+                    //g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
+                    break;
 				}
 			}
 		}
@@ -101,18 +146,20 @@ public class FenetreFormes extends JComponent{
 	 * @param laForme La forme de type Forme à ajouter
 	 */
 	public void ajouterForme(Forme laForme){
-		int pos = -1;
-		do{
-			pos++;
-			if (pos == 10){
-				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
-				listeFormes[listeFormes.length - 1] = laForme;
-			}else
-				if (listeFormes[pos] == null){
-					listeFormes[pos] = laForme;
-					break;
-				}
-		} while(pos < listeFormes.length);
-		paintComponent(getGraphics());
+//		int pos = -1;
+//		do{
+//			pos++;
+//			if (pos == 10){
+//				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
+//				listeFormes[listeFormes.length - 1] = laForme;
+//			}else
+//				if (listeFormes[pos] == null){
+//					listeFormes[pos] = laForme;
+//					break;
+//				}
+//		} while(pos < listeFormes.length);
+
+        listeFormes.ajouterFormeFin(laForme);
+
 	}
 }

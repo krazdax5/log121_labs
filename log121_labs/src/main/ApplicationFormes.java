@@ -15,6 +15,7 @@
 package main;
 
 import javax.swing.*;
+import main.formes.ListeFormes;
 
 /**
  * Cette classe représente l'application dans son ensemble. 
