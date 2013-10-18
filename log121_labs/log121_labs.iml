@@ -3,6 +3,7 @@
   <component name="EclipseModuleManager">
     <libelement value="file://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
     <libelement value="jar://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar!/" />
+    <libelement value="file:///Users/charleslevesque/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -27,12 +28,13 @@
     <orderEntry type="module-library">
       <library name="ca.etsmtl.log.util.jar">
         <CLASSES>
-          <root url="jar://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar!/" />
+          <root url="file:///Users/charleslevesque/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ca.etsmtl.log.util" level="project" />
   </component>
 </module>
 

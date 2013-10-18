@@ -22,6 +22,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import main.triFormes.*;
+import main.formes.ListeFormes;
 
 /**
  * Cree le menu de la fenetre de l'application
@@ -46,6 +48,9 @@ public class MenuFenetre extends JMenuBar{
 			MENU_DESSIN_ARRETER = "app.frame.menus.draw.stop",
             MENU_DESSIN_CONNECTER = "app.frame.menus.file.connect",
             MENU_DESSIN_DECONNECTER = "app.frame.menus.file.disconnect",
+            MENU_ORDRE_TITLE = "app.frame.menus.order.title",
+            MENU_ORDRE_AIRECROISSANTE ="app.frame.menus.order.growingarea",
+            MENU_ORDRE_AIREDECROISSANTE = "app.frame.menus.order.decreasingarea",
 			MENU_AIDE_TITRE = "app.frame.menus.help.title",
 			MENU_AIDE_PROPOS = "app.frame.menus.help.about";
 	private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";  
@@ -54,13 +59,16 @@ public class MenuFenetre extends JMenuBar{
 	private static final int DELAI_QUITTER_MSEC = 200, LIMITE_DE_FORMES = 10;
  	   
 	CommBase comm; // Pour activer/désactiver la communication avec le serveur
+    ListeFormes liste;
 	
 	/**
 	 * Constructeur
 	 */
-	public MenuFenetre(CommBase comm) {
+	public MenuFenetre(CommBase comm, ListeFormes liste) {
 		this.comm = comm;
+        this.liste = liste;
 		addMenuDessiner();
+        addMenuOrdre();
 		addMenuFichier();
 		addMenuAide();
 	}
@@ -115,6 +123,50 @@ public class MenuFenetre extends JMenuBar{
         rafraichirMenus();
 
 	}
+
+    protected void addMenuOrdre() {
+        JMenu menu = creerMenuOrdre(MENU_ORDRE_TITLE,
+                new String[]{MENU_ORDRE_AIRECROISSANTE, MENU_ORDRE_AIREDECROISSANTE});
+
+        ButtonGroup groupeTri = new ButtonGroup();
+        menu.getItem(0).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                comm.stop();
+
+                triAire tri = new triAire(liste);
+                tri.trierCroissant();
+
+                rafraichirMenus();
+
+
+            }
+        });
+        menu.getItem(1).setSelected(false);
+        groupeTri.add(menu.getItem(0));
+
+        menu.getItem(1).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                comm.stop();
+
+                triAire tri = new triAire(liste);
+                tri.trierDecroissant();
+
+                rafraichirMenus();
+
+            }
+        });
+        menu.getItem(1).setSelected(false);
+        groupeTri.add(menu.getItem(1));
+
+        menu.addSeparator();
+
+        add(menu);
+        rafraichirMenus();
+    }
 
 	/** 
 	 * Creer le menu "File"/"Fichier".
@@ -188,4 +240,21 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
    }
+
+    /**
+     * Créer un élément de menu à partir d'un champs principal et ses éléments
+     * @param titleKey champs principal
+     * @param itemKeys éléments
+     * @return le menu
+     */
+    private static JMenu creerMenuOrdre(String titleKey,String[] itemKeys) {
+        JMenu menu = new JMenu(LangueConfig.getResource(titleKey));
+        ButtonGroup groupTri = new ButtonGroup();
+        for(int i=0; i < itemKeys.length; ++i) {
+            JRadioButtonMenuItem radioButtonMenu = new JRadioButtonMenuItem(LangueConfig.getResource(itemKeys[i]));
+            groupTri.add(radioButtonMenu);
+            menu.add(radioButtonMenu);
+        }
+        return menu;
+    }
 }
