@@ -1,0 +1,65 @@
+package main.formes;
+import java.awt.Point;
+
+import main.formes.util.AnalyseurTrame;
+import main.formes.ListeFormes;
+
+
+public class ReplacerForme extends Forme {
+	
+
+	private String forme;
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	private Point coinSupGauche;
+	
+	public void setX1(int x1){
+		if(0<=getNumeroSequence() && getNumeroSequence()<=9)
+			x1 = 40 * getNumeroSequence();
+		else if(10<=getNumeroSequence() && getNumeroSequence()<19)
+			x1 = 40 * (getNumeroSequence() - 10);
+		else if(20<=getNumeroSequence() && getNumeroSequence()<29)
+			x1 = 40 * (getNumeroSequence() - 20);
+		else if(30<=getNumeroSequence() && getNumeroSequence()<39)
+			x1 = 40 * (getNumeroSequence() - 30);
+	}
+	
+	public void setY1(int y1){
+		this.y1=y1;
+		y1 = 40*(getNumeroSequence()-1);
+	}
+	
+
+
+	
+	public Forme replacerForme(Forme formeReplacee){
+		forme = getTypeForme();
+		
+		if(forme=="RECTANGLE"){
+			setX1(getX1());
+			setY1(getY1());
+			
+			coinSupGauche.setLocation(x1, y1);
+			
+		}	
+		
+		else if(forme=="OVALE"){
+			centreX = getCentreX() - getRayonH();
+			centreY = getCentreY() - getRayonV();
+		}
+		
+		else if(forme=="CERCLE"){
+			centreX = getCentreX()- getRayon();
+			centreY = getCentreY()- getRayon();
+		}
+		
+		
+		
+		return formeReplacee;
+	
+			
+	}
+			
+
+	
+
+}

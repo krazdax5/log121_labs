@@ -1,0 +1,18 @@
+package main.formes.util;
+
+public class ReplacerForme extends ClasseurFormes {
+	
+	private int numero=0;
+	
+	public int replacerForme(){
+		if(numero==0)
+		
+			
+		return numero;
+			
+	}
+			
+
+	
+
+}

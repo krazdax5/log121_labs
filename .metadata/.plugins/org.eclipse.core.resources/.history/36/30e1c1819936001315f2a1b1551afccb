@@ -1,0 +1,58 @@
+package main.formes;
+import java.awt.Point;
+
+import main.formes.util.AnalyseurTrame;
+import main.formes.Rectangle;
+
+
+
+public class ReplacerForme extends AnalyseurTrame {
+	
+
+
+	public ReplacerForme(String trame) {
+		super(trame);
+		// TODO Auto-generated constructor stub
+	}
+
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	private Point coinSupGauche;
+	
+	
+	public Forme replacerForme(Forme formeAReplacer){
+		
+		if(formeAReplacer.type==Formes.CARRE){
+			setX1(x1);
+			setY1(y1);
+			x2 = getX2();
+			y2 = getY2();
+			formeAReplacer = new Rectangle(x1,y1,x2,y2,getNumeroSequence());
+		}
+		
+		else if(formeAReplacer.type==Formes.RECTANGLE){
+			setX1(x1);
+			setY1(y1);
+			x2 = getX2();
+			y2 = getY2();
+			formeAReplacer = new Rectangle(x1,y1,x2,y2,getNumeroSequence());
+		}
+		
+		else if(formeAReplacer.type==Formes.LIGNE){
+			setX1(x1);
+			setY1(y1);
+		}
+		
+		else if(formeAReplacer.type==Formes.CERCLE){
+			
+		}
+		else if(formeAReplacer.type==Formes.OVALE){
+			
+		}	
+		
+		return formeAReplacer;
+		
+	}
+		
+	
+	
+}

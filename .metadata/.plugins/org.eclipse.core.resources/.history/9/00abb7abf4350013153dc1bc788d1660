@@ -1,0 +1,28 @@
+package main.formes.util;
+
+import main.formes.Forme;
+
+public class ReplacerForme extends AnalyseurTrame {
+	
+	public ReplacerForme(String trame) {
+		super(trame);
+		
+	}
+
+	private int numero=0;
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	
+	
+	
+	public int replacerForme(){
+		x1 = getX1();
+		
+			
+		return numero;
+			
+	}
+			
+
+	
+
+}

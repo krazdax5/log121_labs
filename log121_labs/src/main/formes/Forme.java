@@ -15,6 +15,7 @@ package main.formes;
  * Abstraction d'une forme géométrique.
  */
 public abstract class Forme {
+	
 	protected Formes type = Formes.INDETERMINE;
 	protected int numeroSequence;
 
@@ -31,4 +32,5 @@ public abstract class Forme {
 	public Formes getType() {
 		return type;
 	}
+	
 }

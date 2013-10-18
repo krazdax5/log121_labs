@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="12.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>30</x>
+      <x>0</x>
       <y>0</y>
-      <w>700</w>
-      <h>500</h>
+      <w>560</w>
+      <h>400</h>
     </coordinates>
     <panel_attributes>main.formes.util</panel_attributes>
     <additional_attributes/>
@@ -15,10 +15,10 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>130</x>
-      <y>40</y>
-      <w>240</w>
-      <h>250</h>
+      <x>56</x>
+      <y>32</y>
+      <w>192</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>*AnalyseurTrame*
 --
@@ -42,10 +42,10 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>310</y>
-      <w>600</w>
-      <h>130</h>
+      <x>48</x>
+      <y>280</y>
+      <w>480</w>
+      <h>104</h>
     </coordinates>
     <panel_attributes>*ClasseurFormes*
 --
@@ -57,6 +57,31 @@ bg=blue</panel_attributes>
 +classerParDistance(listeForme: Forme[]): Forme[]
 
 bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>288</x>
+      <y>64</y>
+      <w>256</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>*ReplacerForme*
+--
+
+ -rayonH:int
+ -ratonV:int
+
+--
+
++replaceForme(ListeFormes liste):ListeForme
++setCoordLigne(forme:Forme, x:int, y:int)
++setCoordCercle(forme:Forme, x:int, y:int)
++setCoordCarre(forme:Forme, x:int,y:int)
+
+bg=blue
+	</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

@@ -1,0 +1,58 @@
+package main.formes;
+import java.awt.Point;
+
+import main.formes.util.AnalyseurTrame;
+import main.formes.Rectangle;
+
+
+
+public class ReplacerForme {
+	
+
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	
+	
+	public ListeFormes replacerForme(ListeFormes liste){
+		
+		try{
+			liste.premiere();
+			for(int i=0; i<=liste.length();i++){
+				Forme forme = liste.getForme(i);
+				
+				if(forme.getType()==Formes.CARRE)
+					setCoordCarre(forme,40*i, 40*i);
+				
+				else if(forme.getType()==Formes.RECTANGLE)
+					setCoordCarre(forme,40*i,40*i);
+				
+				else if(forme.getType()==Formes.CERCLE)
+					setCoordCercle(forme,40*i, 40*i);
+				
+				else if(forme.getType()==Formes.OVALE)
+					setCoordCercle(forme, 40*i, 40*i);
+				
+				else if(forme.getType()==Formes.LIGNE)
+					setCoordLigne(forme,40*i,40*i);
+					
+			}
+		}
+		
+		
+	}
+	
+	private void setCoordLigne(Forme forme, int x, int y) {
+		
+	}
+
+	private void setCoordCercle(Forme forme, int x, int y) {
+		
+	}
+
+	private void setCoordCarre(Forme forme, int x, int y) {	
+		forme.getX();
+		forme.getY();
+	}
+		
+	
+	
+}

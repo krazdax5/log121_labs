@@ -12,10 +12,12 @@ Historique des modifications
 *******************************************************/
 
 import main.formes.*;
+
 import main.formes.Rectangle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.RoundRectangle2D;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +25,11 @@ import java.util.Map;
  * Cette fenêtre gère l'affichage des formes 
  * @author Patrice Boucher
  * @date 2013/05/04
+ * 
+ * Modification:
+ * 1-Pierre-Luc Landry
+ * @date 2013/10/17
+ * 
  */
 public class FenetreFormes extends JComponent{
 	
@@ -32,6 +39,9 @@ public class FenetreFormes extends JComponent{
 	public static final Dimension dimension = new Dimension(500,500);
 	private Forme[] listeFormes;
 	private Map<Formes, Color> colorDictionary;
+	
+	final static float dash1[] = {10.0f};
+	final static BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER,10.0f, dash1, 0.0f);
 		
 	/**
 	 * Constructeur
@@ -49,13 +59,14 @@ public class FenetreFormes extends JComponent{
 		colorDictionary.put(Formes.RECTANGLE, Color.GREEN);
 	}
 	
+	
 	/*
 	 * Affiche la liste de formes 
 	 */
-	@Override 
 	public void paintComponent(Graphics g){
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
+		
 		for (int pos = 0; pos < listeFormes.length; pos++){
 			if (listeFormes[pos] != null){
 				Forme laForme = listeFormes[pos];
@@ -65,22 +76,36 @@ public class FenetreFormes extends JComponent{
 				case CARRE:
 					Rectangle leCarre = (Rectangle) laForme;
 					g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+					((Graphics2D)g).setStroke(dashed);
+					g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
 					break;
+					
 				case RECTANGLE:
 					Rectangle leRectangle = (Rectangle) laForme;
 					g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+					((Graphics2D)g).setStroke(dashed);
+					g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
 					break;
+					
 				case OVALE:
 					Ovale lOvale = (Ovale) laForme;
 					g.fillOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
+					((Graphics2D)g).setStroke(dashed);
+					g.drawRect(lOvale.getCoordonneeCentre().x+lOvale.getRayonHorizontal(), lOvale.getCoordonneeCentre().y+lOvale.getRayonVertical(), lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
 					break;
+					
 				case CERCLE:
 					Ovale leCercle = (Ovale) laForme;
 					g.fillOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
+					((Graphics2D)g).setStroke(dashed);
+					g.drawRect(leCercle.getCoordonneeCentre().x+leCercle.getRayonHorizontal(), leCercle.getCoordonneeCentre().y+leCercle.getRayonVertical(), leCercle.getRayonHorizontal() * 2, leCercle.getRayonVertical() * 2);
 					break;
+					
 				case LIGNE:
 					Ligne laLigne = (Ligne) laForme;
 					g.drawLine(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
+					((Graphics2D)g).setStroke(dashed);
+					g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x-laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y-laLigne.getSecondeCoordonnee().y);
 					break;
 				}
 			}
