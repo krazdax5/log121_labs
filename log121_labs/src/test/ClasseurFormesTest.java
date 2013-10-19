@@ -16,7 +16,6 @@ public class ClasseurFormesTest {
 
     @Test
     public void testClasserParAire() throws Exception {
-
     }
 
     @Test
@@ -34,23 +33,23 @@ public class ClasseurFormesTest {
 
         classeur.classerParType(false);
         listeFormes.premiere();
-        assert listeFormes.getPosition().getForme().getType() == Formes.CARRE && listeFormes.getPosition().getForme().getNumeroSequence() == 13;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.CARRE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 13;
         listeFormes.suivant();
-        assert listeFormes.getPosition().getForme().getType() == Formes.RECTANGLE && listeFormes.getPosition().getForme().getNumeroSequence() == 12;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.RECTANGLE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 12;
         listeFormes.suivant();
-        assert listeFormes.getPosition().getForme().getType() == Formes.CERCLE && listeFormes.getPosition().getForme().getNumeroSequence() == 14;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.CERCLE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 14;
         listeFormes.suivant();
-        assert listeFormes.getPosition().getForme().getType() == Formes.OVALE && listeFormes.getPosition().getForme().getNumeroSequence() == 34;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.OVALE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 34;
         listeFormes.suivant();
-        assert listeFormes.getPosition().getForme().getType() == Formes.LIGNE && listeFormes.getPosition().getForme().getNumeroSequence() == 45;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.LIGNE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 45;
 
         classeur.classerParType(true);
         listeFormes.premiere();
-        assert listeFormes.getPosition().getForme().getType() == Formes.LIGNE && listeFormes.getPosition().getForme().getNumeroSequence() == 45;
-        assert listeFormes.getPosition().getForme().getType() == Formes.OVALE && listeFormes.getPosition().getForme().getNumeroSequence() == 34;
-        assert listeFormes.getPosition().getForme().getType() == Formes.CERCLE && listeFormes.getPosition().getForme().getNumeroSequence() == 14;
-        assert listeFormes.getPosition().getForme().getType() == Formes.RECTANGLE && listeFormes.getPosition().getForme().getNumeroSequence() == 12;
-        assert listeFormes.getPosition().getForme().getType() == Formes.CARRE && listeFormes.getPosition().getForme().getNumeroSequence() == 13;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.LIGNE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 45;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.OVALE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 34;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.CERCLE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 14;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.RECTANGLE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 12;
+        assert listeFormes.getNoeudCourant().getForme().getType() == Formes.CARRE && listeFormes.getNoeudCourant().getForme().getNumeroSequence() == 13;
     }
 
     @Test

@@ -138,7 +138,7 @@ public class MenuFenetre extends JMenuBar{
 
                 comm.stop();
 
-                ClasseurFormes.classerParAire(liste, croissant);
+//                ClasseurFormes.classerParAire(liste, croissant);
 
                 rafraichirMenus();
 
@@ -154,7 +154,7 @@ public class MenuFenetre extends JMenuBar{
 
                 comm.stop();
 
-                ClasseurFormes.classerParAire(liste, !croissant);
+//                ClasseurFormes.classerParAire(liste, !croissant);
 
                 rafraichirMenus();
 
