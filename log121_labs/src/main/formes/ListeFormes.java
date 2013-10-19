@@ -2,8 +2,10 @@ package main.formes;
 
 /**
  * Classe qui cree une liste chainee de formes.
+ *
  * @author Mathieu Lachance
  * 2013-10-10 Version Initiale
+ * 2013-10-19 Modifications des methodes.
  */
 public class ListeFormes {
 
@@ -23,6 +25,8 @@ public class ListeFormes {
 
         /**
          * Constructeur par copie d'attribut.
+         * Permet de pouvoir ajouter une forme à la liste,
+         * ainsi que le forme sur laquelle elle pointe.
          *
          * @param formeNoeud    une forme
          * @param suivant       le noeud qui suit ce noeud.
@@ -90,12 +94,14 @@ public class ListeFormes {
     public void inverser() {
 
         if(pos.suivant != null) {
-            Forme temp = pos.laForme;
+
+            Forme copieForme = pos.laForme;
 
             pos.laForme = pos.suivant.laForme;
-            pos.suivant.laForme = temp;
+            pos.suivant.laForme = copieForme;
 
-            temp = null;
+            copieForme = null; // Le garbage collector viendra supprimer cette instance de forme.
+
         }
 
     }
@@ -103,11 +109,11 @@ public class ListeFormes {
     /**
      * Methode qui ajoute une forme a la fin de la liste chainee
      *
-     * @param f la forme que l'on desire ajouter a la liste chainee
+     * @param nouvelleForme la forme que l'on desire ajouter a la liste chainee
      */
-    public void ajouterFormeFin(Forme f) {
+    public void ajouterFormeFin(Forme nouvelleForme) {
         derniere();
-        ajouterForme(f);
+        ajouterForme(nouvelleForme);
     }
 
     /**
@@ -141,11 +147,11 @@ public class ListeFormes {
      * Methode qui detruit la premiere forme sans modifier le pointeur de position de la liste.
      */
     public void detruirePremiereForme() {
-        Noeud temp = premiere;
+        Noeud noeudTemporaire = premiere;
         premiere = null;
-        premiere = temp.suivant;
+        premiere = noeudTemporaire.suivant;
 
-        temp=null;
+        noeudTemporaire=null; // Le garbage collector viendra supprimer cette instance de Noeaud.
     }
 
     /**
@@ -156,14 +162,33 @@ public class ListeFormes {
         pos.suivant=pos.suivant.suivant;
     }
 
+
     /**
-     * Methode qui detruit la forme a la position envoyee en parametre
+     * Permet d'aller detruire la forme equivalente a celle que l'on envoie en parametre
      *
-     * @param pos la position de la forme que l'on veut detruire
+     * @param formeADetruire la forme que l'on veut detruire dans la liste.
      */
-    public void detruireForme(int pos) {
-        getForme(pos);
-        detruireForme();
+    public void detruireForme(Forme formeADetruire) {
+
+        boolean matchFound = false;
+
+        Noeud miseEnMemoirePosition = pos;
+
+        pos = premiere;
+
+        while(!matchFound) {
+
+            if(!pos.getForme().equals(formeADetruire))
+                suivant();
+            else {
+                detruireForme();
+                matchFound = true;
+            }
+
+        }
+
+        pos=miseEnMemoirePosition;
+
     }
 
     /**
@@ -175,10 +200,20 @@ public class ListeFormes {
     }
 
     /**
+     * Methode qui retourne le noeud suivant a la position courrante
+     * @return  le noeud suivant a la position actuelle.
+     */
+    public Noeud getSuivant() {
+        if(pos != null) {
+            return pos.suivant;
+        } else return null;
+    }
+
+    /**
      * Methode qui permet de pointer sur la forme precedente de la position actuelle de la liste chaine
      */
     public void precedent() {
-        if(pos.suivant!= null && pos != null) {
+        if(pos != null && premiere != null) {
             Noeud temp = premiere;
 
             while(temp.suivant != pos)
@@ -219,28 +254,28 @@ public class ListeFormes {
         return pos.laForme;
     }
 
-    /**
-     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
-     * sans detruire le noeud.
-     *
-     * @param num La position de la forme desiree
-     * @return la forme a la postion envoye en parametres
-     */
-    public Forme getForme(int num) {
-        Forme forme = null;
-        if(length() != 0) {
-            pos = premiere;
-            for(int i = 0; i < num; i++)
-                suivant();
-            forme = pos.laForme;
-        }
-        return forme;
-    }
+//    /**
+//     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
+//     * sans detruire le noeud.
+//     *
+//     * @param num La position de la forme desiree
+//     * @return la forme a la postion envoye en parametres
+//     */
+//    public Forme getForme(int num) {
+//        Forme forme = null;
+//        if(length() != 0) {
+//            pos = premiere;
+//            for(int i = 0; i < num; i++)
+//                suivant();
+//            forme = pos.laForme;
+//        }
+//        return forme;
+//    }
 
     /**
      * @return le noeud a la position courrante
      */
-    public Noeud getPos(){
+    public Noeud getNoeudCourrant(){
         return pos;
     }
 
