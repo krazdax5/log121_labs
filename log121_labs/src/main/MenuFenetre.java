@@ -22,7 +22,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import main.triFormes.*;
+
+import main.formes.util.ClasseurFormes;
 import main.formes.ListeFormes;
 
 /**
@@ -58,8 +59,10 @@ public class MenuFenetre extends JMenuBar{
 	private JMenuItem arreterMenuItem, demarrerMenuItem, connecterMenuItem, deconnecterMenuItem, quitterMenuItem, obtenirFormesMenuItem;
 	private static final int DELAI_QUITTER_MSEC = 200, LIMITE_DE_FORMES = 10;
  	   
-	CommBase comm; // Pour activer/désactiver la communication avec le serveur
-    ListeFormes liste;
+	private CommBase comm; // Pour activer/désactiver la communication avec le serveur
+    private ListeFormes liste;
+
+    private boolean croissant = true;
 	
 	/**
 	 * Constructeur
@@ -135,8 +138,7 @@ public class MenuFenetre extends JMenuBar{
 
                 comm.stop();
 
-                triAire tri = new triAire(liste);
-                tri.trierCroissant();
+                ClasseurFormes.classerParAire(liste, croissant);
 
                 rafraichirMenus();
 
@@ -152,8 +154,7 @@ public class MenuFenetre extends JMenuBar{
 
                 comm.stop();
 
-                triAire tri = new triAire(liste);
-                tri.trierDecroissant();
+                ClasseurFormes.classerParAire(liste, !croissant);
 
                 rafraichirMenus();
 
@@ -221,6 +222,7 @@ public class MenuFenetre extends JMenuBar{
 	 *  Activer ou desactiver les items du menu selon la sélection.
 	 */
 	private void rafraichirMenus() {
+
 		demarrerMenuItem.setEnabled(!comm.isActif());
 		arreterMenuItem.setEnabled(comm.isActif());
         connecterMenuItem.setEnabled(!comm.isConnected());
@@ -257,4 +259,5 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
     }
+
 }

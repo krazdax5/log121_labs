@@ -9,11 +9,11 @@
  *@author Charles Levesque
  *2013-10-11 Version initiale
  * 2013-10-14 Charles Levesque
+ * 2013-10-19 Mathieu Lachance : triAire fonctionnel
  *******************************************************/
 package main.formes.util;
 
-import main.formes.Forme;
-import main.formes.Formes;
+import main.formes.*;
 import main.formes.ListeFormes;
 
 /**
@@ -48,6 +48,57 @@ public class ClasseurFormes {
      * @return Une copie ordonnée de la liste donnée en paramètre.
      */
     public void classerParAire(boolean croissant){
+
+        // Initialisation à 0 du compteur qui sera utilise dans la boucle while
+        int compteur = 0;
+
+        while(compteur != listeFormes.length()+1) {
+
+            // Pointe sur la premiere forme de la liste
+            listeFormes.premiere();
+
+            // Tri les elements de la liste
+            for(int i = 0; i < listeFormes.length(); i++) {
+                if(listeFormes.getNoeudCourrant().getSuivant() != null) {
+
+                    int aire1 = listeFormes.getNoeudCourrant().getForme().getAire();
+                    listeFormes.suivant();
+                    int aire2 = listeFormes.getNoeudCourrant().getForme().getAire();;
+
+                    listeFormes.precedent();
+
+                    // Tri croissant
+                    if(croissant) {
+                        if(aire1 > aire2) {
+                            listeFormes.inverser();
+                        }
+                    }
+                    // Tri decroissant
+                    else {
+                        if(aire1 < aire2) {
+                            listeFormes.inverser();
+                        }
+                    }
+
+                }
+                // Deplace le pointeur sur la forme suivante
+                listeFormes.suivant();
+            }
+            // Incrementation du compteur de la boucle while
+            compteur++;
+        }
+
+        // Affiche la liste ordonnee dans la console.
+        listeFormes.premiere();
+        for(int i = 0; i < listeFormes.length();i++) {
+            System.out.println(listeFormes.getNoeudCourrant().getForme().getType() + " : " +
+                    listeFormes.getNoeudCourrant().getForme().getAire());
+            listeFormes.suivant();
+        }
+        System.out.println();
+
+        // retourne la liste ordonnee
+        return listeFormes;
     }
 
     /**

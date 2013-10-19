@@ -113,7 +113,6 @@ public class CommBase {
 	 */
 	public void stop(){
         isActif = false;
-        isConnected = false;
         isLimited = false;
 	}
 
@@ -186,7 +185,7 @@ public class CommBase {
                                 firePropertyChange("NOUVELLE-TRAME", null, (Object) trame);
                             }
 
-                        if ((isLimited && compteurFormes == limite) || !isActif)
+                        if (isLimited && compteurFormes == limite)
                             disconnect();
                     } catch (Exception ex){
                         JOptionPane.showMessageDialog(

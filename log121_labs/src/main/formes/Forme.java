@@ -18,6 +18,7 @@ public abstract class Forme {
 
 	protected Formes type = Formes.INDETERMINE;
 	protected int numeroSequence;
+    protected int aire;
 
 	/**
 	 * @return le numéro de séquence
@@ -33,8 +34,16 @@ public abstract class Forme {
 		return type;
 	}
 
+    /**
+     *
+     * @return
+     */
     public int getAire() {
-        return 0;
+        return aire;
+    }
+
+    public boolean equals(Forme formeAVerifier) {
+        return this.getType() == formeAVerifier.getType();
     }
 
 }
