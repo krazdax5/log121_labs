@@ -15,7 +15,7 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>130</x>
+      <x>90</x>
       <y>40</y>
       <w>240</w>
       <h>250</h>
@@ -42,21 +42,47 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>80</x>
-      <y>310</y>
-      <w>600</w>
+      <x>190</x>
+      <y>330</y>
+      <w>400</w>
       <h>130</h>
     </coordinates>
     <panel_attributes>*ClasseurFormes*
 --
- 
+-listeFormes: ListeFormes
 --
-+classerParNumeroSequence(listeFormes: Forme[], croissant: boolean[true]): Forme[]
-+classerParAire(listeForme: Forme[], croissant: boolean[true]): Forme[]
-+classerParType(ListeForme: Forme[], inverse: boolean[false]): Forme[]
-+classerParDistance(listeForme: Forme[]): Forme[]
++ClasseurFormes(listeFormes: ListeFormes): void
++classerParNumeroSequence(croissant: boolean): void
++classerParAire(croissant: boolean): void
++classerParType(inverse: boolean): void
++classerParDistance(): void
 
 bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>350</x>
+      <y>80</y>
+      <w>320</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>*ReplacerForme*
+--
+
+ -rayonH:int
+ -ratonV:int
+
+--
+
++replaceForme(ListeFormes liste):ListeForme
++setCoordLigne(forme:Forme, x:int, y:int)
++setCoordCercle(forme:Forme, x:int, y:int)
++setCoordCarre(forme:Forme, x:int,y:int)
+
+bg=blue
+	</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

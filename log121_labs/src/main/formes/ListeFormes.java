@@ -158,8 +158,13 @@ public class ListeFormes {
      * Methode qui detruit la forme a la position courante.
      */
     public void detruireForme() {
-        precedent();
-        pos.suivant=pos.suivant.suivant;
+    	if (pos.getForme().getNumeroSequence() == premiere.getForme().getNumeroSequence()){
+    		suivant();
+    		premiere = pos;
+    	}else{
+	        precedent();
+	        pos.suivant=pos.suivant.suivant;
+    	}
     }
 
 
@@ -178,7 +183,7 @@ public class ListeFormes {
 
         while(!matchFound) {
 
-            if(!pos.getForme().equals(formeADetruire))
+            if(pos.getForme().getNumeroSequence() != formeADetruire.getNumeroSequence())
                 suivant();
             else {
                 detruireForme();
@@ -194,19 +199,13 @@ public class ListeFormes {
     /**
      * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
      */
-    public void suivant() {
-        if(pos.suivant != null)
+    public Noeud suivant() {
+        if(pos.suivant != null){
             pos = pos.suivant;
-    }
-
-    /**
-     * Methode qui retourne le noeud suivant a la position courrante
-     * @return  le noeud suivant a la position actuelle.
-     */
-    public Noeud getSuivant() {
-        if(pos != null) {
-            return pos.suivant;
-        } else return null;
+            return pos;
+        }
+        else
+        	return null;
     }
 
     /**
@@ -214,13 +213,12 @@ public class ListeFormes {
      */
     public void precedent() {
         if(pos != null && premiere != null) {
-            Noeud temp = premiere;
-
-            while(temp.suivant != pos)
-                temp = temp.suivant;
-            pos=temp;
-
-            temp = null;
+        	Noeud elementPrecedent = premiere;
+        	
+        	while (elementPrecedent.suivant.getForme().getNumeroSequence() != pos.getForme().getNumeroSequence())
+        		elementPrecedent = elementPrecedent.suivant;
+        	
+        	pos = elementPrecedent;
         }
     }
 
@@ -254,28 +252,10 @@ public class ListeFormes {
         return pos.laForme;
     }
 
-//    /**
-//     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
-//     * sans detruire le noeud.
-//     *
-//     * @param num La position de la forme desiree
-//     * @return la forme a la postion envoye en parametres
-//     */
-//    public Forme getForme(int num) {
-//        Forme forme = null;
-//        if(length() != 0) {
-//            pos = premiere;
-//            for(int i = 0; i < num; i++)
-//                suivant();
-//            forme = pos.laForme;
-//        }
-//        return forme;
-//    }
-
     /**
      * @return le noeud a la position courrante
      */
-    public Noeud getNoeudCourrant(){
+    public Noeud getNoeudCourant(){
         return pos;
     }
 
