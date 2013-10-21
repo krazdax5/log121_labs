@@ -2,16 +2,60 @@
 <diagram program="umlet" version="12.1">
   <zoom_level>10</zoom_level>
   <element>
-    <type>com.umlet.element.custom.PackageAggregationHierarchy</type>
+    <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>310</x>
-      <y>140</y>
-      <w>180</w>
-      <h>120</h>
+      <x>220</x>
+      <y>180</y>
+      <w>130</w>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>main
-	formes
-		util</panel_attributes>
+    <panel_attributes>formes</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>220</x>
+      <y>20</y>
+      <w>130</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>main</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>220</x>
+      <y>350</y>
+      <w>130</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>util</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>210</x>
+      <y>80</y>
+      <w>146</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;import&gt;&gt;</panel_attributes>
+    <additional_attributes>80;120;80;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>210</x>
+      <y>250</y>
+      <w>146</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+&lt;&lt;import&gt;&gt;</panel_attributes>
+    <additional_attributes>80;120;80;30</additional_attributes>
   </element>
 </diagram>

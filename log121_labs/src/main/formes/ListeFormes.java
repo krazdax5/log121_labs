@@ -58,9 +58,10 @@ public class ListeFormes {
     }
 
     /**
-     * Pointeur du noeud courrant.
+     * Pointeur du noeud courant.
      */
-    private Noeud pos;
+    private Noeud noeudCourant;
+
     /**
      * Pointeur du premier noeud.
      */
@@ -93,12 +94,12 @@ public class ListeFormes {
      */
     public void inverser() {
 
-        if(pos.suivant != null) {
+        if(noeudCourant.suivant != null) {
 
-            Forme copieForme = pos.laForme;
+            Forme copieForme = noeudCourant.laForme;
 
-            pos.laForme = pos.suivant.laForme;
-            pos.suivant.laForme = copieForme;
+            noeudCourant.laForme = noeudCourant.suivant.laForme;
+            noeudCourant.suivant.laForme = copieForme;
 
             copieForme = null; // Le garbage collector viendra supprimer cette instance de forme.
 
@@ -129,17 +130,17 @@ public class ListeFormes {
 
         if(length() != 10) {
             if(length() == 0)
-                premiere = pos = new Noeud(forme, null);
+                premiere = noeudCourant = new Noeud(forme, null);
             else if(length() == 1)
-                pos = premiere.suivant = new Noeud(forme, pos.suivant);
+                noeudCourant = premiere.suivant = new Noeud(forme, noeudCourant.suivant);
             else if(length() > 1)
-                pos = pos.suivant = new Noeud(forme, pos.suivant);
+                noeudCourant = noeudCourant.suivant = new Noeud(forme, noeudCourant.suivant);
 
             length++;
         }
         else {
             detruirePremiereForme();
-            pos = pos.suivant = new Noeud(forme, pos.suivant);
+            noeudCourant = noeudCourant.suivant = new Noeud(forme, noeudCourant.suivant);
         }
     }
 
@@ -158,12 +159,12 @@ public class ListeFormes {
      * Methode qui detruit la forme a la position courante.
      */
     public void detruireForme() {
-    	if (pos.getForme().getNumeroSequence() == premiere.getForme().getNumeroSequence()){
+    	if (noeudCourant.getForme().getNumeroSequence() == premiere.getForme().getNumeroSequence()){
     		suivant();
-    		premiere = pos;
+    		premiere = noeudCourant;
     	}else{
 	        precedent();
-	        pos.suivant=pos.suivant.suivant;
+	        noeudCourant.suivant=noeudCourant.suivant.suivant;
     	}
     }
 
@@ -177,13 +178,13 @@ public class ListeFormes {
 
         boolean matchFound = false;
 
-        Noeud miseEnMemoirePosition = pos;
+        Noeud miseEnMemoirePosition = noeudCourant;
 
-        pos = premiere;
+        noeudCourant = premiere;
 
         while(!matchFound) {
 
-            if(pos.getForme().getNumeroSequence() != formeADetruire.getNumeroSequence())
+            if(noeudCourant.getForme().getNumeroSequence() != formeADetruire.getNumeroSequence())
                 suivant();
             else {
                 detruireForme();
@@ -192,7 +193,7 @@ public class ListeFormes {
 
         }
 
-        pos=miseEnMemoirePosition;
+        noeudCourant=miseEnMemoirePosition;
 
     }
 
@@ -200,9 +201,9 @@ public class ListeFormes {
      * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
      */
     public Noeud suivant() {
-        if(pos.suivant != null){
-            pos = pos.suivant;
-            return pos;
+        if(noeudCourant.suivant != null){
+            noeudCourant = noeudCourant.suivant;
+            return noeudCourant;
         }
         else
         	return null;
@@ -212,13 +213,13 @@ public class ListeFormes {
      * Methode qui permet de pointer sur la forme precedente de la position actuelle de la liste chaine
      */
     public void precedent() {
-        if(pos != null && premiere != null) {
+        if(noeudCourant != null && premiere != null) {
         	Noeud elementPrecedent = premiere;
         	
-        	while (elementPrecedent.suivant.getForme().getNumeroSequence() != pos.getForme().getNumeroSequence())
+        	while (elementPrecedent.suivant.getForme().getNumeroSequence() != noeudCourant.getForme().getNumeroSequence())
         		elementPrecedent = elementPrecedent.suivant;
         	
-        	pos = elementPrecedent;
+        	noeudCourant = elementPrecedent;
         }
     }
 
@@ -226,7 +227,7 @@ public class ListeFormes {
      * Methode qui permet de pointer sur la premiere forme de la liste chainee.
      */
     public void premiere() {
-        pos=premiere;
+        noeudCourant=premiere;
     }
 
     /**
@@ -234,8 +235,8 @@ public class ListeFormes {
      */
     public void derniere() {
         if(premiere != null) {
-            pos=premiere;
-            while(pos.suivant != null) {
+            noeudCourant=premiere;
+            while(noeudCourant.suivant != null) {
                 suivant();
             }
         }
@@ -249,14 +250,14 @@ public class ListeFormes {
      */
     public Forme getderniereForme() {
         derniere();
-        return pos.laForme;
+        return noeudCourant.laForme;
     }
 
     /**
      * @return le noeud a la position courrante
      */
     public Noeud getNoeudCourant(){
-        return pos;
+        return noeudCourant;
     }
 
 }

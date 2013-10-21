@@ -3,6 +3,9 @@
 .idea
 IDLogger
 
+# Eclipse #
+.metadata
+
 # Package Files #
 *.war
 *.ear

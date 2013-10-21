@@ -4,9 +4,9 @@
   <element>
     <type>com.umlet.element.Package</type>
     <coordinates>
-      <x>30</x>
-      <y>0</y>
-      <w>700</w>
+      <x>0</x>
+      <y>30</y>
+      <w>670</w>
       <h>500</h>
     </coordinates>
     <panel_attributes>main.formes.util</panel_attributes>
@@ -15,8 +15,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>90</x>
-      <y>40</y>
+      <x>60</x>
+      <y>70</y>
       <w>240</w>
       <h>250</h>
     </coordinates>
@@ -42,8 +42,8 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>190</x>
-      <y>330</y>
+      <x>160</x>
+      <y>360</y>
       <w>400</w>
       <h>130</h>
     </coordinates>
@@ -63,8 +63,8 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>350</x>
-      <y>80</y>
+      <x>320</x>
+      <y>110</y>
       <w>320</w>
       <h>150</h>
     </coordinates>
@@ -84,5 +84,56 @@ bg=blue</panel_attributes>
 bg=blue
 	</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Package</type>
+    <coordinates>
+      <x>710</x>
+      <y>260</y>
+      <w>150</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>main.formes</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Class</type>
+    <coordinates>
+      <x>730</x>
+      <y>300</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>ListeFormes
+--
+
+bg=blue</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>530</x>
+      <y>320</y>
+      <w>270</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=  1</panel_attributes>
+    <additional_attributes>30;120;160;120;250;120;250;30</additional_attributes>
+  </element>
+  <element>
+    <type>com.umlet.element.Relation</type>
+    <coordinates>
+      <x>610</x>
+      <y>150</y>
+      <w>220</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=  1</panel_attributes>
+    <additional_attributes>30;30;160;30;200;30;200;150</additional_attributes>
   </element>
 </diagram>
