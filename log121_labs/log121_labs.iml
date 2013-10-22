@@ -3,6 +3,7 @@
   <component name="EclipseModuleManager">
     <libelement value="file://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
     <libelement value="jar://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../ca.etsmtl.log.util.jar!/" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -19,15 +20,6 @@
       <library name="junit4">
         <CLASSES>
           <root url="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="ca.etsmtl.log.util.jar">
-        <CLASSES>
-          <root url="file://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

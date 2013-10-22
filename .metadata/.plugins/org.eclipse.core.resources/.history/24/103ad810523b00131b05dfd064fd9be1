@@ -173,8 +173,7 @@ public class FenetreFormes extends JComponent{
 					break;
 				}
 		} while(pos < listeFormes.length());
-
-
+		
     }
     
 }

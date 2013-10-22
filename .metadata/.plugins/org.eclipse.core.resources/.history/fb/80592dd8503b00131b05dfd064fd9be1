@@ -27,16 +27,16 @@ public class ReplacerForme  {
 	public ReplacerForme(ListeFormes liste){
 		liste = new ListeFormes();
 		this.liste = liste;
-        nouvellesCoordonnees();
 	}
 	
 	
 	/**
 	 * Méthode qui permet de changer les coordonnees de la forme
 	 * On change toutes les formes precentes dans la liste  a l'aide d'une boucle
-	 *
+	 * @param liste liste chainee dont les formes ne sont pas encore dans l'ordre d'affichage desire
+	 * @return liste on retourne la liste chainee dont les formes on maintenant des nouvelles coordonnees
 	 */
-	private void nouvellesCoordonnees(){
+	public void nouvellesCoordonnees (){
 		
 		liste.premiere();
 		
