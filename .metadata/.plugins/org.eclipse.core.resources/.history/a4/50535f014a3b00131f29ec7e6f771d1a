@@ -15,7 +15,6 @@ import main.formes.*;
 
 import main.formes.Rectangle;
 import main.formes.ListeFormes.Noeud;
-import main.formes.util.ReplacerForme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -173,9 +172,6 @@ public class FenetreFormes extends JComponent{
 					break;
 				}
 		} while(pos < listeFormes.length());
-		
-		ReplacerForme listeAModifier = new ReplacerForme(listeFormes);
-		listeAModifier.nouvellesCoordonnees();
     }
     
 }

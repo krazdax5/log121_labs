@@ -174,7 +174,7 @@ public class FenetreFormes extends JComponent{
 				}
 		} while(pos < listeFormes.length());
 		
-		ReplacerForme listeAModifier = new ReplacerForme(listeFormes);
+		ReplacerForme listeAModifier = new ReplacerForme();
 		listeAModifier.nouvellesCoordonnees();
     }
     

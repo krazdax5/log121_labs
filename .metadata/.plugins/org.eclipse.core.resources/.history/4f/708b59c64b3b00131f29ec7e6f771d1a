@@ -20,10 +20,6 @@ public class ReplacerForme  {
 	private ListeFormes liste;
 	
 	
-	/**
-	 * Constructeur qui permet de travailler avec la liste original de formes
-	 * @param liste Liste de formes original 
-	 */
 	public ReplacerForme(ListeFormes liste){
 		liste = new ListeFormes();
 		this.liste = liste;

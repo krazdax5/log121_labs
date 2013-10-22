@@ -245,6 +245,24 @@ public class ListeFormes {
 		
 	}
 
+    /**
+<<<<<<< HEAD
+     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
+     *
+     * @param num La position de la forme desiree
+     * @return la forme a la postion envoye en parametres
+     */
+    public Forme getForme(int num) {
+        Forme forme = null;
+        if(length() != 0) {
+            pos = premiere;
+            for(int i = 0; i < num; i++)
+                suivant();
+            forme = pos.laForme;
+        }
+        return forme;
+    }
+
 
     /**
      * Methode qui permet de retrouver la position courante dans la liste

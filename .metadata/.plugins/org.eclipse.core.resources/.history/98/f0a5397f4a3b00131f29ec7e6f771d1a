@@ -17,18 +17,11 @@ public class ReplacerForme  {
 
 	final int DISTANCE = 40;
 	private Point p1,p2,pCentre;
-	private ListeFormes liste;
 	
 	
-	/**
-	 * Constructeur qui permet de travailler avec la liste original de formes
-	 * @param liste Liste de formes original 
-	 */
-	public ReplacerForme(ListeFormes liste){
-		liste = new ListeFormes();
-		this.liste = liste;
-	}
+	public ReplacerForme(){}
 	
+	//public ReplacerForme(ListeFormes liste){}
 	
 	/**
 	 * Méthode qui permet de changer les coordonnees de la forme
@@ -36,7 +29,7 @@ public class ReplacerForme  {
 	 * @param liste liste chainee dont les formes ne sont pas encore dans l'ordre d'affichage desire
 	 * @return liste on retourne la liste chainee dont les formes on maintenant des nouvelles coordonnees
 	 */
-	public void nouvellesCoordonnees (){
+	public ListeFormes nouvellesCoordonnees (ListeFormes liste){
 		
 		liste.premiere();
 		
@@ -54,7 +47,8 @@ public class ReplacerForme  {
 				
 			liste.suivant();	
 		}
-		 
+		
+		return liste;
 	}
 	
 	

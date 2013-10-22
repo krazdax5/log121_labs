@@ -1,9 +1,5 @@
-package main.formes.util;
+package main.formes;
 import java.awt.Point;
-
-import main.formes.Forme;
-import main.formes.Formes;
-import main.formes.ListeFormes;
 
 
 /**
@@ -17,26 +13,15 @@ public class ReplacerForme  {
 
 	final int DISTANCE = 40;
 	private Point p1,p2,pCentre;
-	private ListeFormes liste;
 	
 	
 	/**
-	 * Constructeur qui permet de travailler avec la liste original de formes
-	 * @param liste Liste de formes original 
-	 */
-	public ReplacerForme(ListeFormes liste){
-		liste = new ListeFormes();
-		this.liste = liste;
-	}
-	
-	
-	/**
-	 * Méthode qui permet de changer les coordonnees de la forme
+	 * Constructeur qui permet de changer les coordonnees de la forme
 	 * On change toutes les formes precentes dans la liste  a l'aide d'une boucle
 	 * @param liste liste chainee dont les formes ne sont pas encore dans l'ordre d'affichage desire
 	 * @return liste on retourne la liste chainee dont les formes on maintenant des nouvelles coordonnees
 	 */
-	public void nouvellesCoordonnees (){
+	public ListeFormes replacerForme(ListeFormes liste){
 		
 		liste.premiere();
 		
@@ -54,7 +39,8 @@ public class ReplacerForme  {
 				
 			liste.suivant();	
 		}
-		 
+		
+		return liste;
 	}
 	
 	
