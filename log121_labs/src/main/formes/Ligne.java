@@ -51,8 +51,15 @@ public class Ligne extends Forme {
         return aire;
     }
 
+    /**
+     * @return la plus grande distance de la ligne.
+     */
+    @Override
+    public double getDistance() {
+        return distance;
+    }
 
-	/**
+    /**
 	 * Constructeur d'une ligne
 	 * @param x1
 	 * @param y1
@@ -72,5 +79,7 @@ public class Ligne extends Forme {
         aire = (x2 - x1) * (y2 - y1);
         if(aire < 0)
             aire = aire *(-1);
+
+        distance = longueur;
 	}
 }

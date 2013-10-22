@@ -19,6 +19,7 @@ public abstract class Forme {
 	protected Formes type = Formes.INDETERMINE;
 	protected int numeroSequence;
     protected int aire;
+    protected double distance;
 
 	/**
 	 * @return le numéro de séquence
@@ -35,11 +36,19 @@ public abstract class Forme {
 	}
 
     /**
-     *
-     * @return
+     * Accesseur de l'aire de la forme
+     * @return l'aire de la forme.
      */
     public int getAire() {
         return aire;
+    }
+
+    /**
+     * Accesseur de la plus grande distance d'une forme
+     * @return la plus grande distance de la forme.
+     */
+    public double getDistance() {
+        return distance;
     }
 
     public boolean equals(Forme formeAVerifier) {

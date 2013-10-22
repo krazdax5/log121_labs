@@ -21,7 +21,6 @@ public class Rectangle extends Forme {
 	private Point secondeCoordonnee = null;
 	private int width = -1;
 	private int height = -1;
-    //private int aire;
 	
 	/**
 	 * @return La première coordonnée
@@ -59,7 +58,15 @@ public class Rectangle extends Forme {
         return aire;
     }
 
-	/**
+    /**
+     * @return la plus grande distance du rectangle.
+     */
+    @Override
+    public double getDistance() {
+        return distance;
+    }
+
+    /**
 	 * Constructeur d'un rectangle avec 2 coordonnées.
 	 * @param x1
 	 * @param y1
@@ -79,5 +86,6 @@ public class Rectangle extends Forme {
 			this.type = Formes.RECTANGLE;
 
         aire = width*height;
+        distance = Math.sqrt(width*width+height*height);
 	}
 }

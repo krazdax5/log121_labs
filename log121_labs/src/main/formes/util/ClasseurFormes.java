@@ -10,6 +10,7 @@
  *2013-10-11 Version initiale
  * 2013-10-14 Charles Levesque
  * 2013-10-19 Mathieu Lachance : triAire fonctionnel
+ * 2013-10-19 Mathieu Lachance : triDistance fonctionnel
  *******************************************************/
 package main.formes.util;
 
@@ -157,6 +158,39 @@ public class ClasseurFormes {
     /**
      * Méthode qui classe une liste de formes par la distance la plus grande de sa diagonnale.
      */
-    public void classerParDistance(){
+    public void classerParDistance(boolean croissant){
+
+        // Initialisation à 0 du compteur qui sera utilise dans la boucle while
+        int compteur = 0;
+
+        while(compteur != listeFormes.length()+1) {
+
+            listeFormes.premiere();
+
+            for(int i = 0; i < listeFormes.length(); i++) {
+                if(listeFormes.getNoeudCourant().getSuivant() != null) {
+
+                    double distance1 = listeFormes.getNoeudCourant().getForme().getDistance();
+                    listeFormes.suivant();
+                    double distance2 = listeFormes.getNoeudCourant().getForme().getDistance();;
+
+                    listeFormes.precedent();
+
+                    if(croissant) {
+                        if(distance1 > distance2) {
+                            listeFormes.inverser();
+                        }
+                    }
+                    else {
+                        if(distance1 < distance2) {
+                            listeFormes.inverser();
+                        }
+                    }
+
+                }
+                listeFormes.suivant();
+            }
+            compteur++;
+        }
     }
 }

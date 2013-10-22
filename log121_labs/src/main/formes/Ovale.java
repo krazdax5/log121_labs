@@ -52,7 +52,15 @@ public class Ovale extends Forme {
         return aire;
     }
 
-	/**
+    /**
+     * @return la plus grande distance de la forme ovale.
+     */
+    @Override
+    public double getDistance() {
+        return distance;
+    }
+
+    /**
 	 * Constructeur d'une forme ronde avec une coordonnée et deux rayons.
 	 * @param x
 	 * @param y
@@ -67,6 +75,11 @@ public class Ovale extends Forme {
 		type = Formes.OVALE;
 
         aire = rayonH*rayonV;
+
+        if(rayonH > rayonV)
+            distance = rayonH;
+        else
+            distance = rayonV;
 	}
 	
 	/**
@@ -80,5 +93,7 @@ public class Ovale extends Forme {
 		type = Formes.CERCLE;
 
         aire = rayon*rayon;
+
+        distance = rayon;
 	}
 }
