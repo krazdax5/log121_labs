@@ -29,12 +29,28 @@ public class Rectangle extends AbstractForme {
 		return premiereCoordonnee;
 	}
 
+    /**
+     * instantie la valeur de la premiere coordonnee
+     * @param premiereCoordonnee
+     */
+    public void setPremiereCoordonnee(Point premiereCoordonnee){
+        this.premiereCoordonnee = premiereCoordonnee;
+    }
+
 	/**
 	 * @return La seconde coordonnée
 	 */
 	public Point getSecondeCoordonnee() {
 		return secondeCoordonnee;
 	}
+
+    /**
+     * instantie la valeur de la deuxieme coordonnee
+     * @param secondeCoordonnee
+     */
+    public void setSecondeCoordonnee(Point secondeCoordonnee){
+        this.secondeCoordonnee = secondeCoordonnee;
+    }
 
 	/**
 	 * @return La largeur

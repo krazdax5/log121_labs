@@ -54,6 +54,21 @@ public class ListeFormes {
             return suivant;
         }
 
+        /**
+         * Mutateur de la forme au noeud courant
+         * @param nouvelleForme La nouvelle forme du noeud
+         */
+        public void setForme(AbstractForme nouvelleForme) {
+            this.laAbstractForme = nouvelleForme;
+        }
+
+        /**
+         * Mutateur du noeud suivant du noeud courant
+         * @param noeudSuivant le nouveau noeud
+         */
+        public void setSuivant(Noeud noeudSuivant) {
+            this.suivant = noeudSuivant;
+        }
 
     }
 

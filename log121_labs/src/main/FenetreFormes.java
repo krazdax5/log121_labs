@@ -20,18 +20,6 @@ import main.formes.util.ReplacerForme;
 import javax.swing.*;
 import java.awt.*;
 
-import java.awt.geom.RoundRectangle2D;
-
-import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ImageObserver;
-import java.awt.image.RenderedImage;
-import java.awt.image.renderable.RenderableImage;
-import java.text.AttributedCharacterIterator;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +29,6 @@ public class FenetreFormes extends JComponent{
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
     public static final Dimension dimension = new Dimension(500,500);
-    //private Forme[] listeFormes;
     private ListeFormes listeFormes;
     private Map<Formes, Color> colorDictionary;
     
@@ -75,7 +62,7 @@ public class FenetreFormes extends JComponent{
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         g.setColor(Color.BLACK);
-        g.drawString("NbFormes : " + listeFormes.length(), 10,15);
+        g.drawString("NbFormes : " + listeFormes.getLength(), 10,15);
 //
 //        float dash1[] = {5.0f};
 //        BasicStroke dashed = new BasicStroke(1.0f,
@@ -88,9 +75,9 @@ public class FenetreFormes extends JComponent{
             listeFormes.premiere();
             
            
-            for (int pos = 0; pos < listeFormes.length(); pos++){
+            for (int pos = 0; pos < listeFormes.getLength(); pos++){
 
-                Forme laForme = listeFormes.getNoeudCourant().getForme();
+                AbstractForme laForme = listeFormes.getNoeudCourant().getForme();
 
                 listeFormes.suivant();
 
@@ -156,7 +143,7 @@ public class FenetreFormes extends JComponent{
      * Ajoute une forme à la liste de formes.
      * @param laForme La forme de type Forme à ajouter
      */
-    public void ajouterForme(Forme laForme){
+    public void ajouterForme(AbstractForme laForme){
 		int pos = -1;
 		do{
 			pos++;
@@ -172,7 +159,7 @@ public class FenetreFormes extends JComponent{
 					listeFormes.ajouterForme(laForme);
 					break;
 				}
-		} while(pos < listeFormes.length());
+		} while(pos < listeFormes.getLength());
 
 
     }

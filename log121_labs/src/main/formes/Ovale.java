@@ -30,6 +30,14 @@ public class Ovale extends AbstractForme {
 		return coordonneeCentre;
 	}
 
+    /**
+     * Instantie la valeur de la coordonnee du centre
+     * @param coordonneeCentre
+     */
+    public void setCoordonneeCentre(Point coordonneeCentre){
+           this.coordonneeCentre=coordonneeCentre;
+    }
+
 	/**
 	 * @return Le rayon horizontal
 	 */

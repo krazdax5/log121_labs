@@ -29,12 +29,27 @@ public class Ligne extends AbstractForme {
 		return premiereCoordonnee;
 	}
 
+    /**
+     * Instantie la valeur de la premiere coordonnee
+     * @param premiereCoordonnee
+     */
+    public void setPremiereCoordonnee(Point premiereCoordonnee){
+        this.premiereCoordonnee=premiereCoordonnee;
+    }
 	/**
 	 * @return La seconde coordonnée
 	 */
 	public Point getSecondeCoordonnee() {
 		return secondeCoordonnee;
 	}
+
+    /**
+     * Instantie la valeur de la seconde coordonnee
+     * @param secondeCoordonnee
+     */
+    public void setSecondeCoordonnee(Point secondeCoordonnee){
+        this.secondeCoordonnee=secondeCoordonnee;
+    }
 
 	/**
 	 * @return La longueur de la ligne
