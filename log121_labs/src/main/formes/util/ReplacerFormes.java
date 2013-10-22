@@ -10,11 +10,10 @@ import main.formes.*;
  * 2013/10/16 Version Initiale
  *
  */
-public class ReplacerForme  {
+public class ReplacerFormes {
 	
 
 	final int DISTANCE = 40;
-	private Point p1,p2,pCentre;
     private ListeFormes liste;
 
     public ListeFormes getListe() {
@@ -26,7 +25,7 @@ public class ReplacerForme  {
 	 * Constructeur qui permet de travailler avec la liste original de formes
 	 * @param liste Liste de formes original 
 	 */
-	public ReplacerForme(ListeFormes liste){
+	public ReplacerFormes(ListeFormes liste){
 		this.liste = liste;
         nouvellesCoordonnees();
 	}
@@ -38,11 +37,12 @@ public class ReplacerForme  {
 	 *
 	 */
 	private void nouvellesCoordonnees(){
-		
+
+        AbstractForme forme;
 		liste.premiere();
 		
-		for(int i=0; i<=liste.getLength();i++){
-            AbstractForme forme = liste.getNoeudCourant().getForme();
+		for(int i=0; i<liste.getLength();i++){
+            forme = liste.getNoeudCourant().getForme();
 			liste.getNoeudCourant().setForme(setCoordonnees(forme,DISTANCE*i, DISTANCE*i));
 			liste.suivant();	
 		}
@@ -52,16 +52,20 @@ public class ReplacerForme  {
 	
 	private AbstractForme setCoordonnees(AbstractForme forme, int x, int y){
 
+        Point p1,p2,pCentre;
+
 		if(forme.getType()==Formes.CARRE||forme.getType()==Formes.RECTANGLE){
 			p1 = new Point(x, y);
             Rectangle rectangle = (Rectangle) forme;
             rectangle.setPremiereCoordonnee(p1);
+            rectangle.setSecondeCoordonnee(new Point(x+rectangle.getWidth(),y+rectangle.getHeight()));
             return rectangle;
 		}
 		else if(forme.getType()==Formes.CERCLE || forme.getType()==Formes.OVALE){
 
             Ovale ovale = (Ovale) forme;
 			pCentre = new Point(x + ovale.getRayonHorizontal(), y + ovale.getRayonVertical());
+            ovale.setCoordonneeCentre(pCentre);
             return ovale;
 
 		}
@@ -80,7 +84,7 @@ public class ReplacerForme  {
 			else
 				p2.y = y-p2.y;
 				
-			p1.setLocation(x, y);
+			p1 = new Point(x, y);
 			ligne.setPremiereCoordonnee(p1);
 			ligne.setSecondeCoordonnee(p2);
             return ligne;

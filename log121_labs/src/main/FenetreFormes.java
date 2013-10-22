@@ -14,8 +14,6 @@ package main;
 import main.formes.*;
 
 import main.formes.Rectangle;
-import main.formes.ListeFormes.Noeud;
-import main.formes.util.ReplacerForme;
 
 import javax.swing.*;
 import java.awt.*;
