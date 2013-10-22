@@ -15,9 +15,14 @@ package main.formes;
  * Abstraction d'une forme géométrique.
  */
 public abstract class Forme {
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> e6760c689fc87ef118f04888b42215d42216646f
 	protected Formes type = Formes.INDETERMINE;
 	protected int numeroSequence;
+    protected int aire;
 
 	/**
 	 * @return le numéro de séquence
@@ -32,5 +37,21 @@ public abstract class Forme {
 	public Formes getType() {
 		return type;
 	}
+<<<<<<< HEAD
 	
+=======
+
+    /**
+     *
+     * @return
+     */
+    public int getAire() {
+        return aire;
+    }
+
+    public boolean equals(Forme formeAVerifier) {
+        return this.getType() == formeAVerifier.getType();
+    }
+
+>>>>>>> e6760c689fc87ef118f04888b42215d42216646f
 }

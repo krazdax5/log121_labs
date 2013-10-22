@@ -20,6 +20,7 @@ public class Ligne extends Forme {
 	private Point premiereCoordonnee = null;
 	private Point secondeCoordonnee = null;
 	private double longueur = -1;
+    //private int aire;
 
 	/**
 	 * @return La première coordonnée
@@ -42,6 +43,15 @@ public class Ligne extends Forme {
 		return longueur;
 	}
 
+    /**
+     * @return l'aire de la ligne (carre autour)
+     */
+    @Override
+    public int getAire() {
+        return aire;
+    }
+
+
 	/**
 	 * Constructeur d'une ligne
 	 * @param x1
@@ -58,5 +68,9 @@ public class Ligne extends Forme {
 					Math.pow((x1 > x2) ? x1 - x2 : x2 - x1, 2)
 				); //Théorème de Pythagore
 		type = Formes.LIGNE;
+
+        aire = (x2 - x1) * (y2 - y1);
+        if(aire < 0)
+            aire = aire *(-1);
 	}
 }

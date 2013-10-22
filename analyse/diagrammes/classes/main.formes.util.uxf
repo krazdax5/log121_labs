@@ -15,10 +15,17 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
+<<<<<<< HEAD
       <x>56</x>
       <y>32</y>
       <w>192</w>
       <h>200</h>
+=======
+      <x>90</x>
+      <y>40</y>
+      <w>240</w>
+      <h>250</h>
+>>>>>>> e6760c689fc87ef118f04888b42215d42216646f
     </coordinates>
     <panel_attributes>*AnalyseurTrame*
 --
@@ -42,19 +49,27 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
+<<<<<<< HEAD
       <x>48</x>
       <y>280</y>
       <w>480</w>
       <h>104</h>
+=======
+      <x>190</x>
+      <y>330</y>
+      <w>400</w>
+      <h>130</h>
+>>>>>>> e6760c689fc87ef118f04888b42215d42216646f
     </coordinates>
     <panel_attributes>*ClasseurFormes*
 --
- 
+-listeFormes: ListeFormes
 --
-+classerParNumeroSequence(listeFormes: Forme[], croissant: boolean[true]): Forme[]
-+classerParAire(listeForme: Forme[], croissant: boolean[true]): Forme[]
-+classerParType(ListeForme: Forme[], inverse: boolean[false]): Forme[]
-+classerParDistance(listeForme: Forme[]): Forme[]
++ClasseurFormes(listeFormes: ListeFormes): void
++classerParNumeroSequence(croissant: boolean): void
++classerParAire(croissant: boolean): void
++classerParType(inverse: boolean): void
++classerParDistance(): void
 
 bg=blue</panel_attributes>
     <additional_attributes/>
@@ -62,10 +77,17 @@ bg=blue</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
+<<<<<<< HEAD
       <x>288</x>
       <y>64</y>
       <w>256</w>
       <h>120</h>
+=======
+      <x>350</x>
+      <y>80</y>
+      <w>320</w>
+      <h>150</h>
+>>>>>>> e6760c689fc87ef118f04888b42215d42216646f
     </coordinates>
     <panel_attributes>*ReplacerForme*
 --

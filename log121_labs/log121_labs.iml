@@ -27,12 +27,13 @@
     <orderEntry type="module-library">
       <library name="ca.etsmtl.log.util.jar">
         <CLASSES>
-          <root url="jar://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar!/" />
+          <root url="file://$USER_HOME$/workspace/Squelette-lab1/ca.etsmtl.log.util.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="ca.etsmtl.log.util" level="project" />
   </component>
 </module>
 

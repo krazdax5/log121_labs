@@ -21,6 +21,7 @@ public class Rectangle extends Forme {
 	private Point secondeCoordonnee = null;
 	private int width = -1;
 	private int height = -1;
+    //private int aire;
 	
 	/**
 	 * @return La première coordonnée
@@ -30,7 +31,7 @@ public class Rectangle extends Forme {
 	}
 
 	/**
-	 * @return La seconde Ccoordonnée
+	 * @return La seconde coordonnée
 	 */
 	public Point getSecondeCoordonnee() {
 		return secondeCoordonnee;
@@ -50,6 +51,14 @@ public class Rectangle extends Forme {
 		return height;
 	}
 
+    /**
+     * @return l'aire du rectangle
+     */
+    @Override
+    public int getAire() {
+        return aire;
+    }
+
 	/**
 	 * Constructeur d'un rectangle avec 2 coordonnées.
 	 * @param x1
@@ -63,9 +72,12 @@ public class Rectangle extends Forme {
 		secondeCoordonnee = new Point(x2, y2);
 		width = (x1 > x2) ? x1 - x2 : x2 - x1;
 		height = (y1 > y2) ? y1 - y2 : y2 - y1;
+
 		if (width == height)
 			this.type = Formes.CARRE;
 		else
 			this.type = Formes.RECTANGLE;
+
+        aire = width*height;
 	}
 }

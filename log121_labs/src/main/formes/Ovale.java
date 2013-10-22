@@ -17,9 +17,11 @@ import java.awt.*;
  * Représente une forme ronde.
  */
 public class Ovale extends Forme {
+
 	private Point coordonneeCentre = null;
 	private int rayonHorizontal = -1;
 	private int rayonVertical = -1;
+    //private int aire;
 	
 	/**
 	 * @return La coordonnée du centre de la forme ronde.
@@ -42,6 +44,14 @@ public class Ovale extends Forme {
 		return rayonVertical;
 	}
 
+    /**
+     * @return l'aire de la forme ovale.
+     */
+    @Override
+    public int getAire() {
+        return aire;
+    }
+
 	/**
 	 * Constructeur d'une forme ronde avec une coordonnée et deux rayons.
 	 * @param x
@@ -55,6 +65,8 @@ public class Ovale extends Forme {
 		rayonHorizontal = rayonH;
 		rayonVertical = rayonV;
 		type = Formes.OVALE;
+
+        aire = rayonH*rayonV;
 	}
 	
 	/**
@@ -66,5 +78,7 @@ public class Ovale extends Forme {
 	public Ovale(int x, int y, int rayon, int numeroSequence){
         this(x, y, rayon, rayon, numeroSequence);
 		type = Formes.CERCLE;
+
+        aire = rayon*rayon;
 	}
 }
