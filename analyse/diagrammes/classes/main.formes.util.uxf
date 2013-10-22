@@ -65,21 +65,16 @@ bg=blue</panel_attributes>
     <coordinates>
       <x>320</x>
       <y>110</y>
-      <w>320</w>
+      <w>330</w>
       <h>150</h>
     </coordinates>
     <panel_attributes>*ReplacerForme*
 --
-
- -rayonH:int
- -ratonV:int
-
+ 
 --
 
-+replaceForme(ListeFormes liste):ListeForme
-+setCoordLigne(forme:Forme, x:int, y:int)
-+setCoordCercle(forme:Forme, x:int, y:int)
-+setCoordCarre(forme:Forme, x:int,y:int)
++replacerForme(ListeFormes liste):ListeFormes
+-setCoordonnees(forme:Forme, x:int, y:int)
 
 bg=blue
 	</panel_attributes>
@@ -126,14 +121,14 @@ m2=  1</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>610</x>
+      <x>620</x>
       <y>150</y>
-      <w>220</w>
+      <w>210</w>
       <h>170</h>
     </coordinates>
     <panel_attributes>lt=-
 m1=0..1
 m2=  1</panel_attributes>
-    <additional_attributes>30;30;160;30;200;30;200;150</additional_attributes>
+    <additional_attributes>30;30;150;30;190;30;190;150</additional_attributes>
   </element>
 </diagram>
