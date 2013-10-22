@@ -1,7 +1,7 @@
 /******************************************************
 Cours:  LOG121
 Projet: Squelette du laboratoire #1
-Nom du fichier: Forme.java
+Nom du fichier: AbstractForme.java
 Date créé: 2013-09-17
 *******************************************************
 Historique des modifications
@@ -16,7 +16,7 @@ import java.awt.*;
 /**
  * Représente une ligne.
  */
-public class Ligne extends Forme {
+public class Ligne extends AbstractForme {
 	private Point premiereCoordonnee = null;
 	private Point secondeCoordonnee = null;
 	private double longueur = -1;

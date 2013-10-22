@@ -3,7 +3,7 @@
 //
 //import main.formes.util.AnalyseurTrame;
 //import main.formes.Rectangle;
-//import main.formes.Forme;
+//import main.formes.AbstractForme;
 //import main.formes.Formes;
 //import main.formes.ListeFormes;;
 //
@@ -29,8 +29,8 @@
 //
 //		try{
 //			liste.premiere();
-//			for(int i=0; i<=liste.length();i++){
-//				Forme forme = liste.getForme(i);
+//			for(int i=0; i<=liste.getLength();i++){
+//				AbstractForme forme = liste.getForme(i);
 //
 //				if(forme.getType()==Formes.CARRE ||forme.getType()==Formes.RECTANGLE )
 //					setCoordCarre(forme,DISTANCE*i, DISTANCE*i);
@@ -58,7 +58,7 @@
 //	 * @param y premiere coordonnee en y
 //	 * @return un tableau qui contient les coordonnees x1, y1, x2 et y2 changees
 //	 */
-//	private int[] setCoordLigne(Forme forme, int x1, int y1) {
+//	private int[] setCoordLigne(AbstractForme forme, int x1, int y1) {
 //
 //		int[] tab = new int [4];
 //
@@ -90,7 +90,7 @@
 //	 * @param x
 //	 * @param y
 //	 */
-//	private Object setCoordCercle(Forme forme, int x, int y) {
+//	private Object setCoordCercle(AbstractForme forme, int x, int y) {
 //		rayonH = forme.getRayonHorizontal();
 //		rayonV = forme.getRayonVertical();
 //
@@ -107,7 +107,7 @@
 //	 * @param y
 //	 */
 //
-//	private void setCoordCarre(Forme forme, int x, int y) {
+//	private void setCoordCarre(AbstractForme forme, int x, int y) {
 //		x=forme.getPremiereCoordonnee().x;
 //		y=forme.getPremiereCoordonnee().y;
 //	}

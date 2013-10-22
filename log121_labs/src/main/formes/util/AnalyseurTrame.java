@@ -1,7 +1,7 @@
 /******************************************************
 Cours:  LOG121
 Projet: Squelette du laboratoire #1
-Nom du fichier: Forme.java
+Nom du fichier: AbstractForme.java
 Date créé: 2013-09-17
 *******************************************************
 Historique des modifications
@@ -22,7 +22,7 @@ public class AnalyseurTrame {
 	private final String REGEX_RECTANGLE = "([\\s]?[0-9]+) ([0-9]+) ([0-9]+) ([0-9]+[\\s]?)";
 	private final String REGEX_OVALE = "([\\s]?[0-9]+) ([0-9]+) ([0-9]+)([\\s][0-9]+)?[\\s]?";
 	private String typeForme = "INDETERMINE";
-	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	private int coordonneeX1, coordonneeY1, coordonneeX2, coordonneeY2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
 	
 	/**
 	 * @return Le type de forme
@@ -32,31 +32,31 @@ public class AnalyseurTrame {
 	}
 
 	/**
-	 * @return x1
+	 * @return coordonneeX1
 	 */
-	public int getX1() {
-		return x1;
+	public int getCoordonneeX1() {
+		return coordonneeX1;
 	}
 
 	/**
-	 * @return y1
+	 * @return coordonneeY1
 	 */
-	public int getY1() {
-		return y1;
+	public int getCoordonneeY1() {
+		return coordonneeY1;
 	}
 
 	/**
-	 * @return x2
+	 * @return coordonneeX2
 	 */
-	public int getX2() {
-		return x2;
+	public int getCoordonneeX2() {
+		return coordonneeX2;
 	}
 
 	/**
-	 * @return y2
+	 * @return coordonneeY2
 	 */
-	public int getY2() {
-		return y2;
+	public int getCoordonneeY2() {
+		return coordonneeY2;
 	}
 
 	/**
@@ -120,10 +120,10 @@ public class AnalyseurTrame {
 				coordinateMatcher = coordinatePattern.matcher(trameMatcher.group(3).trim());
 				
 				if (coordinateMatcher.find()){
-					x1 = Integer.parseInt(coordinateMatcher.group(1).trim());
-					y1 = Integer.parseInt(coordinateMatcher.group(2).trim());
-					x2 = Integer.parseInt(coordinateMatcher.group(3).trim());
-					y2 = Integer.parseInt(coordinateMatcher.group(4).trim());
+					coordonneeX1 = Integer.parseInt(coordinateMatcher.group(1).trim());
+					coordonneeY1 = Integer.parseInt(coordinateMatcher.group(2).trim());
+					coordonneeX2 = Integer.parseInt(coordinateMatcher.group(3).trim());
+					coordonneeY2 = Integer.parseInt(coordinateMatcher.group(4).trim());
 					typeForme = nomTag;
 				}
 			} else if (nomTag.equals("CERCLE") || nomTag.equals("OVALE")){

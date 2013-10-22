@@ -16,15 +16,6 @@ import main.formes.Rectangle;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ImageObserver;
-import java.awt.image.RenderedImage;
-import java.awt.image.renderable.RenderableImage;
-import java.text.AttributedCharacterIterator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +30,7 @@ public class FenetreFormes extends JComponent{
     public static final int WIDTH = 500;
     public static final int HEIGHT = 500;
     public static final Dimension dimension = new Dimension(500,500);
-    //private Forme[] listeFormes;
+    //private AbstractForme[] listeFormes;
     private ListeFormes listeFormes;
     private Map<Formes, Color> colorDictionary;
 
@@ -71,7 +62,7 @@ public class FenetreFormes extends JComponent{
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         g.setColor(Color.BLACK);
-        g.drawString("NbFormes : " + listeFormes.length(), 10,15);
+        g.drawString("NbFormes : " + listeFormes.getLength(), 10,15);
 //
 //        float dash1[] = {5.0f};
 //        BasicStroke dashed = new BasicStroke(1.0f,
@@ -83,18 +74,18 @@ public class FenetreFormes extends JComponent{
 
             listeFormes.premiere();
 
-            for (int pos = 0; pos < listeFormes.length(); pos++){
+            for (int pos = 0; pos < listeFormes.getLength(); pos++){
 
-                Forme laForme = listeFormes.getNoeudCourant().getForme();
+                AbstractForme laAbstractForme = listeFormes.getNoeudCourant().getForme();
 
                 listeFormes.suivant();
 
-                g.setColor(colorDictionary.get(laForme.getType()));
+                g.setColor(colorDictionary.get(laAbstractForme.getType()));
 
-                Formes typeForme = laForme.getType();
+                Formes typeForme = laAbstractForme.getType();
 
                 if(typeForme == Formes.CARRE){
-                    Rectangle leCarre = (Rectangle) laForme;
+                    Rectangle leCarre = (Rectangle) laAbstractForme;
                     g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
                     g.setColor(Color.BLACK);
                     g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
@@ -102,7 +93,7 @@ public class FenetreFormes extends JComponent{
 //                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
                 }
                 else if(typeForme == Formes.RECTANGLE) {
-                    Rectangle leRectangle = (Rectangle) laForme;
+                    Rectangle leRectangle = (Rectangle) laAbstractForme;
                     g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
                     g.setColor(Color.BLACK);
                     g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
@@ -110,7 +101,7 @@ public class FenetreFormes extends JComponent{
 //                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
                 }
                 else if(typeForme == Formes.OVALE) {
-                    Ovale lOvale = (Ovale) laForme;
+                    Ovale lOvale = (Ovale) laAbstractForme;
                     g.fillOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
                     g.setColor(Color.BLACK);
                     g.drawOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
@@ -120,7 +111,7 @@ public class FenetreFormes extends JComponent{
 //                            lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
                 }
                 else if(typeForme == Formes.CERCLE) {
-                    Ovale leCercle = (Ovale) laForme;
+                    Ovale leCercle = (Ovale) laAbstractForme;
                     g.fillOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
                     g.setColor(Color.BLACK);
                     g.drawOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
@@ -129,7 +120,7 @@ public class FenetreFormes extends JComponent{
 //                            leCercle.getCoordonneeCentre().y+leCercle.getRayonVertical()/2,
 //                            leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
                 } else if(typeForme == Formes.LIGNE) {
-                    Ligne laLigne = (Ligne) laForme;
+                    Ligne laLigne = (Ligne) laAbstractForme;
                     g.drawLine(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
                     //g2D.setStroke(dashed);
                     //g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
@@ -149,23 +140,23 @@ public class FenetreFormes extends JComponent{
 
     /**
      * Ajoute une forme à la liste de formes.
-     * @param laForme La forme de type Forme à ajouter
+     * @param laAbstractForme La forme de type AbstractForme à ajouter
      */
-    public void ajouterForme(Forme laForme){
+    public void ajouterForme(AbstractForme laAbstractForme){
 //		int pos = -1;
 //		do{
 //			pos++;
 //			if (pos == 10){
 //				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
-//				listeFormes[listeFormes.length - 1] = laForme;
+//				listeFormes[listeFormes.getLength - 1] = laAbstractForme;
 //			}else
 //				if (listeFormes[pos] == null){
-//					listeFormes[pos] = laForme;
+//					listeFormes[pos] = laAbstractForme;
 //					break;
 //				}
-//		} while(pos < listeFormes.length);
+//		} while(pos < listeFormes.getLength);
 
-        listeFormes.ajouterFormeFin(laForme);
+        listeFormes.ajouterFormeFin(laAbstractForme);
 
     }
 }

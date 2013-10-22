@@ -1,7 +1,7 @@
 /******************************************************
 Cours:  LOG121
 Projet: Squelette du laboratoire #1
-Nom du fichier: Forme.java
+Nom du fichier: AbstractForme.java
 Date créé: 2013-09-17
 *******************************************************
 Historique des modifications
@@ -14,7 +14,7 @@ package main.formes;
 /**
  * Abstraction d'une forme géométrique.
  */
-public abstract class Forme {
+public abstract class AbstractForme {
 
 	protected Formes type = Formes.INDETERMINE;
 	protected int numeroSequence;
@@ -51,8 +51,13 @@ public abstract class Forme {
         return distance;
     }
 
-    public boolean equals(Forme formeAVerifier) {
-        return this.getType() == formeAVerifier.getType();
+    /**
+     * Vérifie si la forme envoye en paramètre est égale à la forme actuelle.
+     * @param abstractFormeAVerifier    la forme que l'on desire comparee
+     * @return  true/false dependemment du resultat de la comparaison.
+     */
+    public boolean estEgale(AbstractForme abstractFormeAVerifier) {
+        return this.getType() == abstractFormeAVerifier.getType();
     }
 
 }

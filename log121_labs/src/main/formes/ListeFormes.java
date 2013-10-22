@@ -15,11 +15,11 @@ public class ListeFormes {
      */
     public class Noeud {
 
-        private Forme laForme;
+        private AbstractForme laAbstractForme;
         private Noeud suivant;
 
         /**
-         * Constructeur par defaut, initialise laForme et suivant à null.
+         * Constructeur par defaut, initialise laAbstractForme et suivant à null.
          */
         public Noeud() {}
 
@@ -28,11 +28,11 @@ public class ListeFormes {
          * Permet de pouvoir ajouter une forme à la liste,
          * ainsi que le forme sur laquelle elle pointe.
          *
-         * @param formeNoeud    une forme
+         * @param abstractFormeNoeud    une forme
          * @param suivant       le noeud qui suit ce noeud.
          */
-        public Noeud(Forme formeNoeud, Noeud suivant) {
-            this.laForme = formeNoeud;
+        public Noeud(AbstractForme abstractFormeNoeud, Noeud suivant) {
+            this.laAbstractForme = abstractFormeNoeud;
             this.suivant = suivant;
         }
 
@@ -41,8 +41,8 @@ public class ListeFormes {
          *
          * @return  la forme stockee dans ce noeud
          */
-        public Forme getForme() {
-            return laForme;
+        public AbstractForme getForme() {
+            return laAbstractForme;
         }
 
         /**
@@ -65,7 +65,7 @@ public class ListeFormes {
     /**
      * Pointeur du premier noeud.
      */
-    private Noeud premiere;
+    private Noeud premierNoeud;
 
     /**
      * Initialisation de la longueur de la liste à 0.
@@ -79,10 +79,10 @@ public class ListeFormes {
 
 
     /**
-     * Methode qui retourne le nombre de formes qu'il ya dans la liste chainee
+     * Accesseur de getLength
      * @return le nombre de forme dans la liste chainee
      */
-    public int length() {
+    public int getLength() {
 
         return length;
 
@@ -96,12 +96,12 @@ public class ListeFormes {
 
         if(noeudCourant.suivant != null) {
 
-            Forme copieForme = noeudCourant.laForme;
+            AbstractForme copieAbstractForme = noeudCourant.laAbstractForme;
 
-            noeudCourant.laForme = noeudCourant.suivant.laForme;
-            noeudCourant.suivant.laForme = copieForme;
+            noeudCourant.laAbstractForme = noeudCourant.suivant.laAbstractForme;
+            noeudCourant.suivant.laAbstractForme = copieAbstractForme;
 
-            copieForme = null; // Le garbage collector viendra supprimer cette instance de forme.
+            copieAbstractForme = null; // Le garbage collector viendra supprimer cette instance de forme.
 
         }
 
@@ -110,47 +110,47 @@ public class ListeFormes {
     /**
      * Methode qui ajoute une forme a la fin de la liste chainee
      *
-     * @param nouvelleForme la forme que l'on desire ajouter a la liste chainee
+     * @param nouvelleAbstractForme la forme que l'on desire ajouter a la liste chainee
      */
-    public void ajouterFormeFin(Forme nouvelleForme) {
+    public void ajouterFormeFin(AbstractForme nouvelleAbstractForme) {
         derniere();
-        ajouterForme(nouvelleForme);
+        ajouterForme(nouvelleAbstractForme);
     }
 
     /**
-     * Methode qui permet d'ajouter une forme a la fin de la  liste chainee.
+     * Methode qui permet d'ajouter une abstractForme a la fin de la  liste chainee.
      * Gere aussi la mise en mémoire d'une liste chainee de 10 formes seulement.
      *
-     * @param forme La forme que l'on veut ajouter
+     * @param abstractForme La abstractForme que l'on veut ajouter
      */
-    public void ajouterForme(Forme forme) {
+    public void ajouterForme(AbstractForme abstractForme) {
 
         // Si la longeur n'est pas égale à 10, ajoute normalement.
-        // Sinon detruit la premiere forme et ajouter
+        // Sinon detruit la premierNoeud abstractForme et ajouter
 
-        if(length() != 10) {
-            if(length() == 0)
-                premiere = noeudCourant = new Noeud(forme, null);
-            else if(length() == 1)
-                noeudCourant = premiere.suivant = new Noeud(forme, noeudCourant.suivant);
-            else if(length() > 1)
-                noeudCourant = noeudCourant.suivant = new Noeud(forme, noeudCourant.suivant);
+        if(getLength() != 10) {
+            if(getLength() == 0)
+                premierNoeud = noeudCourant = new Noeud(abstractForme, null);
+            else if(getLength() == 1)
+                noeudCourant = premierNoeud.suivant = new Noeud(abstractForme, noeudCourant.suivant);
+            else if(getLength() > 1)
+                noeudCourant = noeudCourant.suivant = new Noeud(abstractForme, noeudCourant.suivant);
 
             length++;
         }
         else {
             detruirePremiereForme();
-            noeudCourant = noeudCourant.suivant = new Noeud(forme, noeudCourant.suivant);
+            noeudCourant = noeudCourant.suivant = new Noeud(abstractForme, noeudCourant.suivant);
         }
     }
 
     /**
-     * Methode qui detruit la premiere forme sans modifier le pointeur de position de la liste.
+     * Methode qui detruit la premierNoeud forme sans modifier le pointeur de position de la liste.
      */
     public void detruirePremiereForme() {
-        Noeud noeudTemporaire = premiere;
-        premiere = null;
-        premiere = noeudTemporaire.suivant;
+        Noeud noeudTemporaire = premierNoeud;
+        premierNoeud = null;
+        premierNoeud = noeudTemporaire.suivant;
 
         noeudTemporaire=null; // Le garbage collector viendra supprimer cette instance de Noeaud.
     }
@@ -159,9 +159,9 @@ public class ListeFormes {
      * Methode qui detruit la forme a la position courante.
      */
     public void detruireForme() {
-    	if (noeudCourant.getForme().getNumeroSequence() == premiere.getForme().getNumeroSequence()){
+    	if (noeudCourant.getForme().getNumeroSequence() == premierNoeud.getForme().getNumeroSequence()){
     		suivant();
-    		premiere = noeudCourant;
+    		premierNoeud = noeudCourant;
     	}else{
 	        precedent();
 	        noeudCourant.suivant=noeudCourant.suivant.suivant;
@@ -172,19 +172,19 @@ public class ListeFormes {
     /**
      * Permet d'aller detruire la forme equivalente a celle que l'on envoie en parametre
      *
-     * @param formeADetruire la forme que l'on veut detruire dans la liste.
+     * @param abstractFormeADetruire la forme que l'on veut detruire dans la liste.
      */
-    public void detruireForme(Forme formeADetruire) {
+    public void detruireForme(AbstractForme abstractFormeADetruire) {
 
         boolean matchFound = false;
 
-        Noeud miseEnMemoirePosition = noeudCourant;
+        Noeud memoirePosition = noeudCourant;
 
-        noeudCourant = premiere;
+        noeudCourant = premierNoeud;
 
         while(!matchFound) {
 
-            if(noeudCourant.getForme().getNumeroSequence() != formeADetruire.getNumeroSequence())
+            if(noeudCourant.getForme().getNumeroSequence() != abstractFormeADetruire.getNumeroSequence())
                 suivant();
             else {
                 detruireForme();
@@ -193,7 +193,7 @@ public class ListeFormes {
 
         }
 
-        noeudCourant=miseEnMemoirePosition;
+        noeudCourant=memoirePosition;
 
     }
 
@@ -213,8 +213,8 @@ public class ListeFormes {
      * Methode qui permet de pointer sur la forme precedente de la position actuelle de la liste chaine
      */
     public void precedent() {
-        if(noeudCourant != null && premiere != null) {
-        	Noeud elementPrecedent = premiere;
+        if(noeudCourant != null && premierNoeud != null) {
+        	Noeud elementPrecedent = premierNoeud;
         	
         	while (elementPrecedent.suivant.getForme().getNumeroSequence() != noeudCourant.getForme().getNumeroSequence())
         		elementPrecedent = elementPrecedent.suivant;
@@ -224,18 +224,18 @@ public class ListeFormes {
     }
 
     /**
-     * Methode qui permet de pointer sur la premiere forme de la liste chainee.
+     * Methode qui permet de pointer sur la premierNoeud forme de la liste chainee.
      */
     public void premiere() {
-        noeudCourant=premiere;
+        noeudCourant= premierNoeud;
     }
 
     /**
      * Methode qui permet de pointer sur la derniere forme de la liste chainee.
      */
     public void derniere() {
-        if(premiere != null) {
-            noeudCourant=premiere;
+        if(premierNoeud != null) {
+            noeudCourant= premierNoeud;
             while(noeudCourant.suivant != null) {
                 suivant();
             }
@@ -248,9 +248,9 @@ public class ListeFormes {
      *
      * @return La derniere forme de la liste chainee
      */
-    public Forme getderniereForme() {
+    public AbstractForme getderniereForme() {
         derniere();
-        return noeudCourant.laForme;
+        return noeudCourant.laAbstractForme;
     }
 
     /**

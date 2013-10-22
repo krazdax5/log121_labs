@@ -1,7 +1,7 @@
 /******************************************************
 Cours:  LOG121
 Projet: Squelette du laboratoire #1
-Nom du fichier: Forme.java
+Nom du fichier: AbstractForme.java
 Date créé: 2013-09-17
 *******************************************************
 Historique des modifications
@@ -16,7 +16,7 @@ import java.awt.*;
 /**
  * Représente une forme ronde.
  */
-public class Ovale extends Forme {
+public class Ovale extends AbstractForme {
 
 	private Point coordonneeCentre = null;
 	private int rayonHorizontal = -1;

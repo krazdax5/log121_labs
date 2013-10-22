@@ -1,7 +1,7 @@
 /******************************************************
 Cours:  LOG121
 Projet: Squelette du laboratoire #1
-Nom du fichier: Forme.java
+Nom du fichier: AbstractForme.java
 Date créé: 2013-09-20
 *******************************************************
 Historique des modifications

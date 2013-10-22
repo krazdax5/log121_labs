@@ -55,11 +55,11 @@ public class ClasseurFormes {
         // Initialisation à 0 du compteur qui sera utilise dans la boucle while
         int compteur = 0;
 
-        while(compteur != listeFormes.length()+1) {
+        while(compteur != listeFormes.getLength()+1) {
 
             listeFormes.premiere();
 
-            for(int i = 0; i < listeFormes.length(); i++) {
+            for(int i = 0; i < listeFormes.getLength(); i++) {
                 if(listeFormes.getNoeudCourant().getSuivant() != null) {
 
                     int aire1 = listeFormes.getNoeudCourant().getForme().getAire();
@@ -92,7 +92,7 @@ public class ClasseurFormes {
      * @param inverse Si vrai, l'ordre inverse sera appliqué pour le classement.
      */
     public void classerParType(boolean inverse){
-        Forme[] tableauOrdonnee = new Forme[listeFormes.length()];
+        AbstractForme[] tableauOrdonnee = new AbstractForme[listeFormes.getLength()];
 
         for (int position = 0; position < tableauOrdonnee.length; position++){
             listeFormes.premiere();
@@ -151,8 +151,8 @@ public class ClasseurFormes {
         }
         listeFormes = new ListeFormes();
 
-        for (Forme laForme : tableauOrdonnee)
-            listeFormes.ajouterForme(laForme);
+        for (AbstractForme laAbstractForme : tableauOrdonnee)
+            listeFormes.ajouterForme(laAbstractForme);
     }
 
     /**
@@ -163,11 +163,11 @@ public class ClasseurFormes {
         // Initialisation à 0 du compteur qui sera utilise dans la boucle while
         int compteur = 0;
 
-        while(compteur != listeFormes.length()+1) {
+        while(compteur != listeFormes.getLength()+1) {
 
             listeFormes.premiere();
 
-            for(int i = 0; i < listeFormes.length(); i++) {
+            for(int i = 0; i < listeFormes.getLength(); i++) {
                 if(listeFormes.getNoeudCourant().getSuivant() != null) {
 
                     double distance1 = listeFormes.getNoeudCourant().getForme().getDistance();

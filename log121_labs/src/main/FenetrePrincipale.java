@@ -13,7 +13,7 @@ package main;
 
 import ca.etsmtl.log.util.IDLogger;
 import main.formes.CreateurFormes;
-import main.formes.Forme;
+import main.formes.AbstractForme;
 import main.formes.ListeFormes;
 import javax.swing.*;
 import java.awt.*;
@@ -68,10 +68,10 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
             if(arg0.getPropertyName().equals("ENVOIE-TEST")){
                 System.out.print((String) arg0.getNewValue());
             } else if (arg0.getPropertyName().equals("NOUVELLE-TRAME")){
-                Forme nouvelleForme = CreateurFormes.creerForme((String) arg0.getNewValue());
+                AbstractForme nouvelleAbstractForme = CreateurFormes.creerForme((String) arg0.getNewValue());
 
-                fenetreFormes.ajouterForme(nouvelleForme);
-                log.logID(nouvelleForme.getNumeroSequence());
+                fenetreFormes.ajouterForme(nouvelleAbstractForme);
+                log.logID(nouvelleAbstractForme.getNumeroSequence());
 
                 fenetreFormes.repaint();
             }
