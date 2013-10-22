@@ -1,0 +1,61 @@
+package main.formes;
+import java.awt.Point;
+
+import main.formes.util.AnalyseurTrame;
+import main.formes.Rectangle;
+
+
+
+public class ReplacerForme {
+	
+
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	final int DISTANCE = 40;
+	
+	public ListeFormes replacerForme(ListeFormes liste){
+		
+		try{
+			liste.premiere();
+			for(int i=0; i<=liste.length();i++){
+				Forme forme = liste.getForme(i);
+				
+				if(forme.getType()==Formes.CARRE)
+					setCoordCarre(forme,DISTANCE*i, DISTANCE*i);
+				
+				else if(forme.getType()==Formes.RECTANGLE)
+					setCoordCarre(forme,DISTANCE*i,DISTANCE*i);
+				
+				else if(forme.getType()==Formes.CERCLE)
+					setCoordCercle(forme,DISTANCE*i, DISTANCE*i);
+				
+				else if(forme.getType()==Formes.OVALE)
+					setCoordCercle(forme, DISTANCE*i, DISTANCE*i);
+				
+				else if(forme.getType()==Formes.LIGNE)
+					setCoordLigne(forme,DISTANCE*i,DISTANCE*i);
+					
+			}
+		}catch(Exception e){
+			System.out.print("null");
+		}
+		return liste;
+	}
+	
+	private void setCoordLigne(Forme forme, int x, int y) {
+		x=forme.getPremiereCoordonnee().x;
+		y=forme.getPremiereCoordonnee().y;
+	}
+
+	private void setCoordCercle(Forme forme, int x, int y) {
+		x=forme.getCoordonneeCentre().x;
+		y=forme.getCoordonneeCentre().y;
+	}
+
+	private void setCoordCarre(Forme forme, int x, int y) {	
+		x=forme.getPremiereCoordonnee().x;
+		y=forme.getPremiereCoordonnee().y;
+	}
+		
+	
+	
+}

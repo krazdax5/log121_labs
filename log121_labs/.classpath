@@ -4,6 +4,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ca.etsmtl.log.util"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="/Users/charleslevesque/SkyDrive/ETS/trimestre1/LOG121/log121_labs/ca.etsmtl.log.util.jar"/>
+=======
+	<classpathentry kind="lib" path="/Users/pierre-luclandry/Documents/log121_labs/ca.etsmtl.log.util.jar"/>
+>>>>>>> Pierre-Luc
 	<classpathentry kind="output" path="bin"/>
 </classpath>

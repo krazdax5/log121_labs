@@ -1,0 +1,201 @@
+package main.formes;
+
+/**
+ * Classe qui cree une liste chainee de formes.
+ * @author Mathieu Lachance
+ * 2013-10-10 Version Initiale
+ */
+public class ListeFormes {
+
+
+    /**
+     * Classe interne qui cree un noeud de la liste chainee.
+     */
+    public class Noeud {
+
+        private Forme laForme;
+        private Noeud suivant;
+
+        public Noeud() {
+            laForme = null;
+            suivant = null;
+        }
+        public Noeud(Forme formeNoeud, Noeud suivant) {
+            this.laForme = formeNoeud;
+            this.suivant = suivant;
+        }
+
+        public Forme getForme() {
+            return laForme;
+        }
+
+        public Noeud getSuivant() {
+            return suivant;
+        }
+
+
+    }
+
+    private Noeud pos;
+    private Noeud premiere;
+
+    private int length = 0;
+
+    public ListeFormes() {}
+
+    public ListeFormes(ListeFormes liste) {
+        liste.premiere();
+        while(liste.pos.suivant != null){
+            pos = new Noeud(liste.pos.laForme, liste.pos.suivant);
+        }
+    }
+
+    /**
+     * Methode qui retourne le nombre de formes qu'il ya dans la liste chainee
+     * @return le nombre de forme dans la liste chainee
+     */
+    public int length() {
+
+        return length;
+
+    }
+
+    /**
+     * Methode qui inverse les valeurs des formes a la position courante
+     */
+    public void inverser() {
+
+        if(pos.suivant != null) {
+            Forme temp = pos.laForme;
+
+            pos.laForme = pos.suivant.laForme;
+            pos.suivant.laForme = temp;
+
+            temp = null;
+        }
+
+    }
+
+    /**
+     * Methode qui ajoute une forme a la fin de la liste chainee
+     * @param f la forme que l'on desire ajouter a la liste chainee
+     */
+    public void ajouterFormeFin(Forme f) {
+        derniere();
+        ajouterForme(f);
+    }
+
+    /**
+     * Methode qui permet d'ajouter une forme a la fin de la  liste chainee.
+     *
+     * @param forme La forme que l'on veut ajouter
+     */
+    public void ajouterForme(Forme forme) {
+
+        // Lors de la creation de formes, il arrete entre 2 et 3 pour ensuite aller a 4.
+
+        if(length() != 10) {
+            if(length() == 0)
+                premiere = pos = new Noeud(forme, null);
+            else if(length() == 1)
+                pos = premiere.suivant = new Noeud(forme, pos.suivant);
+            else if(length() > 1)
+                pos = pos.suivant = new Noeud(forme, pos.suivant);
+
+            length++;
+        }
+        else {
+            detruirePremiereForme();
+            pos = pos.suivant = new Noeud(forme, pos.suivant);
+        }
+    }
+
+    public void detruirePremiereForme() {
+        Noeud temp = premiere;
+        premiere = null;
+        premiere = temp.suivant;
+
+        temp=null;
+    }
+
+    /**
+     * Methode qui detruit la forme a la position courante.
+     */
+    public void detruireForme() {
+        pos=pos.suivant;
+    }
+
+    /**
+     * Methode qui detruit la forme a la position envoyee en parametre
+     *
+     * @param pos la position de la forme que l'on veut detruire
+     */
+    public void detruireForme(int pos) {
+        getForme(pos);
+        detruireForme();
+    }
+
+    /**
+     * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
+     */
+    public void suivant() {
+        if(pos.suivant != null)
+            pos = pos.suivant;
+    }
+
+    /**
+     * Methode qui permet de pointer sur la premiere forme de la liste chainee.
+     */
+    public void premiere() {
+        pos=premiere;
+    }
+
+    /**
+     * Methode qui permet de pointer sur la derniere forme de la liste chainee.
+     */
+    public void derniere() {
+        if(premiere != null) {
+            pos=premiere;
+            while(pos.suivant != null) {
+                suivant();
+            }
+        }
+    }
+
+    /**
+     * Methode qui retourne la derniere forme de la liste chainee.
+     *
+     * @return La derniere forme de la liste chainee
+     */
+    public Forme getderniereForme() {
+        derniere();
+        return pos.laForme;
+    }
+
+    /**
+     * Methode qui retourne la forme a la position desiree (envoyee en parametres)
+     *
+     * @param num La position de la forme desiree
+     * @return la forme a la postion envoye en parametres
+     */
+    public Forme getForme(int num) {
+        Forme forme = null;
+        if(length() != 0) {
+            pos = premiere;
+            for(int i = 0; i < num; i++)
+                suivant();
+            forme = pos.laForme;
+        }
+        return forme;
+    }
+
+
+    /**
+     * @return le noeud a la position courrante
+     */
+    public Noeud getPos(){
+        return pos;
+    }
+
+}
+

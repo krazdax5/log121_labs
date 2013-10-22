@@ -1,0 +1,75 @@
+package main.formes;
+import java.awt.Point;
+
+import main.formes.util.AnalyseurTrame;
+import main.formes.Rectangle;
+
+
+
+public class ReplacerForme {
+	
+
+	private int x1, y1, x2, y2, centreX, centreY, rayonH, rayonV, rayon, numeroSequence;
+	
+	
+	public ListeFormes replacerForme(ListeFormes liste){
+		
+		try{
+			liste.premiere();
+			for(int i=0; i<=liste.length();i++){
+				Forme forme = (Forme) liste.getForme(i);
+				forme.
+			}
+		}
+		
+		for(int i=0; i<=liste.length();i++){
+			if(liste.getForme(i)==()){
+				x1 = getX1();
+				y1 = getY1();
+				x2 = getX2();
+				y2 = getY2();
+				formeAReplacer = new Rectangle(x1,y1,x2,y2,getNumeroSequence());
+			}
+		}
+		
+		if(liste.type==Formes.RECTANGLE){
+			setX1(x1);
+			setY1(y1);
+			x2 = getX2();
+			y2 = getY2();
+			formeAReplacer = new Rectangle(x1,y1,x2,y2,getNumeroSequence());
+		}
+		
+		else if(formeAReplacer.type==Formes.LIGNE){
+			setX1(x1);
+			setY1(y1);
+		}
+		
+		else if(formeAReplacer.type==Formes.CERCLE){
+			
+		}
+		else if(formeAReplacer.type==Formes.OVALE){
+			
+		}	
+		
+		return formeAReplacer;
+		
+	}
+	
+	public void setX1(int x1){
+		this.x1=x1;
+	}
+	public void setY1(int y1){
+		this.y1=y1;
+	}
+	public void setX2(int x2){
+		this.x2=x2;
+	}
+	public void setY2(int y2){
+		this.y2=y2;
+	}
+	
+		
+	
+	
+}

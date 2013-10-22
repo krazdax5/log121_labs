@@ -1,0 +1,87 @@
+/******************************************************
+Cours:  LOG121
+Projet: Squelette du laboratoire #1
+Nom du fichier: Forme.java
+Date créé: 2013-09-17
+*******************************************************
+Historique des modifications
+*******************************************************
+*@author Charles Levesque
+2013-09-17 Version initiale
+*******************************************************/  
+package main.formes;
+
+import java.awt.Point;
+
+/**
+ * Abstraction d'une forme géométrique.
+ */
+public abstract class Forme {
+
+	protected Formes type = Formes.INDETERMINE;
+	protected int numeroSequence;
+    protected int aire;
+    protected Point coords1;
+    protected Point coords2;
+    protected Point coordsCentre;
+    protected int rayonH;
+    protected int rayonV;
+    
+    
+
+	/**
+	 * @return le numéro de séquence
+	 */
+	public int getNumeroSequence() {
+		return numeroSequence;
+	}
+
+	/**
+	 * @return Le type de forme.
+	 */
+	public Formes getType() {
+		return type;
+	}
+
+    /**
+     *
+     * @return
+     */
+    public int getAire() {
+        return aire;
+    }
+
+    public boolean equals(Forme formeAVerifier) {
+        return this.getType() == formeAVerifier.getType();
+    }
+    
+   
+    public Point getPremiereCoordonnee(){
+    	return coords1;
+    }
+    public void setPremiereCoordonnee(Point coords1){
+    	this.coords1 = coords1;
+    }
+    
+    public Point getDeuxiemeCoordonnee(){
+    	return coords2;
+    }
+    public void setDeuxiemeCoordonnee(Point coords2){
+    	this.coords2 = coords2;
+    }
+    
+	public int getRayonVertical() {
+		return rayonV;
+	}
+
+	public int getRayonHorizontal() {
+		return rayonH;
+	}
+
+	public Point getCoordonneeCentre() {
+		return coordsCentre;
+	}
+	
+
+
+}

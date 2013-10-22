@@ -13,6 +13,7 @@ package main.formes;
 
 import main.formes.util.AnalyseurTrame;
 
+
 /**
  * Se charge de créer les formes pour l'affichage.
  */
