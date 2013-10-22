@@ -22,6 +22,9 @@ import main.formes.ListeFormes;
 public class ClasseurFormes {
     private ListeFormes listeFormes;
 
+    private boolean changementEffectuer = true;
+
+
     /**
      * Accesseur de la liste de formes.
      * @return La liste de formes.
@@ -158,5 +161,58 @@ public class ClasseurFormes {
      * Méthode qui classe une liste de formes par la distance la plus grande de sa diagonnale.
      */
     public void classerParDistance(){
+    }
+
+    /**
+     * Place en ordre croissant les formes dans la liste selon leurs numéros de séquences
+     * @precondition Qu'il y ait au moins deux formes dans la liste
+     * @return Une liste en ordre décroissante classé par rapport au numéro de séquence de chaque forme
+     */
+    public void classerParNumeroSequenceCroissante(){
+        listeFormes.premiere();
+        if(listeFormes.getNoeudCourant().getSuivant() != null){
+            //Pour entrer dans la boucle si la fonction à déjà été appellé auparavant
+            changementEffectuer = true;
+
+            while(changementEffectuer){
+                changementEffectuer = false;
+                listeFormes.premiere();
+
+                while(listeFormes.getNoeudCourant().getSuivant() != null){
+                    if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() > listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
+                        listeFormes.inverser();
+                        changementEffectuer = true;
+                    }
+                    listeFormes.suivant();
+                }
+            }
+        }
+    }
+
+    /**
+     * Place en ordre décroissant les formes dans la liste selon leurs numéros de séquences
+     * @precondition Qu'il y ait au moins deux formes dans la liste
+     * @return Une liste en ordre décroissante classé par rapport au numéro de séquence de chaque forme
+     */
+    public void classerParNumeroSequenceDecroissante(){
+        listeFormes.premiere();
+        if(listeFormes.getNoeudCourant().getSuivant() != null){
+            //Pour entrer dans la boucle si la fonction à déjà été appellé auparavant
+            changementEffectuer = true;
+
+            while(changementEffectuer){
+                changementEffectuer = false;
+                listeFormes.premiere();
+
+                while(listeFormes.getNoeudCourant().getSuivant() != null){
+
+                    if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() < listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
+                        listeFormes.inverser();
+                        changementEffectuer = true;
+                    }
+                    listeFormes.suivant();
+                }
+            }
+        }
     }
 }
