@@ -23,7 +23,6 @@ public abstract class Forme {
     protected int aire;
     protected Point coords1;
     protected Point coords2;
-    protected Point coordsCentre;
     protected int rayonH;
     protected int rayonV;
     
@@ -55,40 +54,21 @@ public abstract class Forme {
         return this.getType() == formeAVerifier.getType();
     }
     
-   
+    
     public Point getPremiereCoordonnee(){
     	return coords1;
-    }
-    public void setPremiereCoordonnee(Point coords1){
-    	this.coords1 = coords1;
     }
     
     public Point getDeuxiemeCoordonnee(){
     	return coords2;
     }
-    public void setDeuxiemeCoordonnee(Point coords2){
-    	this.coords2 = coords2;
-    }
-    
+
 	public int getRayonVertical() {
 		return rayonV;
-	}
-	public void setRayonVertical(int rayonV){
-		this.rayonV = rayonV;
 	}
 
 	public int getRayonHorizontal() {
 		return rayonH;
-	}
-	public void setRayonHorizontal(int rayonH){
-		this.rayonH = rayonH;
-	}
-
-	public Point getCoordonneeCentre() {
-		return coordsCentre;
-	}
-	public void setCoordonneeCentre(Point coordsCentre){
-		this.coordsCentre = coordsCentre;
 	}
 	
 

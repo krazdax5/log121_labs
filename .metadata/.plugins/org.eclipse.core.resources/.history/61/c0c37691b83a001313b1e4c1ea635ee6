@@ -86,7 +86,7 @@ public class FenetreFormes extends JComponent{
             listeFormes.premiere();
             
             ReplacerForme objet = new ReplacerForme(listeFormes);
-       
+            
             for (int pos = 0; pos < listeFormes.length(); pos++){
 
                 Forme laForme = listeFormes.getNoeudCourant().getForme();

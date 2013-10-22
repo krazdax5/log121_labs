@@ -16,7 +16,6 @@ public class ReplacerForme  {
 
 	private int rayonH, rayonV,x2, y2;
 	final int DISTANCE = 40;
-	private Point p1,p2,pCentre;
 	
 	/**
 	 * Constructeur qui permet de changer les coordonnees de la forme
@@ -24,7 +23,7 @@ public class ReplacerForme  {
 	 * @param liste liste chainee dont les formes ne sont pas encore dans l'ordre d'affichage desire
 	 * @return liste on retourne la liste chainee dont les formes on maintenant des nouvelles coordonnees
 	 */
-	public ReplacerForme(ListeFormes liste){
+	public ListeFormes replacerForme(ListeFormes liste){
 		
 		try{
 			liste.premiere();
@@ -47,6 +46,7 @@ public class ReplacerForme  {
 		}catch(Exception e){
 			System.out.print(e);
 		}
+		return liste;
 	}
 	
 	/**
@@ -57,25 +57,21 @@ public class ReplacerForme  {
 	 * @return un tableau qui contient les coordonnees x1, y1, x2 et y2 changees 
 	 */
 	private void setCoordLigne(Forme forme, int x1, int y1) {
-
-		x2 = forme.getDeuxiemeCoordonnee().x;
-		y2 = forme.getDeuxiemeCoordonnee().y;
+		
+	
+		x1=forme.getPremiereCoordonnee().x;
+		
+		y1=forme.getPremiereCoordonnee().y;
 		
 		if(x1>x2)
-			x2=x2-forme.getPremiereCoordonnee().x;
+			x2=forme.getDeuxiemeCoordonnee().x-forme.getPremiereCoordonnee().x;
 		else if(x2>x1)
-			x2=forme.getPremiereCoordonnee().x-x2;
+			x2=forme.getPremiereCoordonnee().x-forme.getDeuxiemeCoordonnee().x;
 		
 		if(y1>y2)
-			y2=y2-forme.getPremiereCoordonnee().y;
+			y2=forme.getDeuxiemeCoordonnee().y-forme.getPremiereCoordonnee().y;
 		else if(y2>y1)
-			y2=forme.getPremiereCoordonnee().y-y2;
-		
-		p1.setLocation(x1,y1);
-		forme.setPremiereCoordonnee(p1.getLocation());
-		p2.setLocation(x2,y2);
-		forme.setDeuxiemeCoordonnee(p2.getLocation());
-		
+			y2=forme.getPremiereCoordonnee().y-forme.getDeuxiemeCoordonnee().y;
 		
 	}
 	
@@ -85,12 +81,14 @@ public class ReplacerForme  {
 	 * @param x
 	 * @param y
 	 */
-	private void setCoordCercle(Forme forme, int x, int y) {
-		
+	private Object setCoordCercle(Forme forme, int x, int y) {
 		rayonH = forme.getRayonHorizontal();
 		rayonV = forme.getRayonVertical();
-
-		pCentre.setLocation(x+rayonH, y+rayonV);
+		
+		x=forme.getCoordonneeCentre().x+rayonH;
+		y=forme.getCoordonneeCentre().y+rayonV;
+		
+		return forme;
 	}
 	
 	/**
@@ -101,10 +99,8 @@ public class ReplacerForme  {
 	 */
 
 	private void setCoordCarre(Forme forme, int x, int y) {	
-		
-		p1.setLocation(x, y);
-		forme.setPremiereCoordonnee(p1);
-
+		x=forme.getPremiereCoordonnee().x;
+		y=forme.getPremiereCoordonnee().y;
 	}
 		
 	

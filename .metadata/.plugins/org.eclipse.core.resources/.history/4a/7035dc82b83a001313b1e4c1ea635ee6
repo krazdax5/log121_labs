@@ -42,9 +42,7 @@ public class FenetreFormes extends JComponent{
     //private Forme[] listeFormes;
     private ListeFormes listeFormes;
     private Map<Formes, Color> colorDictionary;
-    
 
-    
     /**
      * Constructeur
      */
@@ -53,7 +51,7 @@ public class FenetreFormes extends JComponent{
         colorDictionary = new HashMap<Formes, Color>();
 
         this.listeFormes = liste;
-        
+
         colorDictionary.put(Formes.CARRE, Color.RED);
         colorDictionary.put(Formes.CERCLE, Color.BLUE);
         colorDictionary.put(Formes.LIGNE, Color.BLACK);
@@ -84,9 +82,7 @@ public class FenetreFormes extends JComponent{
         if (listeFormes != null){
 
             listeFormes.premiere();
-            
-            ReplacerForme objet = new ReplacerForme(listeFormes);
-       
+
             for (int pos = 0; pos < listeFormes.length(); pos++){
 
                 Forme laForme = listeFormes.getNoeudCourant().getForme();

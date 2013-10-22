@@ -33,7 +33,52 @@ public class ListeFormes {
         }
     }
 
-    
+    /**
+     * Classe interne qui cree un noeud de la liste chainee.
+     */
+    public class Noeud {
+
+        private Forme laForme;
+        private Noeud suivant;
+
+        /**
+         * Constructeur par defaut, initialise laForme et suivant à null.
+         */
+        public Noeud() {}
+
+        /**
+         * Constructeur par copie d'attribut.
+         * Permet de pouvoir ajouter une forme à la liste,
+         * ainsi que le forme sur laquelle elle pointe.
+         *
+         * @param formeNoeud    une forme
+         * @param suivant       le noeud qui suit ce noeud.
+         */
+        public Noeud(Forme formeNoeud, Noeud suivant) {
+            this.laForme = formeNoeud;
+            this.suivant = suivant;
+        }
+
+        /**
+         * Accesseur de la forme
+         *
+         * @return  la forme stockee dans ce noeud
+         */
+        public Forme getForme() {
+            return laForme;
+        }
+
+        /**
+         * Accesseur du noeud suivant.
+         *
+         * @return  le noeud suivant celui-ci
+         */
+        public Noeud getSuivant() {
+            return suivant;
+        }
+
+
+    }
 
 
     /**
@@ -111,7 +156,18 @@ public class ListeFormes {
     }
 
     
- 
+    /**
+     * Methode qui detruit la premiere forme
+     */
+
+    public void detruirePremiereForme() {
+        Noeud temp = premiere;
+        premiere = null;
+        premiere = temp.suivant;
+
+        temp=null;
+    }
+
     /**
      * Methode qui detruit la premiere forme sans modifier le pointeur de position de la liste.
      */
@@ -182,12 +238,11 @@ public class ListeFormes {
     /**
      * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
      */
-    
-    public void suivantInt(){
-    	if(pos.suivant!=null)
-    		pos=pos.suivant;
+
+    public void suivant() {
+        if(pos.suivant != null)
+            pos = pos.suivant;
     }
-    
 
     public Noeud suivant() {
         if(pos.suivant != null){
@@ -271,7 +326,6 @@ public class ListeFormes {
     public Noeud getPos(){
         return pos;
     }
-    
 
     /**
      * Classe interne qui cree un noeud de la liste chainee.
@@ -281,41 +335,24 @@ public class ListeFormes {
         private Forme laForme;
         private Noeud suivant;
 
-        /**
-         * Constructeur par defaut, initialise laForme et suivant à null.
-         */
-        public Noeud() {}
-
-        /**
-         * Constructeur par copie d'attribut.
-         * Permet de pouvoir ajouter une forme à la liste,
-         * ainsi que le forme sur laquelle elle pointe.
-         *
-         * @param formeNoeud    une forme
-         * @param suivant       le noeud qui suit ce noeud.
-         */
+        public Noeud() {
+            laForme = null;
+            suivant = null;
+        }
         public Noeud(Forme formeNoeud, Noeud suivant) {
             this.laForme = formeNoeud;
             this.suivant = suivant;
         }
 
-        /**
-         * Accesseur de la forme
-         *
-         * @return  la forme stockee dans ce noeud
-         */
         public Forme getForme() {
             return laForme;
         }
 
-        /**
-         * Accesseur du noeud suivant.
-         *
-         * @return  le noeud suivant celui-ci
-         */
         public Noeud getSuivant() {
             return suivant;
         }
+
+
     }
 
 

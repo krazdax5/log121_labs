@@ -16,7 +16,7 @@ public class ReplacerForme  {
 
 	private int rayonH, rayonV,x2, y2;
 	final int DISTANCE = 40;
-	private Point p1,p2,pCentre;
+	private Point p1,p2;
 	
 	/**
 	 * Constructeur qui permet de changer les coordonnees de la forme
@@ -86,11 +86,12 @@ public class ReplacerForme  {
 	 * @param y
 	 */
 	private void setCoordCercle(Forme forme, int x, int y) {
-		
 		rayonH = forme.getRayonHorizontal();
 		rayonV = forme.getRayonVertical();
-
-		pCentre.setLocation(x+rayonH, y+rayonV);
+		
+		x=forme.getCoordonneeCentre().x+rayonH;
+		y=forme.getCoordonneeCentre().y+rayonV;
+		
 	}
 	
 	/**
@@ -101,10 +102,8 @@ public class ReplacerForme  {
 	 */
 
 	private void setCoordCarre(Forme forme, int x, int y) {	
-		
-		p1.setLocation(x, y);
-		forme.setPremiereCoordonnee(p1);
-
+		x=forme.getPremiereCoordonnee().x;
+		y=forme.getPremiereCoordonnee().y;
 	}
 		
 	

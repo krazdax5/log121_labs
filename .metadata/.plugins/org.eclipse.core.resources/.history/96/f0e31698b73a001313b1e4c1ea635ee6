@@ -271,7 +271,6 @@ public class ListeFormes {
     public Noeud getPos(){
         return pos;
     }
-    
 
     /**
      * Classe interne qui cree un noeud de la liste chainee.
