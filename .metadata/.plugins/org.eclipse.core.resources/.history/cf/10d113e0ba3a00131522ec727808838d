@@ -1,6 +1,9 @@
 package main.formes;
 import java.awt.Point;
 
+import main.formes.util.AnalyseurTrame;
+import main.formes.Rectangle;
+
 
 /**
  * Classe qui permet de repositionner les formes au bon endroit dans la fenetre

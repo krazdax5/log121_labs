@@ -94,7 +94,7 @@ public class ListeFormes {
         // Sinon detruit la premiere forme et ajouter
 
 
-        if(length() <= 10) {
+        if(length() != 10) {
             if(length() == 0)
                 premiere = pos = new Noeud(forme, null);
             else if(length() == 1)
@@ -137,18 +137,18 @@ public class ListeFormes {
      *
      * @param pos la position de la forme que l'on veut detruire
      */
-//    public void detruireForme(int pos) {
-//       
-//        detruireForme();
-//
-//    	if (pos.getNumeroSequence() == premiere.getForme().getNumeroSequence()){
-//    		suivant();
-//    		premiere = pos;
-//    	}else{
-//	        precedent();
-//	        pos.suivant=pos.suivant().suivant();
-//    	}
-//    }
+    public void detruireForme(int pos) {
+        getForme(pos);
+        detruireForme();
+
+    	if (pos.getForme().getNumeroSequence() == premiere.getForme().getNumeroSequence()){
+    		suivant();
+    		premiere = pos;
+    	}else{
+	        precedent();
+	        pos.suivant=pos.suivant.suivant;
+    	}
+    }
 
 
     /**
@@ -183,6 +183,12 @@ public class ListeFormes {
      * Methode qui permet de pointer sur la prochaine forme de la liste chainee.
      */
     
+    public void suivantInt(){
+    	if(pos.suivant!=null)
+    		pos=pos.suivant;
+    }
+    
+
     public Noeud suivant() {
         if(pos.suivant != null){
             pos = pos.suivant;
@@ -238,12 +244,6 @@ public class ListeFormes {
         derniere();
         return pos.laForme;
     }
-    
-    public void ajouterFormeFin(Forme laForme) {
-		derniere();
-		ajouterForme(laForme);
-		
-	}
 
     /**
 <<<<<<< HEAD
@@ -326,8 +326,6 @@ public class ListeFormes {
     public Noeud getNoeudCourant(){
         return pos;
     }
-
-	
 
 
 

@@ -167,9 +167,8 @@ public class FenetreFormes extends JComponent{
 				
 				
 			}else
-				if (listeFormes.getNoeudCourant() == null){
-					listeFormes.getNoeudCourant();
-					listeFormes.ajouterForme(laForme);
+				if (listeFormes[pos] == null){
+					listeFormes[pos] = laForme;
 					break;
 				}
 		} while(pos < listeFormes.length());

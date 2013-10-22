@@ -137,18 +137,18 @@ public class ListeFormes {
      *
      * @param pos la position de la forme que l'on veut detruire
      */
-//    public void detruireForme(int pos) {
-//       
-//        detruireForme();
-//
-//    	if (pos.getNumeroSequence() == premiere.getForme().getNumeroSequence()){
-//    		suivant();
-//    		premiere = pos;
-//    	}else{
-//	        precedent();
-//	        pos.suivant=pos.suivant().suivant();
-//    	}
-//    }
+    public void detruireForme(int pos) {
+        getForme(pos);
+        detruireForme();
+
+    	if (pos.getNumeroSequence() == premiere.getForme().getNumeroSequence()){
+    		suivant();
+    		premiere = pos;
+    	}else{
+	        precedent();
+	        pos.suivant=pos.suivant.suivant;
+    	}
+    }
 
 
     /**

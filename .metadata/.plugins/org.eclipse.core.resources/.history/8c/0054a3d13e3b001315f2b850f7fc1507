@@ -14,7 +14,6 @@ package main;
 import main.formes.*;
 
 import main.formes.Rectangle;
-import main.formes.ListeFormes.Noeud;
 
 import javax.swing.*;
 import java.awt.*;
@@ -156,24 +155,19 @@ public class FenetreFormes extends JComponent{
      * Ajoute une forme à la liste de formes.
      * @param laForme La forme de type Forme à ajouter
      */
-    public void ajouterForme(Forme laForme){
-		int pos = -1;
-		do{
-			pos++;
-			if (pos == 10){
-				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
-				
-				listeFormes.ajouterForme(laForme);
-				
-				
-			}else
-				if (listeFormes.getNoeudCourant() == null){
-					listeFormes.getNoeudCourant();
-					listeFormes.ajouterForme(laForme);
-					break;
-				}
-		} while(pos < listeFormes.length());
-        listeFormes.ajouterFormeFin(laForme);
-    }
-    
+//    public void ajouterForme(Forme laForme){
+//		int pos = -1;
+//		do{
+//			pos++;
+//			if (pos == 10){
+//				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
+//				listeFormes[listeFormes.length - 1] = laForme;
+//			}else
+//				if (listeFormes[pos] == null){
+//					listeFormes[pos] = laForme;
+//					break;
+//				}
+//		} while(pos < listeFormes.length);
+//        listeFormes.ajouterFormeFin(laForme);
+//    }
 }
