@@ -145,8 +145,11 @@ public class FenetreFormes extends JComponent{
 
         listeFormes.ajouterFormeFin(laForme);
 
+    }
 
-
+    public void setListeFormes(ListeFormes listeFormes) {
+        this.listeFormes = listeFormes;
+        this.repaint();
     }
     
 }

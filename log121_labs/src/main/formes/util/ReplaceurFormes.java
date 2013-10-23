@@ -10,7 +10,7 @@ import main.formes.*;
  * 2013/10/16 Version Initiale
  *
  */
-public class ReplacerFormes {
+public class ReplaceurFormes {
 	
 
 	final int DISTANCE = 40;
@@ -25,7 +25,7 @@ public class ReplacerFormes {
 	 * Constructeur qui permet de travailler avec la liste original de formes
 	 * @param liste Liste de formes original 
 	 */
-	public ReplacerFormes(ListeFormes liste){
+	public ReplaceurFormes(ListeFormes liste){
 		this.liste = liste;
         nouvellesCoordonnees();
 	}

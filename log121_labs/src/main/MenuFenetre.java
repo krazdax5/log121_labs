@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 
 import main.formes.util.ClasseurFormes;
 import main.formes.ListeFormes;
+import main.formes.util.ReplaceurFormes;
 
 /**
  * Cree le menu de la fenetre de l'application
@@ -68,6 +69,8 @@ public class MenuFenetre extends JMenuBar{
 
     private CommBase comm; // Pour activer/désactiver la communication avec le serveur
     private ListeFormes liste;
+    private ClasseurFormes classeurFormes;
+    private ReplaceurFormes replaceurFormes;
 
     private boolean croissant = true;
     private boolean disableMenuOrdre = false;
@@ -78,6 +81,7 @@ public class MenuFenetre extends JMenuBar{
     public MenuFenetre(CommBase comm, ListeFormes liste) {
         this.comm = comm;
         this.liste = liste;
+        this.classeurFormes = new ClasseurFormes(liste);
         addMenuDessiner();
         addMenuOrdre();
         addMenuFichier();
@@ -158,8 +162,11 @@ public class MenuFenetre extends JMenuBar{
         aireCroissanteMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                comm.stop();
-//                ClasseurFormes.classerParAire(liste, croissant);
+
+                classeurFormes.classerParAire(true);
+                liste = classeurFormes.getListeFormes();
+                replaceurFormes = new ReplaceurFormes(liste);
+
                 rafraichirMenus();
             }
         });
@@ -347,6 +354,11 @@ public class MenuFenetre extends JMenuBar{
             menu.add(radioButtonMenu);
         }
         return menu;
+    }
+
+
+    public ListeFormes getListeFormes() {
+        return liste;
     }
 
 }

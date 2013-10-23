@@ -1,7 +1,7 @@
 package test;
 
 import main.formes.*;
-import main.formes.util.ReplacerFormes;
+import main.formes.util.ReplaceurFormes;
 import org.junit.Test;
 
 import java.awt.Point;
@@ -23,7 +23,7 @@ public class ReplacerFormesTest {
         listeFormes.ajouterForme(new main.formes.Rectangle(30, 20, 50, 90, 12)); //rectangle
         listeFormes.ajouterForme(new Ovale(40, 30, 10, 20, 34));//ovale
 
-        ReplacerFormes replaceForme = new ReplacerFormes(listeFormes);
+        ReplaceurFormes replaceForme = new ReplaceurFormes(listeFormes);
 
         replaceForme.getListe().premiere();
 

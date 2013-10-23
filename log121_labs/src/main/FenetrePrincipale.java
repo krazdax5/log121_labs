@@ -34,6 +34,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
     private IDLogger log;
     private ListeFormes liste;
     private CommBase comm;
+    private MenuFenetre menu;
 
     /**
      * Constructeur
@@ -41,7 +42,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
     public FenetrePrincipale(final CommBase comm){
         this.comm = comm;
         this.liste = new ListeFormes();
-        MenuFenetre menu = new MenuFenetre(comm, liste);
+        menu = new MenuFenetre(comm, liste);
         this.setLayout(new BorderLayout());
         this.add(menu, BorderLayout.NORTH);
         fenetreFormes = new FenetreFormes(liste);
@@ -72,6 +73,8 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
             fenetreFormes.ajouterForme(nouvelleAbstractForme);
             log.logID(nouvelleAbstractForme.getNumeroSequence());
+
+            fenetreFormes.setListeFormes(menu.getListeFormes());
 
             fenetreFormes.repaint();
         }

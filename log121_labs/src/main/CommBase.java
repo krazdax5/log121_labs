@@ -50,8 +50,8 @@ public class CommBase {
 	private PrintWriter fluxEcriture = null;
 	private BufferedReader fluxLecture = null;
 
+    private boolean delaiIsOn;
     private boolean isConnected = false;
-    private int DELAI = 1000;
 
     /**
      * @return le socket client
@@ -94,7 +94,7 @@ public class CommBase {
     public void start(){
         if(client==null || !isConnected)
             connect();
-        DELAI = 1000;
+        delaiIsOn = true;
         creerCommunication();
         isConnected = true;
 	}
@@ -106,7 +106,7 @@ public class CommBase {
     public void start(int limite){
         this.limite = limite;
         isLimited = true;
-        DELAI = 0;
+        delaiIsOn = false;
         start();
     }
 	
@@ -175,7 +175,9 @@ public class CommBase {
 
 				while(isConnected() && isActif()){
                     try{
-                        Thread.sleep(DELAI);
+                        if(delaiIsOn)
+                        Thread.sleep(1000);
+
                         fluxEcriture.println(GET_TRAME);
                         fluxLecture.readLine();
                         String trame = fluxLecture.readLine();
