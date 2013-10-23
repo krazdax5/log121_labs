@@ -37,7 +37,6 @@ public class CommBase {
     private final String OPTIONPANE_TITLE_ERROR = "app.optionPane.title.error";
     private final String OPTIONPANE_TITLE_WARNING = "app.optionPane.title.warning";
 
-	private final int DELAI = 1000;
 	private SwingWorker threadComm = null;
 	private PropertyChangeListener listener = null;
 	private boolean isActif = false;
@@ -52,6 +51,7 @@ public class CommBase {
 	private BufferedReader fluxLecture = null;
 
     private boolean isConnected = false;
+    private int DELAI = 1000;
 
     /**
      * @return le socket client
@@ -94,6 +94,7 @@ public class CommBase {
     public void start(){
         if(client==null || !isConnected)
             connect();
+        DELAI = 1000;
         creerCommunication();
         isConnected = true;
 	}
@@ -105,6 +106,7 @@ public class CommBase {
     public void start(int limite){
         this.limite = limite;
         isLimited = true;
+        DELAI = 0;
         start();
     }
 	

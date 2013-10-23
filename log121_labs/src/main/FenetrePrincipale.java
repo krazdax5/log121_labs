@@ -64,18 +64,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
     // Appelé lorsque le sujet lance "firePropertyChanger"
     @Override
     public void propertyChange(PropertyChangeEvent arg0) {
-        if(comm.isActif()){
-            if(arg0.getPropertyName().equals("ENVOIE-TEST")){
-                System.out.print((String) arg0.getNewValue());
-            } else if (arg0.getPropertyName().equals("NOUVELLE-TRAME")){
-                AbstractForme nouvelleAbstractForme = CreateurFormes.creerForme((String) arg0.getNewValue());
 
-                fenetreFormes.ajouterForme(nouvelleAbstractForme);
-                log.logID(nouvelleAbstractForme.getNumeroSequence());
+        if(arg0.getPropertyName().equals("ENVOIE-TEST")){
+            System.out.print((String) arg0.getNewValue());
+        } else if (arg0.getPropertyName().equals("NOUVELLE-TRAME")){
+            AbstractForme nouvelleAbstractForme = CreateurFormes.creerForme((String) arg0.getNewValue());
 
-                fenetreFormes.repaint();
-            }
+            fenetreFormes.ajouterForme(nouvelleAbstractForme);
+            log.logID(nouvelleAbstractForme.getNumeroSequence());
+
+            fenetreFormes.repaint();
         }
+
     }
 
 }

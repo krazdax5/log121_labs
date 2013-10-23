@@ -142,22 +142,9 @@ public class FenetreFormes extends JComponent{
      * @param laForme La forme de type Forme à ajouter
      */
     public void ajouterForme(AbstractForme laForme){
-		int pos = -1;
-		do{
-			pos++;
-			if (pos == 10){
-				System.arraycopy(listeFormes, 1, listeFormes, 0, 9);
-				
-				listeFormes.ajouterForme(laForme);
-				
-				
-			}else
-				if (listeFormes.getNoeudCourant() == null){
-					listeFormes.getNoeudCourant();
-					listeFormes.ajouterForme(laForme);
-					break;
-				}
-		} while(pos < listeFormes.getLength());
+
+        listeFormes.ajouterFormeFin(laForme);
+
 
 
     }
