@@ -85,19 +85,19 @@ public class FenetreFormes extends JComponent{
 
                 if(typeForme == Formes.CARRE){
                     Rectangle leCarre = (Rectangle) laForme;
-                    g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+                    g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
                     g.setColor(Color.BLACK);
-                    g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+                    g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
 //                    g2D.setStroke(dashed);
-//                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getWidth(), leCarre.getHeight());
+//                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
                 }
                 else if(typeForme == Formes.RECTANGLE) {
                     Rectangle leRectangle = (Rectangle) laForme;
-                    g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+                    g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
                     g.setColor(Color.BLACK);
-                    g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+                    g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
 //                    g2D.setStroke(dashed);
-//                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getWidth(), leRectangle.getHeight());
+//                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
                 }
                 else if(typeForme == Formes.OVALE) {
                     Ovale lOvale = (Ovale) laForme;

@@ -69,6 +69,23 @@ public class Ovale extends AbstractForme {
     }
 
     /**
+     * @return l'hauteur de l'ovale.
+     */
+    @Override
+    public int getHauteur() {
+        return rayonVertical*2;
+    }
+
+    /**
+     * @return la largeur de l'ovale.
+     */
+    @Override
+    public int getLargeur() {
+        return rayonHorizontal*2;
+    }
+
+
+    /**
 	 * Constructeur d'une forme ronde avec une coordonnée et deux rayons.
 	 * @param x
 	 * @param y
@@ -82,12 +99,12 @@ public class Ovale extends AbstractForme {
 		rayonVertical = rayonV;
 		type = Formes.OVALE;
 
-        aire = rayonH*rayonV;
+        aire = (int)(Math.PI*rayonH*rayonV);
 
         if(rayonH > rayonV)
-            distance = rayonH;
+            distance = rayonH*2;
         else
-            distance = rayonV;
+            distance = rayonV*2;
 	}
 	
 	/**
@@ -100,8 +117,8 @@ public class Ovale extends AbstractForme {
         this(x, y, rayon, rayon, numeroSequence);
 		type = Formes.CERCLE;
 
-        aire = rayon*rayon;
+        aire = (int)(Math.PI*rayon*rayon);
 
-        distance = rayon;
+        distance = rayon*2;
 	}
 }

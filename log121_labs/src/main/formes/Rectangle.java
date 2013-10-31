@@ -52,20 +52,6 @@ public class Rectangle extends AbstractForme {
         this.secondeCoordonnee = secondeCoordonnee;
     }
 
-	/**
-	 * @return La largeur
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * @return La hauteur
-	 */
-	public int getHeight() {
-		return height;
-	}
-
     /**
      * @return l'aire du rectangle
      */
@@ -80,6 +66,22 @@ public class Rectangle extends AbstractForme {
     @Override
     public double getDistance() {
         return distance;
+    }
+
+    /**
+     * @return La largeur
+     */
+    @Override
+    public int getLargeur() {
+        return width;
+    }
+
+    /**
+     * @return La hauteur
+     */
+    @Override
+    public int getHauteur() {
+        return height;
     }
 
     /**

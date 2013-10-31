@@ -44,9 +44,35 @@ public class ClasseurFormes {
 
     /**
      * Méthode qui classe une liste de forme par son numéro de séquence.
+     * @precondition Qu'il y ait au moins deux formes dans la liste
      * @param croissant Si vrai, ordonne la liste de formes en ordre croissant de numéro de séquence.
      */
     public void classerParNumeroSequence(boolean croissant){
+        listeFormes.premiere();
+        if(listeFormes.getNoeudCourant().getSuivant() != null){
+            //Pour entrer dans la boucle si la fonction à déjà été appellé auparavant
+            changementEffectuer = true;
+
+            while(changementEffectuer){
+                changementEffectuer = false;
+                listeFormes.premiere();
+
+                while(listeFormes.getNoeudCourant().getSuivant() != null){
+                    if(croissant) {
+                        if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() > listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
+                            listeFormes.inverser();
+                            changementEffectuer = true;
+                        }
+                    } else {
+                        if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() < listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
+                            listeFormes.inverser();
+                            changementEffectuer = true;
+                        }
+                    }
+                    listeFormes.suivant();
+                }
+            }
+        }
     }
 
     /**
@@ -104,50 +130,50 @@ public class ClasseurFormes {
                 if (tableauOrdonnee[position] == null)
                     tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
                 else
-                    if (!inverse)
-                        switch(listeFormes.getNoeudCourant().getForme().getType()){
-                            case CARRE:
-                                if (tableauOrdonnee[position].getType() != Formes.CARRE)
-                                    tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                                break;
-                            case RECTANGLE:
-                                if (tableauOrdonnee[position].getType() != Formes.CARRE &&
-                                        tableauOrdonnee[position].getType() != Formes.RECTANGLE)
-                                    tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                                break;
-                            case CERCLE:
-                                if (tableauOrdonnee[position].getType() != Formes.CARRE &&
-                                        tableauOrdonnee[position].getType() != Formes.RECTANGLE &&
-                                        tableauOrdonnee[position].getType() != Formes.CERCLE)
-                                    tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                                break;
-                            case OVALE:
-                                if (tableauOrdonnee[position].getType() == Formes.LIGNE)
-                                    tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                                break;
-                        }
-                    else
-                        switch (listeFormes.getNoeudCourant().getForme().getType()){
-                           case LIGNE:
-                               if (tableauOrdonnee[position].getType() != Formes.LIGNE)
-                                   tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                               break;
-                           case OVALE:
-                               if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
-                                       tableauOrdonnee[position].getType() != Formes.OVALE)
-                                   tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                               break;
-                           case CERCLE:
-                               if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
-                                       tableauOrdonnee[position].getType() != Formes.OVALE &&
-                                       tableauOrdonnee[position].getType() != Formes.CERCLE)
-                                   tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                               break;
-                           case RECTANGLE:
-                               if (tableauOrdonnee[position].getType() == Formes.CARRE)
-                                   tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
-                               break;
-                        }
+                if (!inverse)
+                    switch(listeFormes.getNoeudCourant().getForme().getType()){
+                        case CARRE:
+                            if (tableauOrdonnee[position].getType() != Formes.CARRE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case RECTANGLE:
+                            if (tableauOrdonnee[position].getType() != Formes.CARRE &&
+                                    tableauOrdonnee[position].getType() != Formes.RECTANGLE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case CERCLE:
+                            if (tableauOrdonnee[position].getType() != Formes.CARRE &&
+                                    tableauOrdonnee[position].getType() != Formes.RECTANGLE &&
+                                    tableauOrdonnee[position].getType() != Formes.CERCLE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case OVALE:
+                            if (tableauOrdonnee[position].getType() == Formes.LIGNE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                    }
+                else
+                    switch (listeFormes.getNoeudCourant().getForme().getType()){
+                        case LIGNE:
+                            if (tableauOrdonnee[position].getType() != Formes.LIGNE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case OVALE:
+                            if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
+                                    tableauOrdonnee[position].getType() != Formes.OVALE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case CERCLE:
+                            if (tableauOrdonnee[position].getType() != Formes.LIGNE &&
+                                    tableauOrdonnee[position].getType() != Formes.OVALE &&
+                                    tableauOrdonnee[position].getType() != Formes.CERCLE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                        case RECTANGLE:
+                            if (tableauOrdonnee[position].getType() == Formes.CARRE)
+                                tableauOrdonnee[position] = listeFormes.getNoeudCourant().getForme();
+                            break;
+                    }
             } while (listeFormes.suivant() != null);
 
             listeFormes.detruireForme(tableauOrdonnee[position]);
@@ -197,56 +223,87 @@ public class ClasseurFormes {
         }
     }
 
+    ///////////
+    // BONUS //
+    ///////////
+
+
     /**
-     * Place en ordre croissant les formes dans la liste selon leurs numéros de séquences
-     * @precondition Qu'il y ait au moins deux formes dans la liste
-     * @return Une liste en ordre décroissante classé par rapport au numéro de séquence de chaque forme
+     * Méthode qui classe une liste de forme  selon l'hauteur de sa surface.
+     * @param croissant Si vrai, ordonne la liste en ordre croissant de grandeur d'hauteur.
      */
-    public void classerParNumeroSequenceCroissante(){
-        listeFormes.premiere();
-        if(listeFormes.getNoeudCourant().getSuivant() != null){
-            //Pour entrer dans la boucle si la fonction à déjà été appellé auparavant
-            changementEffectuer = true;
+    public void classerParHauteur(boolean croissant) {
+        // Initialisation à 0 du compteur qui sera utilise dans la boucle while
+        int compteur = 0;
 
-            while(changementEffectuer){
-                changementEffectuer = false;
-                listeFormes.premiere();
+        while(compteur != listeFormes.getLength()+1) {
 
-                while(listeFormes.getNoeudCourant().getSuivant() != null){
-                    if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() > listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
-                        listeFormes.inverser();
-                        changementEffectuer = true;
-                    }
+            listeFormes.premiere();
+
+            for(int i = 0; i < listeFormes.getLength(); i++) {
+                if(listeFormes.getNoeudCourant().getSuivant() != null) {
+
+                    double hauteur1 = listeFormes.getNoeudCourant().getForme().getHauteur();
                     listeFormes.suivant();
+                    double hauteur2 = listeFormes.getNoeudCourant().getForme().getHauteur();;
+
+                    listeFormes.precedent();
+
+                    if(croissant) {
+                        if(hauteur1 > hauteur2) {
+                            listeFormes.inverser();
+                        }
+                    }
+                    else {
+                        if(hauteur1 < hauteur2) {
+                            listeFormes.inverser();
+                        }
+                    }
+
                 }
+                listeFormes.suivant();
             }
+            compteur++;
         }
     }
 
     /**
-     * Place en ordre décroissant les formes dans la liste selon leurs numéros de séquences
-     * @precondition Qu'il y ait au moins deux formes dans la liste
-     * @return Une liste en ordre décroissante classé par rapport au numéro de séquence de chaque forme
+     * Méthode qui classe une liste de forme selon la largeur de sa surface.
+     * @param croissant Si vrai, ordonne la liste en ordre croissant de grandeur de largeur.
      */
-    public void classerParNumeroSequenceDecroissante(){
-        listeFormes.premiere();
-        if(listeFormes.getNoeudCourant().getSuivant() != null){
-            //Pour entrer dans la boucle si la fonction à déjà été appellé auparavant
-            changementEffectuer = true;
+    public void classerParLargeur(boolean croissant) {
+        // Initialisation à 0 du compteur qui sera utilise dans la boucle while
+        int compteur = 0;
 
-            while(changementEffectuer){
-                changementEffectuer = false;
-                listeFormes.premiere();
+        while(compteur != listeFormes.getLength()+1) {
 
-                while(listeFormes.getNoeudCourant().getSuivant() != null){
+            listeFormes.premiere();
 
-                    if(listeFormes.getNoeudCourant().getForme().getNumeroSequence() < listeFormes.getNoeudCourant().getSuivant().getForme().getNumeroSequence()){
-                        listeFormes.inverser();
-                        changementEffectuer = true;
-                    }
+            for(int i = 0; i < listeFormes.getLength(); i++) {
+                if(listeFormes.getNoeudCourant().getSuivant() != null) {
+
+                    double largeur1 = listeFormes.getNoeudCourant().getForme().getLargeur();
                     listeFormes.suivant();
+                    double largeur2 = listeFormes.getNoeudCourant().getForme().getLargeur();;
+
+                    listeFormes.precedent();
+
+                    if(croissant) {
+                        if(largeur1 > largeur2) {
+                            listeFormes.inverser();
+                        }
+                    }
+                    else {
+                        if(largeur1 < largeur2) {
+                            listeFormes.inverser();
+                        }
+                    }
+
                 }
+                listeFormes.suivant();
             }
+            compteur++;
         }
     }
+
 }

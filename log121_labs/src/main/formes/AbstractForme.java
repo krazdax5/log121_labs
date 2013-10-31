@@ -20,6 +20,8 @@ public abstract class AbstractForme {
 	protected int numeroSequence;
     protected int aire;
     protected double distance;
+    protected int hauteur;
+    protected int largeur;
 
 	/**
 	 * @return le numéro de séquence
@@ -49,6 +51,22 @@ public abstract class AbstractForme {
      */
     public double getDistance() {
         return distance;
+    }
+
+    /**
+     * Accesseur de l'hauteur de la forme
+     * @return  l'hauteur de la forme.
+     */
+    public int getHauteur() {
+        return hauteur;
+    }
+
+    /**
+     * Accesseur de la largeur de la forme.
+     * @return  la largeur de la forme.
+     */
+    public int getLargeur() {
+        return largeur;
     }
 
     /**

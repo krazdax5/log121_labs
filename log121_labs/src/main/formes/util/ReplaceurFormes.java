@@ -58,7 +58,7 @@ public class ReplaceurFormes {
 			p1 = new Point(x, y);
             Rectangle rectangle = (Rectangle) forme;
             rectangle.setPremiereCoordonnee(p1);
-            rectangle.setSecondeCoordonnee(new Point(x+rectangle.getWidth(),y+rectangle.getHeight()));
+            rectangle.setSecondeCoordonnee(new Point(x+rectangle.getLargeur(),y+rectangle.getHauteur()));
             return rectangle;
 		}
 		else if(forme.getType()==Formes.CERCLE || forme.getType()==Formes.OVALE){

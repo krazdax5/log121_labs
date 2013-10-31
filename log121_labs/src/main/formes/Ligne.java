@@ -63,7 +63,7 @@ public class Ligne extends AbstractForme {
      */
     @Override
     public int getAire() {
-        return aire;
+        return (int)distance*1;
     }
 
     /**
@@ -72,6 +72,22 @@ public class Ligne extends AbstractForme {
     @Override
     public double getDistance() {
         return distance;
+    }
+
+    /**
+     * @return l'hauteur de la forme.
+     */
+    @Override
+    public int getHauteur() {
+        return Math.abs((int)premiereCoordonnee.getY()-(int)secondeCoordonnee.getY());
+    }
+
+    /**
+     * @return la largeur de la forme.
+     */
+    @Override
+    public int getLargeur() {
+        return Math.abs((int)premiereCoordonnee.getX()-(int)secondeCoordonnee.getX());
     }
 
     /**
