@@ -28,11 +28,11 @@ public class ListeFormes {
          * Permet de pouvoir ajouter une forme à la liste,
          * ainsi que le forme sur laquelle elle pointe.
          *
-         * @param abstractFormeNoeud    une forme
+         * @param formeNoeud    une forme
          * @param suivant       le noeud qui suit ce noeud.
          */
-        public Noeud(AbstractForme abstractFormeNoeud, Noeud suivant) {
-            this.laAbstractForme = abstractFormeNoeud;
+        public Noeud(AbstractForme formeNoeud, Noeud suivant) {
+            this.laAbstractForme = formeNoeud;
             this.suivant = suivant;
         }
 
@@ -111,12 +111,12 @@ public class ListeFormes {
 
         if(noeudCourant.suivant != null) {
 
-            AbstractForme copieAbstractForme = noeudCourant.laAbstractForme;
+            AbstractForme copieForme = noeudCourant.laAbstractForme;
 
             noeudCourant.laAbstractForme = noeudCourant.suivant.laAbstractForme;
-            noeudCourant.suivant.laAbstractForme = copieAbstractForme;
+            noeudCourant.suivant.laAbstractForme = copieForme;
 
-            copieAbstractForme = null; // Le garbage collector viendra supprimer cette instance de forme.
+            copieForme = null; // Le garbage collector viendra supprimer cette instance de forme.
 
         }
 
@@ -125,11 +125,11 @@ public class ListeFormes {
     /**
      * Methode qui ajoute une forme a la fin de la liste chainee
      *
-     * @param nouvelleAbstractForme la forme que l'on desire ajouter a la liste chainee
+     * @param nouvelleForme la forme que l'on desire ajouter a la liste chainee
      */
-    public void ajouterFormeFin(AbstractForme nouvelleAbstractForme) {
+    public void ajouterFormeFin(AbstractForme nouvelleForme) {
         derniere();
-        ajouterForme(nouvelleAbstractForme);
+        ajouterForme(nouvelleForme);
     }
 
     /**
@@ -187,9 +187,9 @@ public class ListeFormes {
     /**
      * Permet d'aller detruire la forme equivalente a celle que l'on envoie en parametre
      *
-     * @param abstractFormeADetruire la forme que l'on veut detruire dans la liste.
+     * @param formeADetruire la forme que l'on veut detruire dans la liste.
      */
-    public void detruireForme(AbstractForme abstractFormeADetruire) {
+    public void detruireForme(AbstractForme formeADetruire) {
 
         boolean matchFound = false;
 
@@ -199,7 +199,7 @@ public class ListeFormes {
 
         while(!matchFound) {
 
-            if(noeudCourant.getForme().getNumeroSequence() != abstractFormeADetruire.getNumeroSequence())
+            if(noeudCourant.getForme().getNumeroSequence() != formeADetruire.getNumeroSequence())
                 suivant();
             else {
                 detruireForme();

@@ -50,30 +50,30 @@ public class ReplaceurFormes {
 	}
 	
 	
-	private AbstractForme setCoordonnees(AbstractForme forme, int x, int y){
+	private AbstractForme setCoordonnees(AbstractForme forme, int coordonneeX, int coordonneeY){
 
-        Point p1,pCentre;
+        Point point1,pCentre;
 
 		if(forme.getType()==Formes.CARRE||forme.getType()==Formes.RECTANGLE){
-			p1 = new Point(x, y);
+			point1 = new Point(coordonneeX, coordonneeY);
             Rectangle rectangle = (Rectangle) forme;
-            rectangle.setPremiereCoordonnee(p1);
-            rectangle.setSecondeCoordonnee(new Point(x+rectangle.getLargeur(),y+rectangle.getHauteur()));
+            rectangle.setPremiereCoordonnee(point1);
+            rectangle.setSecondeCoordonnee(new Point(coordonneeX+rectangle.getLargeur(),coordonneeY+rectangle.getHauteur()));
             return rectangle;
 		}
 		else if(forme.getType()==Formes.CERCLE || forme.getType()==Formes.OVALE){
 
             Ovale ovale = (Ovale) forme;
-			pCentre = new Point(x, y);
+			pCentre = new Point(coordonneeX, coordonneeY);
             ovale.setCoordonneeCentre(pCentre);
             return ovale;
 
 		}
 		else if(forme.getType()==Formes.LIGNE){
             Ligne ligne = (Ligne) forme;
-			p1 = new Point(x, y);
-			ligne.setPremiereCoordonnee(p1);
-			ligne.setSecondeCoordonnee(new Point(p1.x + ligne.getLargeur(), p1.y + ligne.getHauteur()));
+			point1 = new Point(coordonneeX, coordonneeY);
+			ligne.setPremiereCoordonnee(point1);
+			ligne.setSecondeCoordonnee(new Point(point1.x + ligne.getLargeur(), point1.y + ligne.getHauteur()));
             return ligne;
 		}
         return null;

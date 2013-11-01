@@ -71,11 +71,11 @@ public abstract class AbstractForme {
 
     /**
      * Vérifie si la forme envoye en paramètre est égale à la forme actuelle.
-     * @param abstractFormeAVerifier    la forme que l'on desire comparee
+     * @param formeAVerifier    la forme que l'on desire comparee
      * @return  true/false dependemment du resultat de la comparaison.
      */
-    public boolean estEgale(AbstractForme abstractFormeAVerifier) {
-        return this.getType() == abstractFormeAVerifier.getType();
+    public boolean estEgale(AbstractForme formeAVerifier) {
+        return this.getType() == formeAVerifier.getType();
     }
 
 }
