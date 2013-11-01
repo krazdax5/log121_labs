@@ -1,0 +1,65 @@
+ï»¿@startuml
+title Réception et création de formes
+
+participant "<u>comm:CommBase" as comm
+participant "<u>fluxEcriture:PrintWriter" as fluxEcriture
+participant "<u>fluxLecture:BufferedReader" as fluxLecture
+participant "<u>fenetrePrincipal:FenetrePrincipal" as fenP
+participant "«static»\n<u>createurForme" as createur
+
+activate comm
+activate fenP
+
+comm -> fluxEcriture : printLn()
+
+activate fluxEcriture
+deactivate fluxEcriture
+
+comm -> fluxLecture : trame = readLine()
+
+activate fluxLecture
+deactivate fluxLecture
+
+comm -> fenP : firePropertyChange()
+fenP -> createur : creerForme()
+
+activate createur
+
+create "<u>analyseur:AnalyseurTrame" as analyseur
+createur -> analyseur : «create»
+
+createur -> analyseur : typeForme = getTypeForme()
+activate analyseur
+
+alt carré ou rectangle
+	createur -> analyseur : getCoordonneeX1()
+	createur -> analyseur : getCoordonneeY1()
+	createur -> analyseur : getCoordonneeX2()
+	createur -> analyseur : getCoordonneeY3()
+	createur -> analyseur : getNumeroSequence()
+else ovale
+	createur -> analyseur : getCentreX()
+	createur -> analyseur : getCentreY()
+	createur -> analyseur : getRayonH()
+	createur -> analyseur : getRayonV()
+	createur -> analyseur : getNumeroSequence()
+else cercle
+	createur -> analyseur : getCentreX()
+	createur -> analyseur : getCentreY()
+	createur -> analyseur : getRayon()
+	createur -> analyseur : getNumeroSequence()
+else ligne
+	createur -> analyseur : getCoordonneeX1()
+	createur -> analyseur : getCoordonneeY1()
+	createur -> analyseur : getCoordonneeX2()
+	createur -> analyseur : getCoordonneeY3()
+	createur -> analyseur : getNumeroSequence()
+end
+
+deactivate analyseur
+createur -> fenP : nouvelleAbstractForme = \ncreerForme()
+deactivate createur
+
+deactivate comm
+deactivate fenP
+@enduml

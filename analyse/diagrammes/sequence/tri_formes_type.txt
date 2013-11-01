@@ -1,0 +1,40 @@
+@startuml
+title Tri des formes par numéro de séquence
+
+actor utilisateur
+participant "<u>menu:MenuFenetre" as menu
+
+activate menu
+utilisateur -> menu : actionPerformed()
+
+create "<u>classeurFormes:ClasseurFormes" as classeur
+menu -> classeur : «create»
+
+'Addition of the other classes in the diagram
+participant "<u>listeformes:ListeFormes" as liste
+
+menu -> classeur : classerParNumeroSequence()
+activate classeur
+
+classeur -> liste : premiere()
+activate liste
+
+loop noeud suivant n'est pas nul
+	alt croissant
+		alt numéro de séquence de la forme actuelle > numéro de séquence de la forme suivante
+			classeur -> liste : inverser()
+		end
+	else décroissant
+		alt numéro de séquence de la forme actuelle < numéro de séquence de la forme suivante
+			classeur -> liste : inverser()
+		end
+	end
+end
+
+menu -> classeur : getListeFormes()
+
+deactivate liste
+deactivate classeur
+deactivate menu
+
+@enduml
