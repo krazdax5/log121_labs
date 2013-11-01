@@ -21,6 +21,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Cette classe représente la fenêtre principale de l'application 
@@ -42,7 +44,7 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
     public FenetrePrincipale(final CommBase comm){
         this.comm = comm;
         this.liste = new ListeFormes();
-        menu = new MenuFenetre(comm, liste);
+        menu = new MenuFenetre(comm, liste, this);
         this.setLayout(new BorderLayout());
         this.add(menu, BorderLayout.NORTH);
         fenetreFormes = new FenetreFormes(liste);
@@ -68,17 +70,18 @@ public class FenetrePrincipale extends JFrame implements PropertyChangeListener{
 
         if(arg0.getPropertyName().equals("ENVOIE-TEST")){
             System.out.print((String) arg0.getNewValue());
+
         } else if (arg0.getPropertyName().equals("NOUVELLE-TRAME")){
             AbstractForme nouvelleAbstractForme = CreateurFormes.creerForme((String) arg0.getNewValue());
-
             fenetreFormes.ajouterForme(nouvelleAbstractForme);
             log.logID(nouvelleAbstractForme.getNumeroSequence());
 
             fenetreFormes.setListeFormes(menu.getListeFormes());
-
-            fenetreFormes.repaint();
         }
-
     }
 
+    public void rafraichirFenetreFormes(ListeFormes listeFormes){
+        fenetreFormes.setListeFormes(listeFormes);
+        fenetreFormes.repaint();
+    }
 }

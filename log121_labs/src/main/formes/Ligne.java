@@ -20,6 +20,8 @@ public class Ligne extends AbstractForme {
 	private Point premiereCoordonnee = null;
 	private Point secondeCoordonnee = null;
 	private double longueur = -1;
+    private int hauteur;
+    private int largeur;
     //private int aire;
 
 	/**
@@ -79,7 +81,7 @@ public class Ligne extends AbstractForme {
      */
     @Override
     public int getHauteur() {
-        return Math.abs((int)premiereCoordonnee.getY()-(int)secondeCoordonnee.getY());
+        return hauteur;
     }
 
     /**
@@ -87,7 +89,7 @@ public class Ligne extends AbstractForme {
      */
     @Override
     public int getLargeur() {
-        return Math.abs((int)premiereCoordonnee.getX()-(int)secondeCoordonnee.getX());
+        return largeur;
     }
 
     /**
@@ -112,5 +114,7 @@ public class Ligne extends AbstractForme {
             aire = aire *(-1);
 
         distance = longueur;
+        largeur = (x1 > x2) ? x1 - x2 : x2 - x1;
+        hauteur = (y1 > y2) ? y1 - y2 : y2 - y1;
 	}
 }

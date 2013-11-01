@@ -29,9 +29,7 @@ public class FenetreFormes extends JComponent{
     public static final Dimension dimension = new Dimension(500,500);
     private ListeFormes listeFormes;
     private Map<Formes, Color> colorDictionary;
-    
 
-    
     /**
      * Constructeur
      */
@@ -55,18 +53,17 @@ public class FenetreFormes extends JComponent{
      */
     @Override
     public void paintComponent(Graphics g){
-//        Graphics2D g2D = (Graphics2D)g;
+        Graphics2D g2D = (Graphics2D)g;
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
         g.setColor(Color.BLACK);
-        g.drawString("NbFormes : " + listeFormes.getLength(), 10,15);
-//
-//        float dash1[] = {5.0f};
-//        BasicStroke dashed = new BasicStroke(1.0f,
-//                        BasicStroke.CAP_BUTT,
-//                        BasicStroke.JOIN_MITER,
-//                        10.0f, dash1, 0.0f);
+
+        float dash1[] = {5.0f};
+        g2D.setStroke(new BasicStroke(1.0f,
+                BasicStroke.CAP_BUTT,
+                BasicStroke.JOIN_MITER,
+                10.0f, dash1, 0.0f));
 
         if (listeFormes != null){
 
@@ -74,7 +71,6 @@ public class FenetreFormes extends JComponent{
             
            
             for (int pos = 0; pos < listeFormes.getLength(); pos++){
-
                 AbstractForme laForme = listeFormes.getNoeudCourant().getForme();
 
                 listeFormes.suivant();
@@ -88,41 +84,48 @@ public class FenetreFormes extends JComponent{
                     g.fillRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
                     g.setColor(Color.BLACK);
                     g.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
-//                    g2D.setStroke(dashed);
-//                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
+                    g2D.drawRect(leCarre.getPremiereCoordonnee().x, leCarre.getPremiereCoordonnee().y, leCarre.getLargeur(), leCarre.getHauteur());
                 }
                 else if(typeForme == Formes.RECTANGLE) {
                     Rectangle leRectangle = (Rectangle) laForme;
                     g.fillRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
                     g.setColor(Color.BLACK);
                     g.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
-//                    g2D.setStroke(dashed);
-//                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
+                    g2D.drawRect(leRectangle.getPremiereCoordonnee().x, leRectangle.getPremiereCoordonnee().y, leRectangle.getLargeur(), leRectangle.getHauteur());
                 }
                 else if(typeForme == Formes.OVALE) {
                     Ovale lOvale = (Ovale) laForme;
                     g.fillOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
                     g.setColor(Color.BLACK);
                     g.drawOval(lOvale.getCoordonneeCentre().x, lOvale.getCoordonneeCentre().y, lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
-//                    g2D.setStroke(dashed);
-//                    g2D.drawRect(lOvale.getCoordonneeCentre().x-lOvale.getRayonHorizontal()/2,
-//                            lOvale.getCoordonneeCentre().y+lOvale.getRayonVertical()/2,
-//                            lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
+                    g2D.drawRect(lOvale.getCoordonneeCentre().x,
+                            lOvale.getCoordonneeCentre().y,
+                            lOvale.getRayonHorizontal() * 2, lOvale.getRayonVertical() * 2);
                 }
                 else if(typeForme == Formes.CERCLE) {
                     Ovale leCercle = (Ovale) laForme;
                     g.fillOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
                     g.setColor(Color.BLACK);
                     g.drawOval(leCercle.getCoordonneeCentre().x, leCercle.getCoordonneeCentre().y, leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
-//                    g2D.setStroke(dashed);
-//                    g2D.drawRect(leCercle.getCoordonneeCentre().x-leCercle.getRayonHorizontal()/2,
-//                            leCercle.getCoordonneeCentre().y+leCercle.getRayonVertical()/2,
-//                            leCercle.getRayonHorizontal() * 2, leCercle.getRayonHorizontal() * 2);
+                    g2D.drawRect(leCercle.getCoordonneeCentre().x,
+                            leCercle.getCoordonneeCentre().y,
+                            leCercle.getRayonHorizontal() * 2, leCercle.getRayonVertical() * 2);
                 } else if(typeForme == Formes.LIGNE) {
                     Ligne laLigne = (Ligne) laForme;
+                    int lineWidth = (laLigne.getPremiereCoordonnee().x > laLigne.getSecondeCoordonnee().x) ? laLigne.getPremiereCoordonnee().x - laLigne.getSecondeCoordonnee().x : laLigne.getSecondeCoordonnee().x - laLigne.getPremiereCoordonnee().x;
+                    int lineHeight = (laLigne.getPremiereCoordonnee().y > laLigne.getSecondeCoordonnee().y) ? laLigne.getPremiereCoordonnee().y - laLigne.getSecondeCoordonnee().y : laLigne.getSecondeCoordonnee().y - laLigne.getPremiereCoordonnee().y;
                     g.drawLine(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
-                    //g2D.setStroke(dashed);
-                    //g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, laLigne.getSecondeCoordonnee().x, laLigne.getSecondeCoordonnee().y);
+
+                    if ((laLigne.getPremiereCoordonnee().x < laLigne.getSecondeCoordonnee().x) && (laLigne.getPremiereCoordonnee().y > laLigne.getSecondeCoordonnee().y)){ //Si premier point en base à gauche
+                        g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y - lineHeight, lineWidth, lineHeight);
+                    } else if ((laLigne.getPremiereCoordonnee().x < laLigne.getSecondeCoordonnee().x) && (laLigne.getPremiereCoordonnee().y < laLigne.getSecondeCoordonnee().y)){ //Si premier point en haut à gauche
+                        g.drawRect(laLigne.getPremiereCoordonnee().x, laLigne.getPremiereCoordonnee().y, lineWidth, lineHeight);
+                    } else if ((laLigne.getPremiereCoordonnee().x > laLigne.getSecondeCoordonnee().x) && (laLigne.getPremiereCoordonnee().y < laLigne.getSecondeCoordonnee().y)){ //Si premier point en haut à droite
+                        g.drawRect(laLigne.getPremiereCoordonnee().x - lineWidth, laLigne.getPremiereCoordonnee().y, lineWidth, lineHeight);
+                    } else if ((laLigne.getPremiereCoordonnee().x > laLigne.getSecondeCoordonnee().x) && (laLigne.getPremiereCoordonnee().y > laLigne.getSecondeCoordonnee().y)){ //Si premier point en bas à droite
+                        g.drawRect(laLigne.getPremiereCoordonnee().x - lineWidth, laLigne.getPremiereCoordonnee().y - lineHeight, lineWidth, lineHeight);
+                    }
+
                 }
             }
         }

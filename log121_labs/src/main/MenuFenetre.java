@@ -59,18 +59,35 @@ public class MenuFenetre extends JMenuBar{
             MENU_ORDRE_DISTANCEDECROISSANTE = "app.frame.menus.order.decreasingDistance",
             MENU_ORDRE_NOSEQCROISSANT = "app.frame.menus.order.growingNoSeq",
             MENU_ORDRE_NOSEQDECROISSANT = "app.frame.menus.order.decreasingNoSeq",
+            MENU_ORDRE_HAUTEURCROISSANTE = "app.frame.menus.order.growingHeight",
+            MENU_ORDRE_HAUTEURDECROISSANTE = "app.frame.menus.order.decreasingHeight",
+            MENU_ORDRE_LARGEURCROISSANTE = "app.frame.menus.order.growingWidth",
+            MENU_ORDRE_LARGEURDECROISSANTE = "app.frame.menus.order.decreasingWidth",
             MENU_AIDE_TITRE = "app.frame.menus.help.title",
             MENU_AIDE_PROPOS = "app.frame.menus.help.about";
     private static final String MESSAGE_DIALOGUE_A_PROPOS = "app.frame.dialog.about";
 
     private JMenuItem arreterMenuItem, demarrerMenuItem, connecterMenuItem, deconnecterMenuItem, quitterMenuItem, obtenirFormesMenuItem;
-    private JMenuItem aireCroissanteMenuItem, aireDecroissanteMenuItem, typeCroissantMenuItem, typeDecroissantMenuItem, distanceCroissanteMenuItem, distanceDecroissanteMenuItem, noSeqCroissantMenuItem, noSeqDecroissantMenuItem;
+    private JMenuItem
+            aireCroissanteMenuItem,
+            aireDecroissanteMenuItem,
+            typeCroissantMenuItem,
+            typeDecroissantMenuItem,
+            distanceCroissanteMenuItem,
+            distanceDecroissanteMenuItem,
+            noSeqCroissantMenuItem,
+            noSeqDecroissantMenuItem,
+            hauteurCroissanteMenuItem,
+            hauteurDecroissanteMenuItem,
+            largeurCroissanteMenuItem,
+            largeurDecroissanteMenuItem;
     private static final int DELAI_QUITTER_MSEC = 200, LIMITE_DE_FORMES = 10;
 
     private CommBase comm; // Pour activer/désactiver la communication avec le serveur
-    private ListeFormes liste;
+    private ListeFormes liste, listeOrigine;
     private ClasseurFormes classeurFormes;
     private ReplaceurFormes replaceurFormes;
+    private FenetrePrincipale fenetrePrincipale;
 
     private boolean croissant = true;
     private boolean disableMenuOrdre = false;
@@ -78,10 +95,11 @@ public class MenuFenetre extends JMenuBar{
     /**
      * Constructeur
      */
-    public MenuFenetre(CommBase comm, ListeFormes liste) {
+    public MenuFenetre(CommBase comm, ListeFormes liste, FenetrePrincipale fenetrePrincipale) {
         this.comm = comm;
         this.liste = liste;
         this.classeurFormes = new ClasseurFormes(liste);
+        this.fenetrePrincipale = fenetrePrincipale;
         addMenuDessiner();
         addMenuOrdre();
         addMenuFichier();
@@ -152,7 +170,11 @@ public class MenuFenetre extends JMenuBar{
                         MENU_ORDRE_DISTANCECROISSANTE,
                         MENU_ORDRE_DISTANCEDECROISSANTE,
                         MENU_ORDRE_NOSEQCROISSANT,
-                        MENU_ORDRE_NOSEQDECROISSANT
+                        MENU_ORDRE_NOSEQDECROISSANT,
+                        MENU_ORDRE_HAUTEURCROISSANTE,
+                        MENU_ORDRE_HAUTEURDECROISSANTE,
+                        MENU_ORDRE_LARGEURCROISSANTE,
+                        MENU_ORDRE_LARGEURDECROISSANTE
                 });
 
         ButtonGroup groupeTri = new ButtonGroup();
@@ -164,13 +186,12 @@ public class MenuFenetre extends JMenuBar{
             public void actionPerformed(ActionEvent actionEvent) {
 
                 classeurFormes.classerParAire(true);
-                liste = classeurFormes.getListeFormes();
-                replaceurFormes = new ReplaceurFormes(liste);
-
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
-
         groupeTri.add(aireCroissanteMenuItem);
 
         aireDecroissanteMenuItem = menu.getItem(1);
@@ -178,12 +199,11 @@ public class MenuFenetre extends JMenuBar{
         aireDecroissanteMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
-                comm.stop();
-
-//                ClasseurFormes.classerParAire(liste, !croissant);
-
+                classeurFormes.classerParAire(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
 
             }
         });
@@ -194,7 +214,11 @@ public class MenuFenetre extends JMenuBar{
         typeCroissantMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParType(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(typeCroissantMenuItem);
@@ -204,7 +228,11 @@ public class MenuFenetre extends JMenuBar{
         typeDecroissantMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParType(true);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(typeDecroissantMenuItem);
@@ -214,7 +242,11 @@ public class MenuFenetre extends JMenuBar{
         distanceCroissanteMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParDistance(true);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(distanceCroissanteMenuItem);
@@ -224,7 +256,11 @@ public class MenuFenetre extends JMenuBar{
         distanceDecroissanteMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParDistance(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(distanceDecroissanteMenuItem);
@@ -234,7 +270,11 @@ public class MenuFenetre extends JMenuBar{
         noSeqCroissantMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParNumeroSequence(true);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(noSeqCroissantMenuItem);
@@ -244,10 +284,70 @@ public class MenuFenetre extends JMenuBar{
         noSeqDecroissantMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                classeurFormes.classerParNumeroSequence(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
                 rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
             }
         });
         groupeTri.add(noSeqDecroissantMenuItem);
+
+        hauteurCroissanteMenuItem = menu.getItem(8);
+        hauteurCroissanteMenuItem.setSelected(false);
+        hauteurCroissanteMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                classeurFormes.classerParHauteur(true);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
+                rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
+            }
+        });
+        groupeTri.add(hauteurCroissanteMenuItem);
+
+        hauteurDecroissanteMenuItem = menu.getItem(9);
+        hauteurDecroissanteMenuItem.setSelected(false);
+        hauteurDecroissanteMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                classeurFormes.classerParHauteur(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
+                rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
+            }
+        });
+        groupeTri.add(hauteurDecroissanteMenuItem);
+
+        largeurCroissanteMenuItem = menu.getItem(10);
+        largeurCroissanteMenuItem.setSelected(false);
+        largeurCroissanteMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                classeurFormes.classerParLargeur(true);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
+                rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
+            }
+        });
+        groupeTri.add(largeurCroissanteMenuItem);
+
+        largeurDecroissanteMenuItem = menu.getItem(11);
+        largeurDecroissanteMenuItem.setSelected(false);
+        largeurDecroissanteMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                classeurFormes.classerParLargeur(false);
+                replaceurFormes = new ReplaceurFormes(classeurFormes.getListeFormes());
+                liste = replaceurFormes.getListe();
+                rafraichirMenus();
+                fenetrePrincipale.rafraichirFenetreFormes(liste);
+            }
+        });
+        groupeTri.add(largeurDecroissanteMenuItem);
 
         add(menu);
         rafraichirMenus();
@@ -322,7 +422,6 @@ public class MenuFenetre extends JMenuBar{
                 aireCroissanteMenuItem.setEnabled(true);
             }
         }
-
     }
 
     /**
@@ -355,7 +454,6 @@ public class MenuFenetre extends JMenuBar{
         }
         return menu;
     }
-
 
     public ListeFormes getListeFormes() {
         return liste;

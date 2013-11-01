@@ -43,7 +43,7 @@ public class ReplaceurFormes {
 		
 		for(int i=0; i<liste.getLength();i++){
             forme = liste.getNoeudCourant().getForme();
-			liste.getNoeudCourant().setForme(setCoordonnees(forme,DISTANCE*i, DISTANCE*i));
+			liste.getNoeudCourant().setForme(setCoordonnees(forme, DISTANCE*i, DISTANCE*i));
 			liste.suivant();	
 		}
 		 
@@ -52,7 +52,7 @@ public class ReplaceurFormes {
 	
 	private AbstractForme setCoordonnees(AbstractForme forme, int x, int y){
 
-        Point p1,p2,pCentre;
+        Point p1,pCentre;
 
 		if(forme.getType()==Formes.CARRE||forme.getType()==Formes.RECTANGLE){
 			p1 = new Point(x, y);
@@ -64,29 +64,16 @@ public class ReplaceurFormes {
 		else if(forme.getType()==Formes.CERCLE || forme.getType()==Formes.OVALE){
 
             Ovale ovale = (Ovale) forme;
-			pCentre = new Point(x + ovale.getRayonHorizontal(), y + ovale.getRayonVertical());
+			pCentre = new Point(x, y);
             ovale.setCoordonneeCentre(pCentre);
             return ovale;
 
 		}
 		else if(forme.getType()==Formes.LIGNE){
-
-            p2 = new Point();
             Ligne ligne = (Ligne) forme;
-
-			if(x > ligne.getSecondeCoordonnee().x)
-				p2.x = p2.x - x;
-			else
-				p2.x = x-p2.x;
-			
-			if(y > ligne.getSecondeCoordonnee().y)
-				p2.y = p2.y - y;
-			else
-				p2.y = y-p2.y;
-				
 			p1 = new Point(x, y);
 			ligne.setPremiereCoordonnee(p1);
-			ligne.setSecondeCoordonnee(p2);
+			ligne.setSecondeCoordonnee(new Point(p1.x + ligne.getLargeur(), p1.y + ligne.getHauteur()));
             return ligne;
 		}
         return null;
